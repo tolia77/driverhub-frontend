@@ -5,7 +5,7 @@ export default function Header() {
     const userRole = getUserRole();
 
     return (
-        <header className="navbar navbar-expand-lg navbar-dark bg-dark rounded-4 shadow-sm fixed-top mx-3 mt-2">
+        <header className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
             <div className="container-fluid">
                 <button
                     className="navbar-toggler"

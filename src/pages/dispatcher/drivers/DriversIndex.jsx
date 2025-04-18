@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import {
     driversIndex,
     driverShow,
-    driverCreate,
     driverUpdate,
     driverDelete,
 } from "../../../services/backend/driversRequests";
@@ -14,6 +13,7 @@ import DriversTable from "./DriversTable.jsx";
 import DriverModal from "./DriverModal";
 import VehicleSelectModal from "./VehicleSelectModal";
 import DriversSearchBar from "./DriversSearchBar";
+import {registerDriver} from "../../../services/backend/authRequests.js";
 
 const DriversIndex = () => {
     const [drivers, setDrivers] = useState([]);
@@ -101,8 +101,8 @@ const DriversIndex = () => {
 
         try {
             if (modalType === 'add') {
-                const response = await driverCreate(currentDriver, authorization);
-                setDrivers([...drivers, response.data.data]);
+                const response = await registerDriver(currentDriver, authorization);
+                setDrivers([...drivers, response.data.data.driver]);
             } else {
                 await driverUpdate(currentDriver.id, currentDriver, authorization);
                 setDrivers(drivers.map(driver =>

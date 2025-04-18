@@ -17,14 +17,6 @@ export async function driverShow(driverId, authorization) {
     })
 }
 
-export async function driverCreate(data, authorization) {
-    return await instance.post("/drivers/", data, {
-        headers: {
-            authorization: authorization
-        }
-    })
-}
-
 export async function driverUpdate(driverId, data, authorization) {
     return await instance.put("/drivers/" + driverId, data, {
         headers: {
