@@ -10,6 +10,10 @@ import {
     vehiclesIndex,
     vehicleShow
 } from "../../../services/backend/vehiclesRequests";
+import DriversTable from "./DriversTable.jsx";
+import DriverModal from "./DriverModal";
+import VehicleSelectModal from "./VehicleSelectModal";
+import DriversSearchBar from "./DriversSearchBar";
 
 const DriversIndex = () => {
     const [drivers, setDrivers] = useState([]);
@@ -22,6 +26,7 @@ const DriversIndex = () => {
         id: '',
         name: '',
         email: '',
+        password: '',
         license_number: '',
         vehicle_id: ''
     });
@@ -73,6 +78,7 @@ const DriversIndex = () => {
             id: '',
             name: '',
             email: '',
+            password: '',
             license_number: '',
             vehicle_id: ''
         });
@@ -170,210 +176,34 @@ const DriversIndex = () => {
                 </button>
             </div>
 
-            <div className="card mb-4">
-                <div className="card-body">
-                    <div className="input-group mb-3">
-            <span className="input-group-text">
-              <i className="bi bi-search"></i>
-            </span>
-                        <input
-                            type="text"
-                            className="form-control form-control-lg"
-                            placeholder="Search drivers..."
-                            value={searchTerm}
-                            onChange={handleSearchChange}
-                        />
-                    </div>
-                </div>
-            </div>
+            <DriversSearchBar searchTerm={searchTerm} onSearchChange={handleSearchChange} />
 
-            <div className="card">
-                <div className="card-body p-0">
-                    <div className="table-responsive" style={{ maxHeight: '500px' }}>
-                        <table className="table table-hover table-striped mb-0">
-                            <thead className="table-dark sticky-top">
-                            <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>License Number</th>
-                                <th>Vehicle</th>
-                                <th>Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {filteredDrivers.map((driver) => (
-                                <tr key={driver.id}>
-                                    <td>{driver.name}</td>
-                                    <td>{driver.email}</td>
-                                    <td>{driver.license_number}</td>
-                                    <td>
-                                        {driver.vehicle_id && vehiclesMap[driver.vehicle_id]
-                                            ? `${vehiclesMap[driver.vehicle_id].model} (${vehiclesMap[driver.vehicle_id].license_plate})`
-                                            : "None"}
-                                    </td>
-                                    <td>
-                                        <div className="d-flex gap-2">
-                                            <button
-                                                className="btn btn-sm btn-warning"
-                                                onClick={() => handleUpdateDriver(driver.id)}
-                                            >
-                                                <i className="bi bi-pencil"></i> Update
-                                            </button>
-                                            <button
-                                                className="btn btn-sm btn-danger"
-                                                onClick={() => handleDeleteDriver(driver.id)}
-                                            >
-                                                <i className="bi bi-trash"></i> Delete
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            ))}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+            <DriversTable
+                drivers={filteredDrivers}
+                vehiclesMap={vehiclesMap}
+                onUpdate={handleUpdateDriver}
+                onDelete={handleDeleteDriver}
+            />
 
-            {/* Add/Edit Driver Modal */}
-            {isModalOpen && (
-                <div className="modal fade show d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
-                    <div className="modal-dialog modal-dialog-centered">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title">
-                                    {modalType === 'add' ? 'Add Driver' : 'Update Driver'}
-                                </h5>
-                                <button
-                                    type="button"
-                                    className="btn-close"
-                                    onClick={() => setIsModalOpen(false)}
-                                ></button>
-                            </div>
-                            <div className="modal-body">
-                                <form>
-                                    <div className="mb-3">
-                                        <label className="form-label">Name</label>
-                                        <input
-                                            type="text"
-                                            className={`form-control ${formErrors.name ? 'is-invalid' : ''}`}
-                                            name="name"
-                                            value={currentDriver.name}
-                                            onChange={handleInputChange}
-                                        />
-                                        {formErrors.name && <div className="invalid-feedback">{formErrors.name}</div>}
-                                    </div>
-                                    <div className="mb-3">
-                                        <label className="form-label">Email</label>
-                                        <input
-                                            type="email"
-                                            className={`form-control ${formErrors.email ? 'is-invalid' : ''}`}
-                                            name="email"
-                                            value={currentDriver.email}
-                                            onChange={handleInputChange}
-                                        />
-                                        {formErrors.email && <div className="invalid-feedback">{formErrors.email}</div>}
-                                    </div>
-                                    <div className="mb-3">
-                                        <label className="form-label">Password</label>
-                                        <input
-                                            type="password"
-                                            className={`form-control ${formErrors.password ? 'is-invalid' : ''}`}
-                                            name="password"
-                                            value={currentDriver.password}
-                                            onChange={handleInputChange}
-                                        />
-                                        {formErrors.password && <div className="invalid-feedback">{formErrors.password}</div>}
-                                    </div>
-                                    <div className="mb-3">
-                                        <label className="form-label">License Number</label>
-                                        <input
-                                            type="text"
-                                            className={`form-control ${formErrors.license_number ? 'is-invalid' : ''}`}
-                                            name="license_number"
-                                            value={currentDriver.license_number}
-                                            onChange={handleInputChange}
-                                        />
-                                        {formErrors.license_number && <div className="invalid-feedback">{formErrors.license_number}</div>}
-                                    </div>
-                                    <div className="mb-3">
-                                        <label className="form-label">Vehicle</label>
-                                        <div
-                                            className="form-control d-flex justify-content-between align-items-center"
-                                            onClick={() => setIsSelectVehicleOpen(true)}
-                                            style={{ cursor: 'pointer' }}
-                                        >
-                      <span>
-                        {currentDriver.vehicle_id && vehiclesMap[currentDriver.vehicle_id]
-                            ? `${vehiclesMap[currentDriver.vehicle_id].model} (${vehiclesMap[currentDriver.vehicle_id].license_plate})`
-                            : "Choose vehicle..."}
-                      </span>
-                                            <i className="bi bi-chevron-down"></i>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div className="modal-footer">
-                                <button
-                                    type="button"
-                                    className="btn btn-secondary"
-                                    onClick={() => setIsModalOpen(false)}
-                                >
-                                    Cancel
-                                </button>
-                                <button
-                                    type="button"
-                                    className="btn btn-primary"
-                                    onClick={handleConfirm}
-                                >
-                                    {modalType === 'add' ? 'Confirm' : 'Update'}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
+            <DriverModal
+                isOpen={isModalOpen}
+                modalType={modalType}
+                driver={currentDriver}
+                errors={formErrors}
+                vehiclesMap={vehiclesMap}
+                onInputChange={handleInputChange}
+                onSelectVehicle={() => setIsSelectVehicleOpen(true)}
+                onClose={() => setIsModalOpen(false)}
+                onConfirm={handleConfirm}
+            />
 
-            {/* Vehicle Selection Modal */}
-            {isSelectVehicleOpen && (
-                <div className="modal fade show d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
-                    <div className="modal-dialog modal-dialog-centered">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title">Select Vehicle</h5>
-                                <button
-                                    type="button"
-                                    className="btn-close"
-                                    onClick={() => setIsSelectVehicleOpen(false)}
-                                ></button>
-                            </div>
-                            <div className="modal-body">
-                                <div className="list-group">
-                                    {vehicles.map((vehicle) => (
-                                        <button
-                                            key={vehicle.id}
-                                            type="button"
-                                            className={`list-group-item list-group-item-action ${currentDriver.vehicle_id === vehicle.id ? 'active' : ''}`}
-                                            onClick={() => handleSelectVehicle(vehicle.id)}
-                                        >
-                                            {vehicle.model} ({vehicle.license_plate})
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-                            <div className="modal-footer">
-                                <button
-                                    type="button"
-                                    className="btn btn-secondary"
-                                    onClick={() => setIsSelectVehicleOpen(false)}
-                                >
-                                    Cancel
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
+            <VehicleSelectModal
+                isOpen={isSelectVehicleOpen}
+                vehicles={vehicles}
+                selectedVehicleId={currentDriver.vehicle_id}
+                onSelect={handleSelectVehicle}
+                onClose={() => setIsSelectVehicleOpen(false)}
+            />
         </div>
     );
 };
