@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import {Link} from "react-router";
 import {getUserRole} from "../../utils/auth.js";
 
 export default function Header() {
@@ -57,6 +57,17 @@ export default function Header() {
                                 </li>
                                 <li className="nav-item mx-2">
                                     <Link to="/driver/account" className="nav-link px-3 py-2">Account</Link>
+                                </li>
+                            </>
+                        )}
+
+                        {!userRole && (
+                            <>
+                                <li className="nav-item mx-2">
+                                    <Link to="/login" className="nav-link px-3 py-2">Log in</Link>
+                                </li>
+                                <li className="nav-item mx-2">
+                                    <Link to="/signup" className="nav-link px-3 py-2">Sign up</Link>
                                 </li>
                             </>
                         )}
