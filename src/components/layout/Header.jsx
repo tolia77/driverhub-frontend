@@ -33,13 +33,13 @@ export default function Header() {
                                     <Link to="/dispatcher/vehicles" className="nav-link px-3 py-2">Vehicles</Link>
                                 </li>
                                 <li className="nav-item mx-2">
-                                    <Link to="/dispatcher/logbreakes" className="nav-link px-3 py-2">Breaks</Link>
+                                    <Link to="/dispatcher/log-breaks" className="nav-link px-3 py-2">Breaks</Link>
                                 </li>
                                 <li className="nav-item mx-2">
                                     <Link to="/dispatcher/chat" className="nav-link px-3 py-2">Chat</Link>
                                 </li>
                                 <li className="nav-item mx-2">
-                                    <Link to="/dispatcher/account" className="nav-link px-3 py-2">Account</Link>
+                                    <Link to="/account" className="nav-link px-3 py-2">Account</Link>
                                 </li>
                             </>
                         )}

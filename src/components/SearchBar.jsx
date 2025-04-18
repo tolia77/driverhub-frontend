@@ -1,4 +1,4 @@
-const DriversSearchBar = ({ searchTerm, onSearchChange }) => {
+const SearchBar = ({ searchTerm, onSearchChange }) => {
     return (
         <div className="card mb-4">
             <div className="card-body">
@@ -9,7 +9,7 @@ const DriversSearchBar = ({ searchTerm, onSearchChange }) => {
                     <input
                         type="text"
                         className="form-control form-control-lg"
-                        placeholder="Search drivers..."
+                        placeholder="Search..."
                         value={searchTerm}
                         onChange={onSearchChange}
                     />
@@ -19,4 +19,4 @@ const DriversSearchBar = ({ searchTerm, onSearchChange }) => {
     );
 };
 
-export default DriversSearchBar;
+export default SearchBar;

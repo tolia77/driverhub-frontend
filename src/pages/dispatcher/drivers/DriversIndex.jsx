@@ -12,7 +12,7 @@ import {
 import DriversTable from "./DriversTable.jsx";
 import DriverModal from "./DriverModal";
 import VehicleSelectModal from "./VehicleSelectModal";
-import DriversSearchBar from "./DriversSearchBar";
+import SearchBar from "../../../components/SearchBar.jsx";
 import {registerDriver} from "../../../services/backend/authRequests.js";
 
 const DriversIndex = () => {
@@ -176,7 +176,7 @@ const DriversIndex = () => {
                 </button>
             </div>
 
-            <DriversSearchBar searchTerm={searchTerm} onSearchChange={handleSearchChange} />
+            <SearchBar searchTerm={searchTerm} onSearchChange={handleSearchChange} />
 
             <DriversTable
                 drivers={filteredDrivers}
