@@ -8,10 +8,11 @@ import VehiclesIndex from "./pages/dispatcher/vehicles/VehiclesIndex.jsx";
 import LogBreaksIndex from "./pages/dispatcher/log-breaks/LogBreaksIndex.jsx";
 import ChatDispatcher from "./pages/dispatcher/chat/ChatDispatcher.jsx";
 import OnlyDrivers from "./components/OnlyDrivers.jsx";
-import DelieveriesIndexDriver from "./pages/drivers/delieveries/DelieveriesIndexDriver.jsx";
+import DeliveriesIndexDriver from "./pages/drivers/delieveries/DeliveriesIndexDriver.jsx";
 import LogBreaksIndexDriver from "./pages/drivers/log-breaks/LogBreaksIndexDriver.jsx";
 import ChatDriver from "./pages/drivers/chat/ChatDriver.jsx";
-
+import Login from "./pages/Login.jsx";
+import Signup from "./pages/Signup.jsx";
 function App() {
     return (
         <BrowserRouter>
@@ -26,10 +27,12 @@ function App() {
                         <Route path="chat/" element={<ChatDispatcher/>}/>
                     </Route>
                     <Route path="driver/" element={<OnlyDrivers/>}>
-                        <Route path="delieveries/" element={<DelieveriesIndexDriver/>}/>
+                        <Route path="delieveries/" element={<DeliveriesIndexDriver/>}/>
                         <Route path="log-breaks/" element={<LogBreaksIndexDriver/>}/>
                         <Route path="chat/" element={<ChatDriver/>}/>
                     </Route>
+                    <Route path="login/" element={<Login/>}/>
+                    <Route path="signup/" element={<Signup/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>

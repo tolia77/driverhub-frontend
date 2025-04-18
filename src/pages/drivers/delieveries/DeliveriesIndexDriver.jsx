@@ -1,9 +1,9 @@
 import React from 'react';
 
-function DelieveriesIndexDriver() {
+function DeliveriesIndexDriver() {
     return (
         <div></div>
     );
 }
 
-export default DelieveriesIndexDriver;
+export default DeliveriesIndexDriver;
