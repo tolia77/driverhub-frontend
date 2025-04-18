@@ -61,7 +61,7 @@ function Login() {
                         </div>
                         <button type="submit" className="btn btn-primary w-100 py-2 mb-3">Log In</button>
                         <p className="text-center text-muted mb-0">
-                            Don't have an account? <Link to="/auth/register" className="text-decoration-none">Sign up</Link>
+                            Don't have an account? <Link to="/signup" className="text-decoration-none">Sign up</Link>
                         </p>
                     </form>
                 </div>

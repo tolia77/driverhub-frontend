@@ -1,12 +1,14 @@
-import React from 'react';
-import {useNavigate} from "react-router";
+import {Outlet, useNavigate} from "react-router";
 import {auth} from "../services/firebase.js";
 
 function RequireAuth() {
     const navigate = useNavigate();
-    if(!auth.currentUser) {
+    if (!auth.currentUser) {
         navigate("/login");
     }
+    return (
+        <Outlet/>
+    )
 }
 
 export default RequireAuth;

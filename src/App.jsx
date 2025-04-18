@@ -27,7 +27,7 @@ function App() {
                         <Route path="chat/" element={<ChatDispatcher/>}/>
                     </Route>
                     <Route path="driver/" element={<OnlyDrivers/>}>
-                        <Route path="delieveries/" element={<DeliveriesIndexDriver/>}/>
+                        <Route path="deliveries/" element={<DeliveriesIndexDriver/>}/>
                         <Route path="log-breaks/" element={<LogBreaksIndexDriver/>}/>
                         <Route path="chat/" element={<ChatDriver/>}/>
                     </Route>
