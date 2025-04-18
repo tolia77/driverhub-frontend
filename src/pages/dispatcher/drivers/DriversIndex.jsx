@@ -101,8 +101,8 @@ const DriversIndex = () => {
 
         try {
             if (modalType === 'add') {
-                const response = await registerDriver(currentDriver, authorization);
-                setDrivers([...drivers, response.data.data.driver]);
+                await registerDriver(currentDriver, authorization);
+                setDrivers([...drivers, currentDriver]);
             } else {
                 await driverUpdate(currentDriver.id, currentDriver, authorization);
                 setDrivers(drivers.map(driver =>
