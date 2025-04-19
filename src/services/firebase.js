@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getDatabase, ref, push, onChildAdded } from "firebase/database";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
@@ -20,3 +20,13 @@ export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
 export const realtimeDB = getDatabase(app);
+
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        user.getIdToken().then((idToken) => {
+            localStorage.setItem('accessToken', `Bearer ${idToken}`);
+        }).catch((error) => {
+            console.error("Error getting token:", error);
+        });
+    }
+});
