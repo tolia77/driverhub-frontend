@@ -1,4 +1,4 @@
-const DriversTable = ({ drivers, vehiclesMap, onUpdate, onDelete }) => {
+const DriversTable = ({ drivers, onUpdate, onDelete }) => {
     return (
         <div className="card">
             <div className="card-body p-0">
@@ -20,9 +20,7 @@ const DriversTable = ({ drivers, vehiclesMap, onUpdate, onDelete }) => {
                                 <td>{driver.email}</td>
                                 <td>{driver.license_number}</td>
                                 <td>
-                                    {driver.vehicle_id && vehiclesMap[driver.vehicle_id]
-                                        ? `${vehiclesMap[driver.vehicle_id].model} (${vehiclesMap[driver.vehicle_id].license_plate})`
-                                        : "None"}
+                                    {driver.vehicle && `${driver.vehicle.model} (${driver.vehicle.license_plate})`}
                                 </td>
                                 <td>
                                     <div className="d-flex gap-2">

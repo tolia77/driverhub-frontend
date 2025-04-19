@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import {
     driversIndex,
-    driverShow,
     driverUpdate,
     driverDelete,
 } from "src/services/backend/driversRequests.js";
 import {
     vehiclesIndex,
-    vehicleShow
 } from "src/services/backend/vehiclesRequests.js";
 import DriversTable from "src/pages/dispatcher/drivers/DriversTable.jsx";
 import DriverModal from "src/pages/dispatcher/drivers/DriverModal";
@@ -38,7 +36,6 @@ const DriversIndex = () => {
 
     useEffect(() => {
         fetchDrivers();
-        fetchVehicles();
     }, []);
 
     const fetchDrivers = async () => {
@@ -46,19 +43,6 @@ const DriversIndex = () => {
             const response = await driversIndex({}, authorization);
             const driversData = response.data.data.drivers;
             setDrivers(driversData);
-
-            const vehicleData = {};
-            await Promise.all(driversData.map(async (driver) => {
-                if (driver.vehicle_id) {
-                    try {
-                        const vehicleResponse = await vehicleShow(driver.vehicle_id, authorization);
-                        vehicleData[driver.vehicle_id] = vehicleResponse.data.data;
-                    } catch (error) {
-                        console.error(`Error in fetching vehicle for driver ${driver.id}:`, error);
-                    }
-                }
-            }));
-            setVehiclesMap(vehicleData);
         } catch (error) {
             console.error("Error fetching drivers:", error);
         }
@@ -68,12 +52,19 @@ const DriversIndex = () => {
         try {
             const response = await vehiclesIndex({}, authorization);
             setVehicles(response.data.data.vehicles);
+            setVehiclesMap(response.data.data.vehicles.map(vehicle => ({
+                id: vehicle.id,
+                name: `${vehicle.model} (${vehicle.license_plate})`
+            })))
         } catch (error) {
             console.error("Error fetching vehicles:", error);
         }
     };
 
-    const handleAddDriver = () => {
+    const handleAddDriver = async () => {
+        if (!vehicles.length) {
+            await fetchVehicles();
+        }
         setModalType('add');
         setCurrentDriver({
             id: '',
@@ -86,11 +77,14 @@ const DriversIndex = () => {
         setIsModalOpen(true);
     };
 
+
     const handleUpdateDriver = async (id) => {
+        if (!vehicles.length) {
+            await fetchVehicles();
+        }
         try {
-            const response = await driverShow(id, authorization);
             setModalType('update');
-            setCurrentDriver(response.data.data);
+            setCurrentDriver(drivers.find(driver => driver.id === id));
             setIsModalOpen(true);
         } catch (error) {
             console.error("Error fetching driver details:", error);
@@ -181,7 +175,6 @@ const DriversIndex = () => {
 
             <DriversTable
                 drivers={filteredDrivers}
-                vehiclesMap={vehiclesMap}
                 onUpdate={handleUpdateDriver}
                 onDelete={handleDeleteDriver}
             />
