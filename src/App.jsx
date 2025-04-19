@@ -8,7 +8,7 @@ import VehiclesIndex from "src/pages/dispatcher/vehicles/VehiclesIndex.jsx";
 import LogBreaksIndex from "src/pages/dispatcher/log-breaks/LogBreaksIndex.jsx";
 import ChatDispatcher from "src/pages/dispatcher/chat/ChatDispatcher.jsx";
 import OnlyDrivers from "src/components/OnlyDrivers.jsx";
-import DeliveriesIndexDriver from "src/pages/drivers/delieveries/DeliveriesIndexDriver.jsx";
+import DeliveriesIndexDriver from "src/pages/drivers/deliveries/DeliveriesIndexDriver.jsx";
 import LogBreaksIndexDriver from "src/pages/drivers/log-breaks/LogBreaksIndexDriver.jsx";
 import ChatDriver from "src/pages/drivers/chat/ChatDriver.jsx";
 import Login from "src/pages/Login.jsx";

@@ -17,7 +17,7 @@ function Login() {
                 localStorage.setItem('accountType', result.data.data.additional_data.type);
                 localStorage.setItem('userId', result.data.data.uid)
                 if(localStorage.getItem('accountType') === "driver"){
-                    navigate("/driver/mydelivery");
+                    navigate("/driver/deliveries");
                 }
                 else if(localStorage.getItem('accountType') === "dispatcher") {
                     navigate("/dispatcher/deliveries");

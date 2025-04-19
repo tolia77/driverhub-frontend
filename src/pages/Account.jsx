@@ -34,7 +34,7 @@ const Account = () => {
         localStorage.removeItem("refreshToken");
         localStorage.removeItem("accountType");
         localStorage.removeItem("userId");
-        navigate("/auth/login");
+        navigate("/login");
     };
 
     return (
