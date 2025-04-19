@@ -1,5 +1,4 @@
 const Message = ({ message, isOwnMessage }) => {
-    console.log(message)
     return (
         <div className={`d-flex mb-3 ${isOwnMessage ? 'justify-content-end' : 'justify-content-start'}`}>
             <div

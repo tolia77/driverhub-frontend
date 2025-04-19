@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { ref, push, off, onChildAdded, onValue } from "firebase/database";
 import { realtimeDB } from "src/services/firebase";
 import { driversIndex } from "src/services/backend/driversRequests";
-import ChatSidebar from "src/pages/dispatcher/chat/ChatSidebar";
-import ChatMessages from "src/pages/dispatcher/chat/ChatMessages";
-import MessageInput from "src/pages/dispatcher/chat/MessageInput";
+import ChatSidebar from "src/components/chat/ChatSidebar.jsx";
+import ChatMessages from "src/components/chat/ChatMessages.jsx";
+import MessageInput from "src/components/chat/MessageInput.jsx";
 
 function ChatDispatcher() {
     const [drivers, setDrivers] = useState([]);
