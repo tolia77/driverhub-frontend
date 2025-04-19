@@ -104,10 +104,8 @@ const DriversIndex = () => {
                 setDrivers([...drivers, currentDriver]);
             } else {
                 await driverUpdate(currentDriver.id, currentDriver, authorization);
-                setDrivers(drivers.map(driver =>
-                    driver.id === currentDriver.id ? currentDriver : driver
-                ));
             }
+            await fetchDrivers();
             setIsModalOpen(false);
         } catch (error) {
             console.error("Error saving driver:", error);
