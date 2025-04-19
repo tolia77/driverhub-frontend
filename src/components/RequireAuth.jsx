@@ -1,5 +1,5 @@
 import {Outlet, useNavigate} from "react-router";
-import {auth} from "../services/firebase.js";
+import {auth} from "src/services/firebase.js";
 
 function RequireAuth() {
     const navigate = useNavigate();

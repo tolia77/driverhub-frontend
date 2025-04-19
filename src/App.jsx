@@ -1,18 +1,18 @@
 import {BrowserRouter, Route, Routes} from "react-router";
-import Layout from "./components/layout/Layout.jsx";
-import Index from "./pages/Index.jsx";
-import OnlyDispatchers from "./components/OnlyDispatchers.jsx";
-import DeliveriesIndex from "./pages/dispatcher/deliveries/DeliveriesIndex.jsx";
-import DriversIndex from "./pages/dispatcher/drivers/DriversIndex.jsx";
-import VehiclesIndex from "./pages/dispatcher/vehicles/VehiclesIndex.jsx";
-import LogBreaksIndex from "./pages/dispatcher/log-breaks/LogBreaksIndex.jsx";
-import ChatDispatcher from "./pages/dispatcher/chat/ChatDispatcher.jsx";
-import OnlyDrivers from "./components/OnlyDrivers.jsx";
-import DeliveriesIndexDriver from "./pages/drivers/delieveries/DeliveriesIndexDriver.jsx";
-import LogBreaksIndexDriver from "./pages/drivers/log-breaks/LogBreaksIndexDriver.jsx";
-import ChatDriver from "./pages/drivers/chat/ChatDriver.jsx";
-import Login from "./pages/Login.jsx";
-import Signup from "./pages/Signup.jsx";
+import Layout from "src/components/layout/Layout.jsx";
+import Index from "src/pages/Index.jsx";
+import OnlyDispatchers from "src/components/OnlyDispatchers.jsx";
+import DeliveriesIndex from "src/pages/dispatcher/deliveries/DeliveriesIndex.jsx";
+import DriversIndex from "src/pages/dispatcher/drivers/DriversIndex.jsx";
+import VehiclesIndex from "src/pages/dispatcher/vehicles/VehiclesIndex.jsx";
+import LogBreaksIndex from "src/pages/dispatcher/log-breaks/LogBreaksIndex.jsx";
+import ChatDispatcher from "src/pages/dispatcher/chat/ChatDispatcher.jsx";
+import OnlyDrivers from "src/components/OnlyDrivers.jsx";
+import DeliveriesIndexDriver from "src/pages/drivers/delieveries/DeliveriesIndexDriver.jsx";
+import LogBreaksIndexDriver from "src/pages/drivers/log-breaks/LogBreaksIndexDriver.jsx";
+import ChatDriver from "src/pages/drivers/chat/ChatDriver.jsx";
+import Login from "src/pages/Login.jsx";
+import Signup from "src/pages/Signup.jsx";
 function App() {
     return (
         <BrowserRouter>

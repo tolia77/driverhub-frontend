@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { registerDispatcher } from "../services/backend/authRequests.js";
-import { firebaseLogin } from "../services/firebaseLogin.js";
+import { registerDispatcher } from "src/services/backend/authRequests.js";
+import { firebaseLogin } from "src/services/firebaseLogin.js";
 
 function SignUp() {
     const [username, setUsername] = useState("");

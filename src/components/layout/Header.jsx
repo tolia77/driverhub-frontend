@@ -1,5 +1,5 @@
 import {Link} from "react-router";
-import {getUserRole} from "../../utils/auth.js";
+import {getUserRole} from "src/utils/auth.js";
 
 export default function Header() {
     const userRole = getUserRole();

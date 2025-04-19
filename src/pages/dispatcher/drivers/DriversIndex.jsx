@@ -4,16 +4,17 @@ import {
     driverShow,
     driverUpdate,
     driverDelete,
-} from "../../../services/backend/driversRequests";
+} from "src/services/backend/driversRequests.js";
 import {
     vehiclesIndex,
     vehicleShow
-} from "../../../services/backend/vehiclesRequests";
-import DriversTable from "./DriversTable.jsx";
-import DriverModal from "./DriverModal";
-import VehicleSelectModal from "./VehicleSelectModal";
-import SearchBar from "../../../components/SearchBar.jsx";
-import {registerDriver} from "../../../services/backend/authRequests.js";
+} from "src/services/backend/vehiclesRequests.js";
+import DriversTable from "src/pages/dispatcher/drivers/DriversTable.jsx";
+import DriverModal from "src/pages/dispatcher/drivers/DriverModal";
+import VehicleSelectModal from "src/pages/dispatcher/drivers/VehicleSelectModal";
+import SearchBar from "src/components/SearchBar.jsx";
+import {registerDriver} from "src/services/backend/authRequests.js";
+import {getAccessToken} from "src/utils/auth.js";
 
 const DriversIndex = () => {
     const [drivers, setDrivers] = useState([]);
@@ -33,7 +34,7 @@ const DriversIndex = () => {
     const [isSelectVehicleOpen, setIsSelectVehicleOpen] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
 
-    const authorization = localStorage.getItem("accessToken");
+    const authorization = getAccessToken()
 
     useEffect(() => {
         fetchDrivers();

@@ -5,10 +5,11 @@ import {
     vehicleCreate,
     vehicleUpdate,
     vehicleDelete,
-} from "../../../services/backend/vehiclesRequests";
-import VehiclesTable from "./VehiclesTable";
-import VehicleModal from "./VehicleModal";
-import SearchBar from "../../../components/SearchBar";
+} from "src/services/backend/vehiclesRequests";
+import VehiclesTable from "src/pages/dispatcher/vehicles/VehiclesTable";
+import VehicleModal from "src/pages/dispatcher/vehicles/VehicleModal";
+import SearchBar from "src/components/SearchBar";
+import {getAccessToken} from "src/utils/auth.js";
 
 const VehiclesIndex = () => {
     const [vehicles, setVehicles] = useState([]);
@@ -25,7 +26,7 @@ const VehiclesIndex = () => {
     });
     const [searchTerm, setSearchTerm] = useState('');
 
-    const authorization = localStorage.getItem("accessToken");
+    const authorization = getAccessToken()
 
     useEffect(() => {
         fetchVehicles();

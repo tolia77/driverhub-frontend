@@ -1,4 +1,4 @@
-import {instance} from "./config.js";
+import {instance} from "src/services/backend/config.js";
 
 export async function driversIndex(params, authorization) {
     return await instance.get("/drivers", {
