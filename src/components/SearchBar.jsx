@@ -1,4 +1,4 @@
-const SearchBar = ({ searchTerm, onSearchChange }) => {
+const SearchBar = ({ searchTerm, onSearchChange, placeholder="Search..." }) => {
     return (
         <div className="card mb-4">
             <div className="card-body">
@@ -9,7 +9,7 @@ const SearchBar = ({ searchTerm, onSearchChange }) => {
                     <input
                         type="text"
                         className="form-control form-control-lg"
-                        placeholder="Search..."
+                        placeholder={placeholder}
                         value={searchTerm}
                         onChange={onSearchChange}
                     />
