@@ -47,24 +47,6 @@ const DeliveriesIndexDriver = () => {
         setIsLogBreakModalOpen(true);
     };
 
-    const handleCancelDelivery = async (deliveryId) => {
-        try {
-            await updateDeliveryStatus(
-                deliveryId,
-                "Cancellation Requested",
-                localStorage.getItem("accessToken")
-            );
-            setDeliveries(deliveries.map(delivery =>
-                delivery.id === deliveryId
-                    ? { ...delivery, status: "Cancellation Requested" }
-                    : delivery
-            ));
-        } catch (err) {
-            console.error("Error canceling delivery:", err);
-            alert("Error canceling delivery");
-        }
-    };
-
     const handleUpdateStatus = async () => {
         try {
             await updateDeliveryStatus(
@@ -94,7 +76,6 @@ const DeliveriesIndexDriver = () => {
                 localStorage.getItem("accessToken")
             );
             setIsLogBreakModalOpen(false);
-            // Optionally show success message
         } catch (err) {
             console.error("Error logging break:", err);
             alert("Error logging break");
@@ -110,7 +91,6 @@ const DeliveriesIndexDriver = () => {
             <DeliveriesTable
                 deliveries={deliveries}
                 onUpdateStatus={openStatusModal}
-                onCancel={handleCancelDelivery}
                 onLogBreak={openLogBreakModal}
             />
 

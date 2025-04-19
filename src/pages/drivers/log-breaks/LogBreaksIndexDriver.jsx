@@ -93,20 +93,8 @@ const LogBreaksIndexDriver = () => {
         return true;
     };
 
-    const handleAddBreak = () => {};
-
     return (
         <div className="container py-4">
-            <div className="d-flex justify-content-between align-items-center mb-4">
-                <h1 className="mb-0">Log breaks</h1>
-                <button
-                    className="btn btn-success"
-                    onClick={handleAddBreak}
-                >
-                    <i className="bi bi-plus-circle me-2"></i>Add break
-                </button>
-            </div>
-
             <LogBreaksTable
                 logBreaks={logBreaks}
                 onEdit={openUpdateModal}

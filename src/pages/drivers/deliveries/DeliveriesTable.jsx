@@ -1,4 +1,4 @@
-const DeliveriesTable = ({ deliveries, onUpdateStatus, onCancel, onLogBreak }) => {
+const DeliveriesTable = ({ deliveries, onUpdateStatus, onLogBreak }) => {
     if (deliveries.length === 0) {
         return <div className="alert alert-info">No deliveries found</div>;
     }
@@ -35,12 +35,6 @@ const DeliveriesTable = ({ deliveries, onUpdateStatus, onCancel, onLogBreak }) =
                                             onClick={() => onUpdateStatus(delivery)}
                                         >
                                             <i className="bi bi-pencil"></i> Update
-                                        </button>
-                                        <button
-                                            className="btn btn-sm btn-danger"
-                                            onClick={() => onCancel(delivery.id)}
-                                        >
-                                            <i className="bi bi-x-circle"></i> Cancel
                                         </button>
                                         <button
                                             className="btn btn-sm btn-info"

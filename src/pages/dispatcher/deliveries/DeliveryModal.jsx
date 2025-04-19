@@ -5,8 +5,10 @@ const DeliveryModal = ({
                            errors,
                            onInputChange,
                            onClose,
-                           onConfirm
+                           onConfirm,
+                           drivers
                        }) => {
+
     if (!isOpen) return null;
 
     return (
@@ -27,30 +29,21 @@ const DeliveryModal = ({
                         <form>
                             <div className="row">
                                 <div className="col-md-6 mb-3">
-                                    <label className="form-label">Driver ID</label>
-                                    <input
-                                        type="text"
+                                    <label className="form-label">Driver</label>
+                                    <select
                                         className={`form-control ${errors.driver_id ? 'is-invalid' : ''}`}
                                         name="driver_id"
                                         value={delivery.driver_id}
                                         onChange={onInputChange}
-                                    />
-                                    {errors.driver_id && <div className="invalid-feedback">{errors.driver_id}</div>}
-                                </div>
-
-                                <div className="col-md-6 mb-3">
-                                    <label className="form-label">Status</label>
-                                    <select
-                                        className={`form-control ${errors.status ? 'is-invalid' : ''}`}
-                                        name="status"
-                                        value={delivery.status}
-                                        onChange={onInputChange}
                                     >
-                                        <option value="Pending">Pending</option>
-                                        <option value="In Progress">In Progress</option>
-                                        <option value="Delivered">Delivered</option>
+                                        <option value="">Select a driver</option>
+                                        {drivers.map(driver => (
+                                            <option key={driver.id} value={driver.id}>
+                                                {driver.name || `Driver ${driver.id}`}
+                                            </option>
+                                        ))}
                                     </select>
-                                    {errors.status && <div className="invalid-feedback">{errors.status}</div>}
+                                    {errors.driver_id && <div className="invalid-feedback">{errors.driver_id}</div>}
                                 </div>
                             </div>
 

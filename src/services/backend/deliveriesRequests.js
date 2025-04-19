@@ -10,7 +10,6 @@ export async function deliveriesIndex(params, authorization) {
     })
 }
 
-// Doesn't exist
 export async function deliveryShow(driverId, authorization) {
     return await instance.get("/deliveries/" + driverId, {
         headers: {
@@ -27,8 +26,8 @@ export async function deliveryCreate(data, authorization) {
     })
 }
 
-export async function deliveryUpdate(driverId, data, authorization) {
-    return await instance.put("/deliveries/" + driverId, data, {
+export async function deliveryUpdate(deliveryId, data, authorization) {
+    return await instance.patch("/deliveries/" + deliveryId, data, {
         headers: {
             Authorization: authorization
         },

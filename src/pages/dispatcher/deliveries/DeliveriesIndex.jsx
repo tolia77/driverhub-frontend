@@ -6,6 +6,7 @@ import {
     deliveryUpdate,
     deliveryDelete,
 } from "src/services/backend/deliveriesRequests";
+import { driversIndex } from "src/services/backend/driversRequests";
 import DeliveriesTable from "src/pages/dispatcher/deliveries/DeliveriesTable";
 import DeliveryModal from "./DeliveryModal";
 import SearchBar from "src/components/SearchBar";
@@ -15,6 +16,7 @@ const DeliveriesIndex = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalType, setModalType] = useState('add');
     const [formErrors, setFormErrors] = useState({});
+    const [drivers, setDrivers] = useState([]);
     const [currentDelivery, setCurrentDelivery] = useState({
         id: '',
         driver_id: '',
@@ -32,7 +34,17 @@ const DeliveriesIndex = () => {
 
     useEffect(() => {
         fetchDeliveries();
+        fetchDrivers();
     }, []);
+
+    const fetchDrivers = async () => {
+        try {
+            const response = await driversIndex({}, authorization);
+            setDrivers(response.data.data.drivers);
+        } catch (error) {
+            console.error("Error fetching drivers:", error);
+        }
+    };
 
     const fetchDeliveries = async () => {
         try {
@@ -162,7 +174,9 @@ const DeliveriesIndex = () => {
                 onInputChange={handleInputChange}
                 onClose={() => setIsModalOpen(false)}
                 onConfirm={handleConfirm}
+                drivers={drivers}
             />
+
         </div>
     );
 };

@@ -13,6 +13,7 @@ const LogBreaksTable = ({ logBreaks, onEdit, onDelete }) => {
                             <th>Start Time</th>
                             <th>End Time</th>
                             <th>Cost</th>
+                            <th>Actions</th>
                         </tr>
                         </thead>
                         <tbody>
