@@ -1,11 +1,11 @@
-import {format} from "date-fns";
-import {useEffect, useState} from "react";
+import { format } from "date-fns";
+import { useEffect, useState } from "react";
 import {
     logBreaksDelete,
     logBreaksMy,
-    logBreaksUpdate,
-    logBreaksCreate
+    logBreaksUpdate
 } from "src/services/backend/logBreaksRequests.js";
+import LogBreaksTable from "src/pages/drivers/log-breaks/LogBreaksTable";
 
 const LogBreaksIndexDriver = () => {
     const [logBreaks, setLogBreaks] = useState([]);
@@ -40,8 +40,8 @@ const LogBreaksIndexDriver = () => {
     };
 
     const handleInputChange = (e) => {
-        const {name, value} = e.target;
-        setFormData(prev => ({...prev, [name]: value}));
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
     };
 
     const handleUpdateLogBreak = () => {
@@ -93,9 +93,7 @@ const LogBreaksIndexDriver = () => {
         return true;
     };
 
-    function handleAddBreak() {
-
-    }
+    const handleAddBreak = () => {};
 
     return (
         <div className="container py-4">
@@ -108,61 +106,15 @@ const LogBreaksIndexDriver = () => {
                     <i className="bi bi-plus-circle me-2"></i>Add break
                 </button>
             </div>
-            <div className="card">
-                <div className="card-body p-0">
-                    <div className="table-responsive" style={{maxHeight: '500px'}}>
-                        <table className="table table-hover table-striped mb-0">
-                            <thead className="table-dark sticky-top">
-                            <tr>
-                                <th>ID</th>
-                                <th>Location</th>
-                                <th>Start Time</th>
-                                <th>End Time</th>
-                                <th>Cost</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {logBreaks.length === 0 ? (
-                                <tr>
-                                    <td colSpan="6" className="text-center py-4">
-                                        No log breaks found
-                                    </td>
-                                </tr>
-                            ) : (
-                                logBreaks.map((logBreak) => (
-                                    <tr key={logBreak.id}>
-                                        <td>{logBreak.id}</td>
-                                        <td>{logBreak.location}</td>
-                                        <td>{format(new Date(logBreak.start_time), "yyyy-MM-dd HH:mm")}</td>
-                                        <td>{format(new Date(logBreak.end_time), "yyyy-MM-dd HH:mm")}</td>
-                                        <td>${logBreak.cost.toFixed(2)}</td>
-                                        <td>
-                                            <div className="d-flex gap-2">
-                                                <button
-                                                    className="btn btn-sm btn-warning"
-                                                    onClick={() => openUpdateModal(logBreak)}
-                                                >
-                                                    <i className="bi bi-pencil"></i> Edit
-                                                </button>
-                                                <button
-                                                    className="btn btn-sm btn-danger"
-                                                    onClick={() => handleDeleteLogBreak(logBreak.id)}
-                                                >
-                                                    <i className="bi bi-trash"></i> Delete
-                                                </button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                ))
-                            )}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+
+            <LogBreaksTable
+                logBreaks={logBreaks}
+                onEdit={openUpdateModal}
+                onDelete={handleDeleteLogBreak}
+            />
 
             {isModalOpen && (
-                <div className="modal fade show" style={{display: 'block', backgroundColor: 'rgba(0,0,0,0.5)'}}>
+                <div className="modal fade show" style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }}>
                     <div className="modal-dialog">
                         <div className="modal-content">
                             <div className="modal-header">
