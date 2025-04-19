@@ -1,6 +1,5 @@
-import { format } from "date-fns";
-
 const Message = ({ message, isOwnMessage }) => {
+    console.log(message)
     return (
         <div className={`d-flex mb-3 ${isOwnMessage ? 'justify-content-end' : 'justify-content-start'}`}>
             <div
@@ -8,9 +7,6 @@ const Message = ({ message, isOwnMessage }) => {
                 style={{ maxWidth: '75%' }}
             >
                 <div className="mb-1">{message.text}</div>
-                <small className={`d-block text-end ${isOwnMessage ? 'text-white-50' : 'text-muted'}`}>
-                    {format(new Date(message.timestamp), 'HH:mm')}
-                </small>
             </div>
         </div>
     );
