@@ -13,7 +13,7 @@ function Login() {
         firebaseLogin(email, password).then(result => {
             localStorage.setItem('accessToken', `Bearer ${result.accessToken}`);
             localStorage.setItem('refreshToken', `Bearer ${result.refreshToken}`);
-            getMe(`Bearer ${result.accessToken}`).then(result => {
+            setTimeout(() => getMe(`Bearer ${result.accessToken}`).then(result => {
                 localStorage.setItem('accountType', result.data.data.additional_data.type);
                 localStorage.setItem('userId', result.data.data.uid)
                 if(localStorage.getItem('accountType') === "driver"){
@@ -22,7 +22,7 @@ function Login() {
                 else if(localStorage.getItem('accountType') === "dispatcher") {
                     navigate("/dispatcher/deliveries");
                 }
-            })
+            }), 1000);
         }).catch(error => {
             console.log(error);
             alert("Error signing in!")
