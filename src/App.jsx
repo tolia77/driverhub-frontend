@@ -13,6 +13,7 @@ import LogBreaksIndexDriver from "src/pages/drivers/log-breaks/LogBreaksIndexDri
 import ChatDriver from "src/pages/drivers/chat/ChatDriver.jsx";
 import Login from "src/pages/Login.jsx";
 import Signup from "src/pages/Signup.jsx";
+import Account from "src/pages/Account.jsx";
 function App() {
     return (
         <BrowserRouter>
@@ -33,6 +34,7 @@ function App() {
                     </Route>
                     <Route path="login/" element={<Login/>}/>
                     <Route path="signup/" element={<Signup/>}/>
+                    <Route path="/account" element={<Account/>}/>
                 </Route>
             </Routes>
         </BrowserRouter>
