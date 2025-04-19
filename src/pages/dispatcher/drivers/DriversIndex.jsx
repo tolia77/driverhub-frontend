@@ -51,15 +51,19 @@ const DriversIndex = () => {
     const fetchVehicles = async () => {
         try {
             const response = await vehiclesIndex({}, authorization);
-            setVehicles(response.data.data.vehicles);
-            setVehiclesMap(response.data.data.vehicles.map(vehicle => ({
-                id: vehicle.id,
-                name: `${vehicle.model} (${vehicle.license_plate})`
-            })))
+            const vehiclesArray = response.data.data.vehicles;
+            setVehicles(vehiclesArray);
+
+            const map = {};
+            vehiclesArray.forEach(vehicle => {
+                map[vehicle.id] = vehicle;
+            });
+            setVehiclesMap(map);
         } catch (error) {
             console.error("Error fetching vehicles:", error);
         }
     };
+
 
     const handleAddDriver = async () => {
         if (!vehicles.length) {
