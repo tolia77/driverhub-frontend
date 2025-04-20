@@ -1,65 +1,35 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 import LogBreaksTable from "src/pages/dispatcher/log-breaks/LogBreaksTable";
 import LogBreakModal from "src/pages/dispatcher/log-breaks/LogBreakModal";
-import DriverSelect from "src/pages/dispatcher/log-breaks/DriverSelect";
+import DeliverySelect from "src/pages/dispatcher/log-breaks/DeliverySelect.jsx";
+import {deliveriesIndex} from "src/services/backend/deliveriesRequests.js";
+import {getAccessToken} from "src/utils/auth.js";
+import {logBreaksIndex} from "src/services/backend/logBreaksRequests.js";
 
 const LogBreaksIndex = () => {
-    const [drivers, setDrivers] = useState([]);
-    const [selectedDriver, setSelectedDriver] = useState(null);
+    const [deliveries, setDeliveries] = useState([]);
+    const [selectedDelivery, setSelectedDelivery] = useState(null);
     const [logBreaks, setLogBreaks] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentLogBreak, setCurrentLogBreak] = useState(null);
 
-    // Initialize with mock data (replace with actual API calls)
     useEffect(() => {
-        setDrivers([
-            { id: '1', name: 'John Doe' },
-            { id: '2', name: 'Jane Smith' },
-            { id: '3', name: 'Bob Johnson' }
-        ]);
+        deliveriesIndex({}, getAccessToken()).then(res => {
+            setDeliveries(res.data.data.deliveries);
+        });
     }, []);
 
-    // Load log breaks for selected driver
     useEffect(() => {
-        if (selectedDriver) {
-            getLogBreaksForDriver(selectedDriver)
-                .then((res) => {
-                    setLogBreaks(res.data);
-                })
-                .catch((err) => {
-                    console.error(err);
-                    alert("Error fetching log breaks");
-                });
-        }
-    }, [selectedDriver]);
-
-    const getLogBreaksForDriver = (driverId) => {
-        return new Promise((resolve) => {
-            resolve({
-                data: [
-                    {
-                        id: '1',
-                        location: 'City A',
-                        start_time: '2025-02-10T08:00',
-                        end_time: '2025-02-10T10:00',
-                        cost: 15.5,
-                        driver_id: driverId
-                    },
-                    {
-                        id: '2',
-                        location: 'City B',
-                        start_time: '2025-02-11T09:00',
-                        end_time: '2025-02-11T11:00',
-                        cost: 20.0,
-                        driver_id: driverId
-                    },
-                ]
+        if (selectedDelivery) {
+            logBreaksIndex(getAccessToken(), { delivery_id: selectedDelivery.id }).then(res => {
+                setLogBreaks(res.data.data.log_breaks);
             });
-        });
-    };
+        }
+    }, [selectedDelivery]);
+
 
     const handleSelectDriver = (driverId) => {
-        setSelectedDriver(driverId);
+        setSelectedDelivery(driverId);
     };
 
     const handleOpenModal = (logBreak = null) => {
@@ -69,7 +39,7 @@ const LogBreaksIndex = () => {
             start_time: new Date().toISOString(),
             end_time: new Date().toISOString(),
             cost: 0,
-            driver_id: selectedDriver
+            driver_id: selectedDelivery
         });
         setIsModalOpen(true);
     };
@@ -100,7 +70,7 @@ const LogBreaksIndex = () => {
         <div className="container-fluid py-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <h1 className="mb-0">Log Breaks Management</h1>
-                {selectedDriver && (
+                {selectedDelivery && (
                     <button
                         className="btn btn-success"
                         onClick={() => handleOpenModal()}
@@ -110,13 +80,13 @@ const LogBreaksIndex = () => {
                 )}
             </div>
 
-            <DriverSelect
-                drivers={drivers}
-                selectedDriver={selectedDriver}
+            <DeliverySelect
+                deliveries={deliveries}
+                selectedDriver={selectedDelivery}
                 onSelect={handleSelectDriver}
             />
 
-            {selectedDriver && (
+            {selectedDelivery && (
                 <LogBreaksTable
                     logBreaks={logBreaks}
                     onEdit={handleOpenModal}
