@@ -27,11 +27,6 @@ const LogBreaksIndex = () => {
         }
     }, [selectedDelivery]);
 
-
-    const handleSelectDriver = (driverId) => {
-        setSelectedDelivery(driverId);
-    };
-
     const handleOpenModal = (logBreak = null) => {
         setCurrentLogBreak(logBreak || {
             id: '',
@@ -82,8 +77,8 @@ const LogBreaksIndex = () => {
 
             <DeliverySelect
                 deliveries={deliveries}
-                selectedDriver={selectedDelivery}
-                onSelect={handleSelectDriver}
+                selectedDelivery={selectedDelivery}
+                onSelect={setSelectedDelivery}
             />
 
             {selectedDelivery && (
