@@ -60,7 +60,16 @@ export default function Header() {
                                 </li>
                             </>
                         )}
-
+                        {userRole === 'client' && (
+                            <>
+                                <li className="nav-item mx-2">
+                                    <Link to="/client/deliveries" className="nav-link px-3 py-2">Deliveries</Link>
+                                </li>
+                                <li className="nav-item mx-2">
+                                    <Link to="/account" className="nav-link px-3 py-2">Account</Link>
+                                </li>
+                            </>
+                        )}
                         {!userRole && (
                             <>
                                 <li className="nav-item mx-2">

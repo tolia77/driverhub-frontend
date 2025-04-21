@@ -42,7 +42,7 @@ const DeliveriesIndex = () => {
             const response = await driversIndex({}, authorization);
             setDrivers(response.data.data.drivers);
         } catch (error) {
-            console.error("Error fetching drivers:", error);
+            console.error("Error fetching driver:", error);
         }
     };
 

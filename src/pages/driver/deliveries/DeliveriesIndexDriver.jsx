@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { getMyDeliveries, updateDeliveryStatus } from "src/services/backend/deliveriesRequests";
 import { logBreaksCreate } from "src/services/backend/logBreaksRequests";
-import DeliveriesTable from "src/pages/drivers/deliveries/DeliveriesTable";
-import StatusUpdateModal from "src/pages/drivers/deliveries/StatusUpdateModal";
-import LogBreakModal from "src/pages/drivers/deliveries/LogBreakModal";
+import DeliveriesTable from "src/pages/driver/deliveries/DeliveriesTable";
+import StatusUpdateModal from "src/pages/driver/deliveries/StatusUpdateModal";
+import LogBreakModal from "src/pages/driver/deliveries/LogBreakModal";
 
 const DeliveriesIndexDriver = () => {
     const navigate = useNavigate();

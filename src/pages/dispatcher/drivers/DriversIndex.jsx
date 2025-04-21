@@ -44,7 +44,7 @@ const DriversIndex = () => {
             const driversData = response.data.data.drivers;
             setDrivers(driversData);
         } catch (error) {
-            console.error("Error fetching drivers:", error);
+            console.error("Error fetching driver:", error);
         }
     };
 

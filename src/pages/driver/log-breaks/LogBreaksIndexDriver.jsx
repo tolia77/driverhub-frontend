@@ -5,7 +5,7 @@ import {
     logBreaksMy,
     logBreaksUpdate
 } from "src/services/backend/logBreaksRequests.js";
-import LogBreaksTable from "src/pages/drivers/log-breaks/LogBreaksTable";
+import LogBreaksTable from "src/pages/driver/log-breaks/LogBreaksTable";
 
 const LogBreaksIndexDriver = () => {
     const [logBreaks, setLogBreaks] = useState([]);

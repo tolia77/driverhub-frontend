@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
 import { firebaseLogin } from "src/services/firebaseLogin.js";
 import { getMe } from "src/services/backend/authRequests.js";
+import {getUserRole} from "src/utils/auth.js";
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -16,11 +17,14 @@ function Login() {
             setTimeout(() => getMe(`Bearer ${result.accessToken}`).then(result => {
                 localStorage.setItem('accountType', result.data.data.additional_data.type);
                 localStorage.setItem('userId', result.data.data.uid)
-                if(localStorage.getItem('accountType') === "driver"){
+                if(getUserRole() === "driver"){
                     navigate("/driver/deliveries");
                 }
-                else if(localStorage.getItem('accountType') === "dispatcher") {
+                else if(getUserRole()  === "dispatcher") {
                     navigate("/dispatcher/deliveries");
+                }
+                else if(getUserRole()  === "client") {
+                    navigate("/client/deliveries");
                 }
             }), 1000);
         }).catch(error => {

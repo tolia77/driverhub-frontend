@@ -8,12 +8,14 @@ import VehiclesIndex from "src/pages/dispatcher/vehicles/VehiclesIndex.jsx";
 import LogBreaksIndex from "src/pages/dispatcher/log-breaks/LogBreaksIndex.jsx";
 import ChatDispatcher from "src/pages/dispatcher/chat/ChatDispatcher.jsx";
 import OnlyDrivers from "src/components/OnlyDrivers.jsx";
-import DeliveriesIndexDriver from "src/pages/drivers/deliveries/DeliveriesIndexDriver.jsx";
-import LogBreaksIndexDriver from "src/pages/drivers/log-breaks/LogBreaksIndexDriver.jsx";
-import ChatDriver from "src/pages/drivers/chat/ChatDriver.jsx";
+import DeliveriesIndexDriver from "src/pages/driver/deliveries/DeliveriesIndexDriver.jsx";
+import LogBreaksIndexDriver from "src/pages/driver/log-breaks/LogBreaksIndexDriver.jsx";
+import ChatDriver from "src/pages/driver/chat/ChatDriver.jsx";
 import Login from "src/pages/Login.jsx";
 import Signup from "src/pages/Signup.jsx";
 import Account from "src/pages/Account.jsx";
+import OnlyClients from "src/components/layout/OnlyClients.jsx";
+import DeliveriesIndexClient from "src/pages/client/DeliveriesIndexClient.jsx";
 function App() {
     return (
         <BrowserRouter>
@@ -31,6 +33,9 @@ function App() {
                         <Route path="deliveries/" element={<DeliveriesIndexDriver/>}/>
                         <Route path="log-breaks/" element={<LogBreaksIndexDriver/>}/>
                         <Route path="chat/" element={<ChatDriver/>}/>
+                    </Route>
+                    <Route path="client/" element={<OnlyClients/>}>
+                        <Route path="deliveries/" element={<DeliveriesIndexClient/>}/>
                     </Route>
                     <Route path="login/" element={<Login/>}/>
                     <Route path="signup/" element={<Signup/>}/>
