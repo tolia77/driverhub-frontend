@@ -34,8 +34,16 @@ export async function deliveryUpdate(deliveryId, data, authorization) {
     })
 }
 
-export async function getMyDeliveries(authorization) {
+export async function deliveriesMyDriver(authorization) {
     return await instance.get("/deliveries/my", {
+        headers: {
+            Authorization: authorization
+        },
+    })
+}
+
+export async function deliveriesMyClient(authorization) {
+    return await instance.get("/deliveries/my-deliveries", {
         headers: {
             Authorization: authorization
         },
