@@ -134,7 +134,7 @@ const DeliveriesIndex = () => {
     const filteredDeliveries = deliveries.filter(delivery => {
         const search = searchTerm.toLowerCase();
         return (
-            delivery.driver_id.toLowerCase().includes(search) ||
+            delivery.driver_id?.toLowerCase().includes(search) ||
             delivery.pickup_location.toLowerCase().includes(search) ||
             delivery.dropoff_location.toLowerCase().includes(search) ||
             delivery.delivery_window.toLowerCase().includes(search) ||
