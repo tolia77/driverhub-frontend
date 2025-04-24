@@ -1,5 +1,6 @@
-import {Link} from "react-router";
-import {getUserRole} from "src/utils/auth.js";
+import { Link } from "react-router";
+import { getUserRole } from "src/utils/auth.js";
+import logo from "src/assets/img/logo-light-no-bg.png";
 
 export default function Header() {
     const userRole = getUserRole();
@@ -7,6 +8,12 @@ export default function Header() {
     return (
         <header className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
             <div className="container-fluid">
+                <Link to="/" className="navbar-brand d-flex align-items-center me-4">
+                    <img src={logo} alt="Logo" height="50" className="me-2" />
+                    <span className="fw-bold">DriverHub</span>
+                </Link>
+
+                {/* Toggle button */}
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -20,63 +27,60 @@ export default function Header() {
                 </button>
 
                 <div className="collapse navbar-collapse" id="navbarContent">
-                    <ul className="navbar-nav mx-auto">
+                    <ul className="navbar-nav me-auto">
                         {userRole === 'dispatcher' && (
                             <>
-                                <li className="nav-item mx-2">
-                                    <Link to="/dispatcher/deliveries" className="nav-link px-3 py-2">Deliveries</Link>
+                                <li className="nav-item">
+                                    <Link to="/dispatcher/deliveries" className="nav-link px-2">Deliveries</Link>
                                 </li>
-                                <li className="nav-item mx-2">
-                                    <Link to="/dispatcher/drivers" className="nav-link px-3 py-2">Drivers</Link>
+                                <li className="nav-item">
+                                    <Link to="/dispatcher/drivers" className="nav-link px-2">Drivers</Link>
                                 </li>
-                                <li className="nav-item mx-2">
-                                    <Link to="/dispatcher/vehicles" className="nav-link px-3 py-2">Vehicles</Link>
+                                <li className="nav-item">
+                                    <Link to="/dispatcher/vehicles" className="nav-link px-2">Vehicles</Link>
                                 </li>
-                                <li className="nav-item mx-2">
-                                    <Link to="/dispatcher/log-breaks" className="nav-link px-3 py-2">Breaks</Link>
+                                <li className="nav-item">
+                                    <Link to="/dispatcher/log-breaks" className="nav-link px-2">Breaks</Link>
                                 </li>
-                                <li className="nav-item mx-2">
-                                    <Link to="/dispatcher/chat" className="nav-link px-3 py-2">Chat</Link>
-                                </li>
-                                <li className="nav-item mx-2">
-                                    <Link to="/account" className="nav-link px-3 py-2">Account</Link>
+                                <li className="nav-item">
+                                    <Link to="/dispatcher/chat" className="nav-link px-2">Chat</Link>
                                 </li>
                             </>
                         )}
 
                         {userRole === 'driver' && (
                             <>
-                                <li className="nav-item mx-2">
-                                    <Link to="/driver/deliveries" className="nav-link px-3 py-2">Deliveries</Link>
+                                <li className="nav-item">
+                                    <Link to="/driver/deliveries" className="nav-link px-2">Deliveries</Link>
                                 </li>
-                                <li className="nav-item mx-2">
-                                    <Link to="/driver/log-breaks" className="nav-link px-3 py-2">Breaks</Link>
+                                <li className="nav-item">
+                                    <Link to="/driver/log-breaks" className="nav-link px-2">Breaks</Link>
                                 </li>
-                                <li className="nav-item mx-2">
-                                    <Link to="/driver/chat" className="nav-link px-3 py-2">Chat</Link>
-                                </li>
-                                <li className="nav-item mx-2">
-                                    <Link to="/account" className="nav-link px-3 py-2">Account</Link>
+                                <li className="nav-item">
+                                    <Link to="/driver/chat" className="nav-link px-2">Chat</Link>
                                 </li>
                             </>
                         )}
+
                         {userRole === 'client' && (
-                            <>
-                                <li className="nav-item mx-2">
-                                    <Link to="/client/deliveries" className="nav-link px-3 py-2">Deliveries</Link>
-                                </li>
-                                <li className="nav-item mx-2">
-                                    <Link to="/account" className="nav-link px-3 py-2">Account</Link>
-                                </li>
-                            </>
+                            <li className="nav-item">
+                                <Link to="/client/deliveries" className="nav-link px-2">Deliveries</Link>
+                            </li>
                         )}
-                        {!userRole && (
+                    </ul>
+
+                    <ul className="navbar-nav">
+                        {userRole ? (
+                            <li className="nav-item">
+                                <Link to="/account" className="nav-link px-2">My account</Link>
+                            </li>
+                        ) : (
                             <>
-                                <li className="nav-item mx-2">
-                                    <Link to="/login" className="nav-link px-3 py-2">Log in</Link>
+                                <li className="nav-item">
+                                    <Link to="/login" className="nav-link px-2">Login</Link>
                                 </li>
-                                <li className="nav-item mx-2">
-                                    <Link to="/signup" className="nav-link px-3 py-2">Sign up</Link>
+                                <li className="nav-item">
+                                    <Link to="/signup" className="nav-link px-2">Sign Up</Link>
                                 </li>
                             </>
                         )}
