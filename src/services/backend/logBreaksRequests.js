@@ -18,7 +18,7 @@ export async function logBreaksIndex(authorization, params=null) {
 }
 
 export async function logBreaksMy(authorization, params=null) {
-    return await instance.get("/log-breaks/my", {
+    return await instance.get("/log-breaks/driver/me", {
         params: params,
         headers: {
             Authorization: authorization

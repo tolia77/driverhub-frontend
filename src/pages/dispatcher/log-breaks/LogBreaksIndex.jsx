@@ -15,14 +15,14 @@ const LogBreaksIndex = () => {
 
     useEffect(() => {
         deliveriesIndex({}, getAccessToken()).then(res => {
-            setDeliveries(res.data.data.deliveries);
+            setDeliveries(res.data);
         });
     }, []);
 
     useEffect(() => {
         if (selectedDelivery) {
             logBreaksIndex(getAccessToken(), { delivery_id: selectedDelivery.id }).then(res => {
-                setLogBreaks(res.data.data.log_breaks);
+                setLogBreaks(res.data);
             });
         }
     }, [selectedDelivery]);

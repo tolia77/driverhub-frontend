@@ -40,7 +40,7 @@ const DeliveriesIndex = () => {
     const fetchDrivers = async () => {
         try {
             const response = await driversIndex({}, authorization);
-            setDrivers(response.data.data.drivers);
+            setDrivers(response.data);
         } catch (error) {
             console.error("Error fetching driver:", error);
         }
@@ -75,7 +75,7 @@ const DeliveriesIndex = () => {
         try {
             const response = await deliveryShow(id, authorization);
             setModalType('update');
-            setCurrentDelivery(response.data.data);
+            setCurrentDelivery(response.data);
             setIsModalOpen(true);
         } catch (error) {
             console.error("Error fetching delivery details:", error);

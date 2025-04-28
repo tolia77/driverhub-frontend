@@ -41,7 +41,7 @@ const DriversIndex = () => {
     const fetchDrivers = async () => {
         try {
             const response = await driversIndex({}, authorization);
-            const driversData = response.data.data.drivers;
+            const driversData = response.data;
             setDrivers(driversData);
         } catch (error) {
             console.error("Error fetching driver:", error);
@@ -51,7 +51,7 @@ const DriversIndex = () => {
     const fetchVehicles = async () => {
         try {
             const response = await vehiclesIndex({}, authorization);
-            const vehiclesArray = response.data.data.vehicles;
+            const vehiclesArray = response.data;
             setVehicles(vehiclesArray);
 
             const map = {};

@@ -35,7 +35,7 @@ const VehiclesIndex = () => {
     const fetchVehicles = async () => {
         try {
             const response = await vehiclesIndex({}, authorization);
-            setVehicles(response.data.data.vehicles);
+            setVehicles(response.data);
         } catch (error) {
             console.error("Error fetching vehicles:", error);
         }
@@ -58,7 +58,7 @@ const VehiclesIndex = () => {
         try {
             const response = await vehicleShow(id, authorization);
             setModalType('update');
-            setCurrentVehicle(response.data.data);
+            setCurrentVehicle(response.data);
             setIsModalOpen(true);
         } catch (error) {
             console.error("Error fetching vehicle details:", error);

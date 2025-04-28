@@ -3,6 +3,7 @@ import { driversIndex } from "src/services/backend/driversRequests";
 import ChatSidebar from "src/components/chat/ChatSidebar.jsx";
 import ChatMessages from "src/components/chat/ChatMessages.jsx";
 import MessageInput from "src/components/chat/MessageInput.jsx";
+import {getAccessToken} from "src/utils/auth.js";
 
 function ChatDispatcher() {
     const [drivers, setDrivers] = useState([]);
@@ -23,7 +24,7 @@ function ChatDispatcher() {
     }, []);
 
     const fetchDrivers = async () => {
-        const response = await driversIndex({}, localStorage.getItem("accessToken"));
+        const response = await driversIndex({}, getAccessToken());
         setDrivers(response.data.data.drivers);
 
         response.data.data.drivers.forEach(driver => {

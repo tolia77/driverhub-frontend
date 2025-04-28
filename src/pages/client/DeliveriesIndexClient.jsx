@@ -13,7 +13,7 @@ import {getAccessToken} from "src/utils/auth.js";
           const fetchDeliveries = async () => {
               try {
                   const response = await deliveriesMyClient(getAccessToken());
-                  setDeliveries(response.data.data.deliveries);
+                  setDeliveries(response.data);
               } catch (err) {
                   console.error("Error fetching deliveries:", err);
                   alert("Error fetching deliveries");
