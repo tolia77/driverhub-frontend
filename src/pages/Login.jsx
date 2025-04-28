@@ -13,8 +13,8 @@ function Login() {
         signIn(email, password).then(result => {
             localStorage.setItem('accessToken', `Bearer ${result.data.access_token}`);
             getMe(`Bearer ${result.data.access_token}`).then(result => {
-                localStorage.setItem('accountType', result.data.user.type);
-                localStorage.setItem('userId', result.data.user.id)
+                localStorage.setItem('accountType', result.data.type);
+                localStorage.setItem('userId', result.data.id)
                 if (getUserRole() === "driver") {
                     navigate("/driver/deliveries");
                 } else if (getUserRole() === "dispatcher") {
