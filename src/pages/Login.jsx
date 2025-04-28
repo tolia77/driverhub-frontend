@@ -11,8 +11,8 @@ function Login() {
     const handleSubmit = (e) => {
         e.preventDefault();
         signIn(email, password).then(result => {
-            localStorage.setItem('accessToken', `Bearer ${result.access_token}`);
-            getMe(`Bearer ${result.access_token}`).then(result => {
+            localStorage.setItem('accessToken', `Bearer ${result.data.access_token}`);
+            getMe(`Bearer ${result.data.access_token}`).then(result => {
                 localStorage.setItem('accountType', result.data.user.type);
                 localStorage.setItem('userId', result.data.user.id)
                 if (getUserRole() === "driver") {

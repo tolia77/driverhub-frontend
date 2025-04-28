@@ -1,9 +1,10 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router';
+import {useState} from 'react';
+import {Link, useNavigate} from 'react-router';
 import {registerClient, signIn} from "src/services/backend/authRequests.js";
 
 function SignUp() {
-    const [username, setUsername] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
@@ -17,36 +18,49 @@ function SignUp() {
             return;
         }
         const requestData = {
-            name: username,
+            first_name: firstName,
+            last_name: lastName,
             email: email,
             phone_number: phone,
             password: password,
-        }
+        };
 
         registerClient(requestData).then(() => {
             signIn(email, password).then((result) => {
-                localStorage.setItem('accessToken', `Bearer ${result.accessToken}`);
+                localStorage.setItem('accessToken', `Bearer ${result.data.access_token}`);
                 localStorage.setItem('accountType', 'client');
                 navigate("/client/deliveries");
-            })
-        })
+            });
+        });
     };
 
     return (
         <div className="min-vh-100 d-flex justify-content-center align-items-center bg-light">
-            <div className="card shadow-sm p-4" style={{ width: '380px' }}>
+            <div className="card shadow-sm p-4" style={{width: '380px'}}>
                 <div className="card-body">
                     <h2 className="text-center mb-4">Create an Account</h2>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
-                            <label htmlFor="username" className="form-label">Username</label>
+                            <label htmlFor="firstName" className="form-label">First Name</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                id="username"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                                placeholder="Enter your Username"
+                                id="firstName"
+                                value={firstName}
+                                onChange={(e) => setFirstName(e.target.value)}
+                                placeholder="Enter your first name"
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="lastName" className="form-label">Last Name</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="lastName"
+                                value={lastName}
+                                onChange={(e) => setLastName(e.target.value)}
+                                placeholder="Enter your last name"
                                 required
                             />
                         </div>
