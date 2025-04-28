@@ -15,8 +15,16 @@ export async function registerDriver(data, authorization) {
     })
 }
 
-export async function registerDispatcher(data) {
-    return await instance.post("/auth/register-dispatcher", data)
+export async function registerDispatcher(data, authorization) {
+    return await instance.post("/auth/register-dispatcher", data, {
+        headers: {
+            Authorization: authorization
+        }
+    })
+}
+
+export async function registerClient(data) {
+    return await instance.post("/auth/signup", data)
 }
 
 export async function getMe(authorization) {

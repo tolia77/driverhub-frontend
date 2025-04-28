@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
-import {registerDispatcher, signIn} from "src/services/backend/authRequests.js";
+import {registerClient, signIn} from "src/services/backend/authRequests.js";
 
 function SignUp() {
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const navigate = useNavigate();
@@ -18,14 +19,15 @@ function SignUp() {
         const requestData = {
             name: username,
             email: email,
+            phone_number: phone,
             password: password,
         }
 
-        registerDispatcher(requestData).then(() => {
+        registerClient(requestData).then(() => {
             signIn(email, password).then((result) => {
                 localStorage.setItem('accessToken', `Bearer ${result.accessToken}`);
-                localStorage.setItem('accountType', 'dispatcher');
-                navigate("/dispatcher/deliveries");
+                localStorage.setItem('accountType', 'client');
+                navigate("/client/deliveries");
             })
         })
     };
@@ -57,6 +59,17 @@ function SignUp() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Enter your email"
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="phone" className="form-label">Phone number</label>
+                            <input
+                                className="form-control"
+                                id="phone"
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                                placeholder="Enter your phone number"
                                 required
                             />
                         </div>
