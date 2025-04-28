@@ -1,5 +1,12 @@
 import {instance} from "src/services/backend/config.js";
 
+export async function signIn(email, password) {
+    return await instance.post("/auth/login", {
+        email: email,
+        password: password
+    })
+}
+
 export async function registerDriver(data, authorization) {
     return await instance.post("/auth/register-driver", data, {
         headers: {

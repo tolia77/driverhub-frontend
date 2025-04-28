@@ -1,6 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { ref, push, off, onChildAdded, onValue } from "firebase/database";
-import { realtimeDB } from "src/services/firebase";
 import { driversIndex } from "src/services/backend/driversRequests";
 import ChatSidebar from "src/components/chat/ChatSidebar.jsx";
 import ChatMessages from "src/components/chat/ChatMessages.jsx";

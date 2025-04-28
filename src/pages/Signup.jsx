@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
-import { registerDispatcher } from "src/services/backend/authRequests.js";
-import { firebaseLogin } from "src/services/firebaseLogin.js";
+import {registerDispatcher, signIn} from "src/services/backend/authRequests.js";
 
 function SignUp() {
     const [username, setUsername] = useState("");
@@ -23,9 +22,8 @@ function SignUp() {
         }
 
         registerDispatcher(requestData).then(() => {
-            firebaseLogin(email, password).then((result) => {
+            signIn(email, password).then((result) => {
                 localStorage.setItem('accessToken', `Bearer ${result.accessToken}`);
-                localStorage.setItem('refreshToken', `Bearer ${result.refreshToken}`);
                 localStorage.setItem('accountType', 'dispatcher');
                 navigate("/dispatcher/deliveries");
             })

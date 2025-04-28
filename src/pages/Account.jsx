@@ -32,7 +32,6 @@ const Account = () => {
 
     const handleLogout = () => {
         localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
         localStorage.removeItem("accountType");
         localStorage.removeItem("userId");
         navigate("/login");

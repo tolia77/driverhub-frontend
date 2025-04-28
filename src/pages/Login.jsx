@@ -1,7 +1,6 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router';
-import { firebaseLogin } from "src/services/firebaseLogin.js";
-import { getMe } from "src/services/backend/authRequests.js";
+import {useState} from 'react';
+import {Link, useNavigate} from 'react-router';
+import {getMe, signIn} from "src/services/backend/authRequests.js";
 import {getUserRole} from "src/utils/auth.js";
 
 function Login() {
@@ -11,22 +10,19 @@ function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        firebaseLogin(email, password).then(result => {
-            localStorage.setItem('accessToken', `Bearer ${result.accessToken}`);
-            localStorage.setItem('refreshToken', `Bearer ${result.refreshToken}`);
-            setTimeout(() => getMe(`Bearer ${result.accessToken}`).then(result => {
-                localStorage.setItem('accountType', result.data.data.additional_data.type);
-                localStorage.setItem('userId', result.data.data.uid)
-                if(getUserRole() === "driver"){
+        signIn(email, password).then(result => {
+            localStorage.setItem('accessToken', `Bearer ${result.access_token}`);
+            getMe(`Bearer ${result.access_token}`).then(result => {
+                localStorage.setItem('accountType', result.data.user.type);
+                localStorage.setItem('userId', result.data.user.id)
+                if (getUserRole() === "driver") {
                     navigate("/driver/deliveries");
-                }
-                else if(getUserRole()  === "dispatcher") {
+                } else if (getUserRole() === "dispatcher") {
                     navigate("/dispatcher/deliveries");
-                }
-                else if(getUserRole()  === "client") {
+                } else if (getUserRole() === "client") {
                     navigate("/client/deliveries");
                 }
-            }), 2000);
+            })
         }).catch(error => {
             console.log(error);
             alert("Error signing in!")
@@ -35,7 +31,7 @@ function Login() {
 
     return (
         <div className="min-vh-100 d-flex justify-content-center align-items-center bg-light">
-            <div className="card shadow-sm p-4" style={{ width: '380px' }}>
+            <div className="card shadow-sm p-4" style={{width: '380px'}}>
                 <div className="card-body">
                     <h2 className="text-center mb-4">Welcome Back</h2>
                     <form onSubmit={handleSubmit}>
