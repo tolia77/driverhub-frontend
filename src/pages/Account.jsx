@@ -6,8 +6,8 @@ import RequireAuth from "src/components/RequireAuth.jsx";
 const Account = () => {
     const navigate = useNavigate();
     const [account, setAccount] = useState({
-        firstName: "",
-        lastName: "",
+        first_name: "",
+        last_name: "",
         email: "",
         status: "",
         license_number: null
@@ -18,8 +18,8 @@ const Account = () => {
             try {
                 const response = await getMe(localStorage.getItem("accessToken"));
                 setAccount({
-                    firstName: response.data.first_name,
-                    lastName: response.data.last_name,
+                    first_name: response.data.first_name,
+                    last_name: response.data.last_name,
                     email: response.data.email,
                     role: response.data.type,
                     license_number: response.data.license_number,
@@ -51,11 +51,11 @@ const Account = () => {
                                 <div className="mb-4">
                                     <div className="d-flex justify-content-between py-2 border-bottom">
                                         <span className="fw-bold">First name:</span>
-                                        <span>{account.firstName}</span>
+                                        <span>{account.first_name}</span>
                                     </div>
                                     <div className="d-flex justify-content-between py-2 border-bottom">
                                         <span className="fw-bold">Last name:</span>
-                                        <span>{account.lastName}</span>
+                                        <span>{account.last_name}</span>
                                     </div>
                                     <div className="d-flex justify-content-between py-2 border-bottom">
                                         <span className="fw-bold">Email:</span>

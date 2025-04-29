@@ -32,23 +32,23 @@ const DriverModal = ({
                                     <label className="form-label">First Name</label>
                                     <input
                                         type="text"
-                                        className={`form-control ${errors.firstName ? 'is-invalid' : ''}`}
-                                        name="firstName"
-                                        value={driver.firstName}
+                                        className={`form-control ${errors.first_name ? 'is-invalid' : ''}`}
+                                        name="first_name"
+                                        value={driver.first_name}
                                         onChange={onInputChange}
                                     />
-                                    {errors.firstName && <div className="invalid-feedback">{errors.firstName}</div>}
+                                    {errors.first_name && <div className="invalid-feedback">{errors.first_name}</div>}
                                 </div>
                                 <div className="col-md-6 mb-3">
                                     <label className="form-label">Last Name</label>
                                     <input
                                         type="text"
-                                        className={`form-control ${errors.lastName ? 'is-invalid' : ''}`}
-                                        name="lastName"
-                                        value={driver.lastName}
+                                        className={`form-control ${errors.last_name ? 'is-invalid' : ''}`}
+                                        name="last_name"
+                                        value={driver.last_name}
                                         onChange={onInputChange}
                                     />
-                                    {errors.lastName && <div className="invalid-feedback">{errors.lastName}</div>}
+                                    {errors.last_name && <div className="invalid-feedback">{errors.last_name}</div>}
                                 </div>
                             </div>
                             <div className="mb-3">

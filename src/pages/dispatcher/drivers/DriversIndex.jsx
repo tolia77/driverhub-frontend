@@ -23,8 +23,8 @@ const DriversIndex = () => {
     const [modalType, setModalType] = useState('add');
     const [currentDriver, setCurrentDriver] = useState({
         id: '',
-        firstName: '',
-        lastName: '',
+        first_name: '',
+        last_name: '',
         email: '',
         password: '',
         license_number: '',
@@ -66,8 +66,8 @@ const DriversIndex = () => {
     };
 
     const mapToApiFormat = (driver) => ({
-        first_name: driver.firstName,
-        last_name: driver.lastName,
+        first_name: driver.first_name,
+        last_name: driver.last_name,
         email: driver.email,
         password: driver.password,
         license_number: driver.license_number,
@@ -81,8 +81,8 @@ const DriversIndex = () => {
         setModalType('add');
         setCurrentDriver({
             id: '',
-            firstName: '',
-            lastName: '',
+            first_name: '',
+            last_name: '',
             email: '',
             password: '',
             license_number: '',
@@ -159,8 +159,8 @@ const DriversIndex = () => {
 
     const validateForm = () => {
         const errors = {};
-        if (!currentDriver.firstName.trim()) errors.firstName = "First name is required";
-        if (!currentDriver.lastName.trim()) errors.lastName = "Last name is required";
+        if (!currentDriver.first_name.trim()) errors.first_name = "First name is required";
+        if (!currentDriver.last_name.trim()) errors.last_name = "Last name is required";
         if (!currentDriver.email.trim()) {
             errors.email = "Email is required";
         } else if (!/\S+@\S+\.\S+/.test(currentDriver.email)) {

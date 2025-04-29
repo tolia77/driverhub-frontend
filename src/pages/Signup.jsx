@@ -3,8 +3,8 @@ import {Link, useNavigate} from 'react-router';
 import {registerClient, signIn} from "src/services/backend/authRequests.js";
 
 function SignUp() {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
+    const [first_name, setfirst_name] = useState("");
+    const [last_name, setlast_name] = useState("");
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
@@ -18,8 +18,8 @@ function SignUp() {
             return;
         }
         const requestData = {
-            first_name: firstName,
-            last_name: lastName,
+            first_name: first_name,
+            last_name: last_name,
             email: email,
             phone_number: phone,
             password: password,
@@ -41,25 +41,25 @@ function SignUp() {
                     <h2 className="text-center mb-4">Create an Account</h2>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
-                            <label htmlFor="firstName" className="form-label">First Name</label>
+                            <label htmlFor="first_name" className="form-label">First Name</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                id="firstName"
-                                value={firstName}
-                                onChange={(e) => setFirstName(e.target.value)}
+                                id="first_name"
+                                value={first_name}
+                                onChange={(e) => setfirst_name(e.target.value)}
                                 placeholder="Enter your first name"
                                 required
                             />
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="lastName" className="form-label">Last Name</label>
+                            <label htmlFor="last_name" className="form-label">Last Name</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                id="lastName"
-                                value={lastName}
-                                onChange={(e) => setLastName(e.target.value)}
+                                id="last_name"
+                                value={last_name}
+                                onChange={(e) => setlast_name(e.target.value)}
                                 placeholder="Enter your last name"
                                 required
                             />
