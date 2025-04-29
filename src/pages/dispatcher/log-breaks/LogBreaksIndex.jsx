@@ -41,12 +41,10 @@ const LogBreaksIndex = () => {
 
     const handleSaveLogBreak = (updatedLogBreak) => {
         if (updatedLogBreak.id) {
-            // Update existing
             setLogBreaks(logBreaks.map(logBreak =>
                 logBreak.id === updatedLogBreak.id ? updatedLogBreak : logBreak
             ));
         } else {
-            // Add new
             setLogBreaks([...logBreaks, {
                 ...updatedLogBreak,
                 id: `${logBreaks.length + 1}`
