@@ -13,7 +13,6 @@ const DeliveriesTable = ({ deliveries, onUpdateStatus, onLogBreak }) => {
                             <th>ID</th>
                             <th>Pickup Location</th>
                             <th>Dropoff Location</th>
-                            <th>Delivery Window</th>
                             <th>Package Details</th>
                             <th>Status</th>
                             <th>Actions</th>
@@ -25,7 +24,6 @@ const DeliveriesTable = ({ deliveries, onUpdateStatus, onLogBreak }) => {
                                 <td>{delivery.id}</td>
                                 <td>{delivery.pickup_location}</td>
                                 <td>{delivery.dropoff_location}</td>
-                                <td>{delivery.delivery_window}</td>
                                 <td>{delivery.package_details}</td>
                                 <td>{delivery.status}</td>
                                 <td>

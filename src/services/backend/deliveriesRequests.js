@@ -51,14 +51,15 @@ export async function deliveriesMyClient(authorization) {
 }
 
 export async function updateDeliveryStatus(deliveryId, status, authorization) {
-    return await instance.patch(`/deliveries/${deliveryId}/status`, {}, {
-        params: {
-            status: status,
+    return await instance.patch(`/deliveries/${deliveryId}/status`,
+        {
+            new_status: status,
         },
-        headers: {
-            Authorization: authorization
-        }
-    })
+        {
+            headers: {
+                Authorization: authorization
+            }
+        })
 }
 
 export async function deliveryDelete(driverId, authorization) {
