@@ -80,7 +80,7 @@ const VehiclesIndex = () => {
         try {
             if (modalType === 'add') {
                 const response = await vehicleCreate(currentVehicle, authorization);
-                setVehicles([...vehicles, response.data.data]);
+                setVehicles([...vehicles, response.data]);
             } else {
                 await vehicleUpdate(currentVehicle.id, currentVehicle, authorization);
                 setVehicles(vehicles.map(vehicle =>
