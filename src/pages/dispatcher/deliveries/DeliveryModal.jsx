@@ -39,7 +39,7 @@ const DeliveryModal = ({
                                         <option value="">Select a driver</option>
                                         {drivers.map(driver => (
                                             <option key={driver.id} value={driver.id}>
-                                                {driver.name || `Driver ${driver.id}`}
+                                                {`${driver.first_name} ${driver.last_name}` || `Driver ${driver.id}`}
                                             </option>
                                         ))}
                                     </select>
@@ -70,32 +70,6 @@ const DeliveryModal = ({
                                         onChange={onInputChange}
                                     />
                                     {errors.dropoff_location && <div className="invalid-feedback">{errors.dropoff_location}</div>}
-                                </div>
-                            </div>
-
-                            <div className="row">
-                                <div className="col-md-6 mb-3">
-                                    <label className="form-label">Delivery Window</label>
-                                    <input
-                                        type="text"
-                                        className={`form-control ${errors.delivery_window ? 'is-invalid' : ''}`}
-                                        name="delivery_window"
-                                        value={delivery.delivery_window}
-                                        onChange={onInputChange}
-                                    />
-                                    {errors.delivery_window && <div className="invalid-feedback">{errors.delivery_window}</div>}
-                                </div>
-
-                                <div className="col-md-6 mb-3">
-                                    <label className="form-label">Created At</label>
-                                    <input
-                                        type="date"
-                                        className="form-control"
-                                        name="created_at"
-                                        value={delivery.created_at}
-                                        onChange={onInputChange}
-                                        disabled
-                                    />
                                 </div>
                             </div>
 

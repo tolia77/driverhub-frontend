@@ -1,4 +1,4 @@
-const DeliveriesTable = ({ deliveries, onUpdate, onDelete }) => {
+const DeliveriesTable = ({ deliveries, onUpdate }) => {
     return (
         <div className="card">
             <div className="card-body p-0">
@@ -10,7 +10,6 @@ const DeliveriesTable = ({ deliveries, onUpdate, onDelete }) => {
                             <th>Driver ID</th>
                             <th>Pickup Location</th>
                             <th>Dropoff Location</th>
-                            <th>Delivery Window</th>
                             <th>Status</th>
                             <th>Created At</th>
                             <th>Actions</th>
@@ -23,7 +22,6 @@ const DeliveriesTable = ({ deliveries, onUpdate, onDelete }) => {
                                 <td>{delivery.driver_id || 'None'}</td>
                                 <td>{delivery.pickup_location}</td>
                                 <td>{delivery.dropoff_location}</td>
-                                <td>{delivery.delivery_window}</td>
                                 <td>{delivery.status}</td>
                                 <td>{delivery.created_at}</td>
                                 <td>
@@ -33,12 +31,6 @@ const DeliveriesTable = ({ deliveries, onUpdate, onDelete }) => {
                                             onClick={() => onUpdate(delivery.id)}
                                         >
                                             <i className="bi bi-pencil"></i> Update
-                                        </button>
-                                        <button
-                                            className="btn btn-sm btn-danger"
-                                            onClick={() => onDelete(delivery.id)}
-                                        >
-                                            <i className="bi bi-trash"></i> Delete
                                         </button>
                                     </div>
                                 </td>

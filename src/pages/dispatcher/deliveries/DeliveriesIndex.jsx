@@ -10,6 +10,7 @@ import { driversIndex } from "src/services/backend/driversRequests";
 import DeliveriesTable from "src/pages/dispatcher/deliveries/DeliveriesTable";
 import DeliveryModal from "./DeliveryModal";
 import SearchBar from "src/components/SearchBar";
+import {getAccessToken} from "src/utils/auth.js";
 
 const DeliveriesIndex = () => {
     const [deliveries, setDeliveries] = useState([]);
@@ -22,7 +23,6 @@ const DeliveriesIndex = () => {
         driver_id: '',
         pickup_location: '',
         dropoff_location: '',
-        delivery_window: '',
         package_details: '',
         status: 'Pending',
         delivery_notes: '',
@@ -30,7 +30,7 @@ const DeliveriesIndex = () => {
     });
     const [searchTerm, setSearchTerm] = useState('');
 
-    const authorization = localStorage.getItem("accessToken");
+    const authorization = getAccessToken();
 
     useEffect(() => {
         fetchDeliveries();
@@ -49,7 +49,7 @@ const DeliveriesIndex = () => {
     const fetchDeliveries = async () => {
         try {
             const response = await deliveriesIndex({}, authorization);
-            setDeliveries(response.data.data.deliveries);
+            setDeliveries(response.data);
         } catch (error) {
             console.error("Error fetching deliveries:", error);
         }
@@ -62,7 +62,6 @@ const DeliveriesIndex = () => {
             driver_id: '',
             pickup_location: '',
             dropoff_location: '',
-            delivery_window: '',
             package_details: '',
             status: 'Pending',
             delivery_notes: '',
@@ -82,15 +81,6 @@ const DeliveriesIndex = () => {
         }
     };
 
-    const handleDeleteDelivery = async (id) => {
-        try {
-            await deliveryDelete(id, authorization);
-            setDeliveries(deliveries.filter(delivery => delivery.id !== id));
-        } catch (error) {
-            console.error("Error deleting delivery:", error);
-        }
-    };
-
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setCurrentDelivery({ ...currentDelivery, [name]: value });
@@ -106,7 +96,7 @@ const DeliveriesIndex = () => {
         try {
             if (modalType === 'add') {
                 const response = await deliveryCreate(currentDelivery, authorization);
-                setDeliveries([...deliveries, response.data.data]);
+                setDeliveries([...deliveries, response.data]);
             } else {
                 await deliveryUpdate(currentDelivery.id, currentDelivery, authorization);
                 setDeliveries(deliveries.map(delivery =>
@@ -121,10 +111,9 @@ const DeliveriesIndex = () => {
 
     const validateForm = () => {
         const errors = {};
-        if (!currentDelivery.driver_id.trim()) errors.driver_id = "Driver ID is required";
+        if (!currentDelivery.driver_id) errors.driver_id = "Driver ID is required";
         if (!currentDelivery.pickup_location.trim()) errors.pickup_location = "Pickup location is required";
         if (!currentDelivery.dropoff_location.trim()) errors.dropoff_location = "Dropoff location is required";
-        if (!currentDelivery.delivery_window.trim()) errors.delivery_window = "Delivery window is required";
         if (!currentDelivery.package_details.trim()) errors.package_details = "Package details are required";
 
         setFormErrors(errors);
@@ -134,10 +123,8 @@ const DeliveriesIndex = () => {
     const filteredDeliveries = deliveries.filter(delivery => {
         const search = searchTerm.toLowerCase();
         return (
-            delivery.driver_id?.toLowerCase().includes(search) ||
             delivery.pickup_location.toLowerCase().includes(search) ||
             delivery.dropoff_location.toLowerCase().includes(search) ||
-            delivery.delivery_window.toLowerCase().includes(search) ||
             delivery.status.toLowerCase().includes(search)
         );
     });
@@ -163,7 +150,6 @@ const DeliveriesIndex = () => {
             <DeliveriesTable
                 deliveries={filteredDeliveries}
                 onUpdate={handleUpdateDelivery}
-                onDelete={handleDeleteDelivery}
             />
 
             <DeliveryModal
