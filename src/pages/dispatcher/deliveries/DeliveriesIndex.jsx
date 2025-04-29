@@ -19,6 +19,7 @@ const DeliveriesIndex = () => {
     const [formErrors, setFormErrors] = useState({});
     const [drivers, setDrivers] = useState([]);
     const [clients, setClients] = useState([]);
+    const [originalDelivery, setOriginalDelivery] = useState(null);
     const [currentDelivery, setCurrentDelivery] = useState({
         id: '',
         driver_id: '',
@@ -31,7 +32,6 @@ const DeliveriesIndex = () => {
         created_at: new Date().toISOString().split('T')[0],
     });
     const [searchTerm, setSearchTerm] = useState('');
-
     const authorization = getAccessToken();
 
     useEffect(() => {
@@ -48,12 +48,13 @@ const DeliveriesIndex = () => {
             console.error("Error fetching clients:", error);
         }
     };
+
     const fetchDrivers = async () => {
         try {
             const response = await driversIndex({}, authorization);
             setDrivers(response.data);
         } catch (error) {
-            console.error("Error fetching driver:", error);
+            console.error("Error fetching drivers:", error);
         }
     };
 
@@ -68,7 +69,7 @@ const DeliveriesIndex = () => {
 
     const handleAddDelivery = () => {
         setModalType('add');
-        setCurrentDelivery({
+        const newDelivery = {
             id: '',
             driver_id: '',
             client_id: '',
@@ -78,7 +79,9 @@ const DeliveriesIndex = () => {
             status: 'Pending',
             delivery_notes: '',
             created_at: new Date().toISOString().split('T')[0],
-        });
+        };
+        setCurrentDelivery(newDelivery);
+        setOriginalDelivery(null);
         setIsModalOpen(true);
     };
 
@@ -87,6 +90,7 @@ const DeliveriesIndex = () => {
             const response = await deliveryShow(id, authorization);
             setModalType('update');
             setCurrentDelivery(response.data);
+            setOriginalDelivery(response.data);
             setIsModalOpen(true);
         } catch (error) {
             console.error("Error fetching delivery details:", error);
@@ -95,26 +99,38 @@ const DeliveriesIndex = () => {
 
     const handleInputChange = (e) => {
         const {name, value} = e.target;
-        setCurrentDelivery({...currentDelivery, [name]: value});
+        setCurrentDelivery({...currentDelivery, [name]: value || null});
     };
 
-    const handleSearchChange = (e) => {
-        setSearchTerm(e.target.value);
+    const getModifiedFields = () => {
+        if (!originalDelivery) return currentDelivery;
+
+        const modified = {};
+        for (const key in currentDelivery) {
+            if (key === 'id') continue;
+            if (currentDelivery[key] !== originalDelivery[key]) {
+                modified[key] = currentDelivery[key] || null;
+            }
+        }
+        return modified;
     };
 
     const handleConfirm = async () => {
         if (!validateForm()) return;
-        const cleanedDelivery = { ...currentDelivery };
-        if (!cleanedDelivery.driver_id) delete cleanedDelivery.driver_id;
-        if (!cleanedDelivery.client_id) delete cleanedDelivery.client_id;
+
         try {
             if (modalType === 'add') {
+                const cleanedDelivery = { ...currentDelivery };
+                if (!cleanedDelivery.driver_id) cleanedDelivery.driver_id = null;
+                if (!cleanedDelivery.client_id) cleanedDelivery.client_id = null;
+
                 const response = await deliveryCreate(cleanedDelivery, authorization);
                 setDeliveries([...deliveries, response.data]);
             } else {
-                await deliveryUpdate(cleanedDelivery.id, cleanedDelivery, authorization);
+                const modifiedFields = getModifiedFields();
+                const response = await deliveryUpdate(currentDelivery.id, modifiedFields, authorization);
                 setDeliveries(deliveries.map(delivery =>
-                    delivery.id === cleanedDelivery.id ? cleanedDelivery : delivery
+                    delivery.id === currentDelivery.id ? response.data : delivery
                 ));
             }
             setIsModalOpen(false);
@@ -125,9 +141,9 @@ const DeliveriesIndex = () => {
 
     const validateForm = () => {
         const errors = {};
-        if (!currentDelivery.pickup_location.trim()) errors.pickup_location = "Pickup location is required";
-        if (!currentDelivery.dropoff_location.trim()) errors.dropoff_location = "Dropoff location is required";
-        if (!currentDelivery.package_details.trim()) errors.package_details = "Package details are required";
+        if (!currentDelivery.pickup_location?.trim()) errors.pickup_location = "Pickup location is required";
+        if (!currentDelivery.dropoff_location?.trim()) errors.dropoff_location = "Dropoff location is required";
+        if (!currentDelivery.package_details?.trim()) errors.package_details = "Package details are required";
 
         setFormErrors(errors);
         return Object.keys(errors).length === 0;
@@ -146,17 +162,14 @@ const DeliveriesIndex = () => {
         <div className="container-fluid py-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <h1 className="mb-0">Deliveries</h1>
-                <button
-                    className="btn btn-success"
-                    onClick={handleAddDelivery}
-                >
+                <button className="btn btn-success" onClick={handleAddDelivery}>
                     <i className="bi bi-plus-circle me-2"></i>Add Delivery
                 </button>
             </div>
 
             <SearchBar
                 searchTerm={searchTerm}
-                onSearchChange={handleSearchChange}
+                onSearchChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Search deliveries..."
             />
 
@@ -176,7 +189,6 @@ const DeliveriesIndex = () => {
                 drivers={drivers}
                 clients={clients}
             />
-
         </div>
     );
 };
