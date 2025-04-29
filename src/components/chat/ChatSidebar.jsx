@@ -14,7 +14,7 @@ const ChatSidebar = ({ drivers, selectedDriver, lastMessages, onSelectDriver }) 
                             style={{ cursor: 'pointer' }}
                         >
                             <div className="d-flex flex-column">
-                                <span className="fw-bold">{driver.name}</span>
+                                <span className="fw-bold">{driver.first_name} {driver.last_name}</span>
                                 <small className="text-truncate">
                                     {lastMessages[driver.id]?.text || "No messages yet"}
                                 </small>

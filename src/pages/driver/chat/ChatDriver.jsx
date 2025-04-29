@@ -1,36 +1,18 @@
-import { useEffect, useRef, useState } from "react";
+import useChatSocket from "src/hooks/useChatSocket";
 import ChatMessages from "src/components/chat/ChatMessages";
 import MessageInput from "src/components/chat/MessageInput";
+import { useRef, useEffect } from "react";
 
 const ChatDriver = () => {
-    const [messages, setMessages] = useState([]);
+    const { messages, sendMessage } = useChatSocket(); // no driver_id
     const messagesEndRef = useRef(null);
     const userId = localStorage.getItem("userId");
-
-    useEffect(() => {
-        if (!userId) return;
-        const chatRef = ref(realtimeDB, `chats/${userId}`);
-        onChildAdded(chatRef, (snapshot) => {
-            setMessages((prev) => [...prev, snapshot.val()]);
-        });
-        return () => {
-            off(chatRef);
-        };
-    }, [userId]);
 
     useEffect(() => {
         if (messagesEndRef.current) {
             messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
         }
     }, [messages]);
-
-    const handleSendMessage = (text) => {
-        if (!text.trim()) return;
-        push(ref(realtimeDB, `chats/${userId}`), {
-            sender: userId,
-            text: text,
-        });
-    };
 
     return (
         <div className="container py-4">
@@ -43,7 +25,7 @@ const ChatDriver = () => {
                     userId={userId}
                     messagesEndRef={messagesEndRef}
                 />
-                <MessageInput onSendMessage={handleSendMessage} />
+                <MessageInput onSendMessage={sendMessage} />
             </div>
         </div>
     );

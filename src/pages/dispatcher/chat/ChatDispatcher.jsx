@@ -1,73 +1,32 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import ChatSidebar from "src/components/chat/ChatSidebar";
+import ChatMessages from "src/components/chat/ChatMessages";
+import MessageInput from "src/components/chat/MessageInput";
 import { driversIndex } from "src/services/backend/driversRequests";
-import ChatSidebar from "src/components/chat/ChatSidebar.jsx";
-import ChatMessages from "src/components/chat/ChatMessages.jsx";
-import MessageInput from "src/components/chat/MessageInput.jsx";
-import {getAccessToken} from "src/utils/auth.js";
+import { getAccessToken } from "src/utils/auth";
+import useChatSocket from "src/hooks/useChatSocket";
 
-function ChatDispatcher() {
+const ChatDispatcher = () => {
     const [drivers, setDrivers] = useState([]);
     const [selectedDriver, setSelectedDriver] = useState(null);
-    const [messages, setMessages] = useState([]);
-    const [lastMessages, setLastMessages] = useState({});
     const userId = localStorage.getItem("userId");
     const messagesEndRef = useRef(null);
 
+    const { messages, sendMessage } = useChatSocket(selectedDriver?.id);
+
     useEffect(() => {
+        const fetchDrivers = async () => {
+            const response = await driversIndex({}, getAccessToken());
+            setDrivers(response.data);
+        };
         fetchDrivers();
-        return () => {
-            // Clean up listeners when component unmounts
-            drivers.forEach(driver => {
-                off(ref(realtimeDB, `chats/${driver.id}`));
-            });
-        };
     }, []);
-
-    const fetchDrivers = async () => {
-        const response = await driversIndex({}, getAccessToken());
-        setDrivers(response.data.data.drivers);
-
-        response.data.data.drivers.forEach(driver => {
-            const chatRef = ref(realtimeDB, `chats/${driver.id}`);
-            onValue(chatRef, (snapshot) => {
-                const messages = snapshot.val();
-                if (messages) {
-                    const lastMsg = Object.values(messages).pop();
-                    setLastMessages(prev => ({ ...prev, [driver.id]: lastMsg }));
-                }
-            });
-        });
-    };
-
-    useEffect(() => {
-        if (!selectedDriver) return;
-
-        setMessages([]);
-
-        const chatRef = ref(realtimeDB, `chats/${selectedDriver.id}`);
-        onChildAdded(chatRef, (snapshot) => {
-            setMessages((prev) => [...prev, snapshot.val()]);
-        });
-
-        return () => {
-            off(chatRef);
-        };
-    }, [selectedDriver]);
 
     useEffect(() => {
         if (messagesEndRef.current) {
             messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
         }
     }, [messages]);
-
-    const sendMessage = (message) => {
-        if (!message.trim() || !selectedDriver) return;
-        push(ref(realtimeDB, `chats/${selectedDriver.id}`), {
-            sender: userId,
-            text: message,
-            timestamp: new Date().toISOString()
-        });
-    };
 
     return (
         <div className="container-fluid py-4">
@@ -76,8 +35,8 @@ function ChatDispatcher() {
                     <ChatSidebar
                         drivers={drivers}
                         selectedDriver={selectedDriver}
-                        lastMessages={lastMessages}
                         onSelectDriver={setSelectedDriver}
+                        lastMessages={{}} // optionally track recent messages
                     />
                 </div>
                 <div className="col-md-8">
@@ -92,9 +51,7 @@ function ChatDispatcher() {
                                     userId={userId}
                                     messagesEndRef={messagesEndRef}
                                 />
-                                <MessageInput
-                                    onSendMessage={sendMessage}
-                                />
+                                <MessageInput onSendMessage={sendMessage} />
                             </div>
                         </div>
                     ) : (
@@ -108,6 +65,6 @@ function ChatDispatcher() {
             </div>
         </div>
     );
-}
+};
 
 export default ChatDispatcher;
