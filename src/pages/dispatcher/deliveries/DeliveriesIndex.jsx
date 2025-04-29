@@ -1,16 +1,16 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 import {
     deliveriesIndex,
     deliveryShow,
     deliveryCreate,
     deliveryUpdate,
-    deliveryDelete,
 } from "src/services/backend/deliveriesRequests";
-import { driversIndex } from "src/services/backend/driversRequests";
+import {driversIndex} from "src/services/backend/driversRequests";
 import DeliveriesTable from "src/pages/dispatcher/deliveries/DeliveriesTable";
 import DeliveryModal from "./DeliveryModal";
 import SearchBar from "src/components/SearchBar";
 import {getAccessToken} from "src/utils/auth.js";
+import {clientsIndex} from "src/services/backend/clientsRequests.js";
 
 const DeliveriesIndex = () => {
     const [deliveries, setDeliveries] = useState([]);
@@ -18,9 +18,11 @@ const DeliveriesIndex = () => {
     const [modalType, setModalType] = useState('add');
     const [formErrors, setFormErrors] = useState({});
     const [drivers, setDrivers] = useState([]);
+    const [clients, setClients] = useState([]);
     const [currentDelivery, setCurrentDelivery] = useState({
         id: '',
         driver_id: '',
+        client_id: '',
         pickup_location: '',
         dropoff_location: '',
         package_details: '',
@@ -35,8 +37,17 @@ const DeliveriesIndex = () => {
     useEffect(() => {
         fetchDeliveries();
         fetchDrivers();
+        fetchClients();
     }, []);
 
+    const fetchClients = async () => {
+        try {
+            const response = await clientsIndex(authorization);
+            setClients(response.data);
+        } catch (error) {
+            console.error("Error fetching clients:", error);
+        }
+    };
     const fetchDrivers = async () => {
         try {
             const response = await driversIndex({}, authorization);
@@ -60,6 +71,7 @@ const DeliveriesIndex = () => {
         setCurrentDelivery({
             id: '',
             driver_id: '',
+            client_id: '',
             pickup_location: '',
             dropoff_location: '',
             package_details: '',
@@ -82,8 +94,8 @@ const DeliveriesIndex = () => {
     };
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setCurrentDelivery({ ...currentDelivery, [name]: value });
+        const {name, value} = e.target;
+        setCurrentDelivery({...currentDelivery, [name]: value});
     };
 
     const handleSearchChange = (e) => {
@@ -92,15 +104,17 @@ const DeliveriesIndex = () => {
 
     const handleConfirm = async () => {
         if (!validateForm()) return;
-
+        const cleanedDelivery = { ...currentDelivery };
+        if (!cleanedDelivery.driver_id) delete cleanedDelivery.driver_id;
+        if (!cleanedDelivery.client_id) delete cleanedDelivery.client_id;
         try {
             if (modalType === 'add') {
-                const response = await deliveryCreate(currentDelivery, authorization);
+                const response = await deliveryCreate(cleanedDelivery, authorization);
                 setDeliveries([...deliveries, response.data]);
             } else {
-                await deliveryUpdate(currentDelivery.id, currentDelivery, authorization);
+                await deliveryUpdate(cleanedDelivery.id, cleanedDelivery, authorization);
                 setDeliveries(deliveries.map(delivery =>
-                    delivery.id === currentDelivery.id ? currentDelivery : delivery
+                    delivery.id === cleanedDelivery.id ? cleanedDelivery : delivery
                 ));
             }
             setIsModalOpen(false);
@@ -111,7 +125,6 @@ const DeliveriesIndex = () => {
 
     const validateForm = () => {
         const errors = {};
-        if (!currentDelivery.driver_id) errors.driver_id = "Driver ID is required";
         if (!currentDelivery.pickup_location.trim()) errors.pickup_location = "Pickup location is required";
         if (!currentDelivery.dropoff_location.trim()) errors.dropoff_location = "Dropoff location is required";
         if (!currentDelivery.package_details.trim()) errors.package_details = "Package details are required";
@@ -161,6 +174,7 @@ const DeliveriesIndex = () => {
                 onClose={() => setIsModalOpen(false)}
                 onConfirm={handleConfirm}
                 drivers={drivers}
+                clients={clients}
             />
 
         </div>
