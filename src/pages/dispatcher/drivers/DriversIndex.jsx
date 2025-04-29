@@ -11,7 +11,7 @@ import DriversTable from "src/pages/dispatcher/drivers/DriversTable.jsx";
 import DriverModal from "src/pages/dispatcher/drivers/DriverModal";
 import VehicleSelectModal from "src/pages/dispatcher/drivers/VehicleSelectModal";
 import SearchBar from "src/components/SearchBar.jsx";
-import {registerDriver} from "src/services/backend/authRequests.js";
+import {driversCreate} from "src/services/backend/driversRequests.js";
 import {getAccessToken} from "src/utils/auth.js";
 
 const DriversIndex = () => {
@@ -100,7 +100,7 @@ const DriversIndex = () => {
 
         try {
             if (modalType === 'add') {
-                await registerDriver(currentDriver, authorization);
+                await driversCreate(currentDriver, authorization);
                 setDrivers([...drivers, currentDriver]);
             } else {
                 await driverUpdate(currentDriver.id, currentDriver, authorization);

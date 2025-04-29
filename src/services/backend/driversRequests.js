@@ -9,6 +9,14 @@ export async function driversIndex(params, authorization) {
     })
 }
 
+export async function driversCreate(data, authorization) {
+    return await instance.post("/drivers/", data, {
+        headers: {
+            Authorization: authorization
+        }
+    })
+}
+
 export async function driverShow(driverId, authorization) {
     return await instance.get("/drivers/" + driverId, {
         headers: {

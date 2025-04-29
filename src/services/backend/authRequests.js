@@ -7,16 +7,9 @@ export async function signIn(email, password) {
     })
 }
 
-export async function registerDriver(data, authorization) {
-    return await instance.post("/auth/register-driver", data, {
-        headers: {
-            Authorization: authorization
-        }
-    })
-}
 
-export async function registerDispatcher(data, authorization) {
-    return await instance.post("/auth/register-dispatcher", data, {
+export async function dispatchersCreate(data, authorization) {
+    return await instance.post("/dispatchers/", data, {
         headers: {
             Authorization: authorization
         }
