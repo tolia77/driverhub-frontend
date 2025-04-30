@@ -5,14 +5,18 @@ import MessageInput from "src/components/chat/MessageInput";
 import {driversIndex} from "src/services/backend/driversRequests";
 import {getAccessToken} from "src/utils/auth";
 import useChatSocket from "src/hooks/useChatSocket";
+import {messagesIndex} from "src/services/backend/messagesRequest.js";
 
 const ChatDispatcher = () => {
     const [drivers, setDrivers] = useState([]);
     const [selectedDriver, setSelectedDriver] = useState(null);
+    const [historyMessages, setHistoryMessages] = useState([]);
     const userId = localStorage.getItem("userId");
     const messagesEndRef = useRef(null);
 
-    const {messages, sendMessage} = useChatSocket(selectedDriver?.id);
+    const {messages: socketMessages, sendMessage} = useChatSocket(selectedDriver?.id);
+
+    // завантаження водіїв
     useEffect(() => {
         const fetchDrivers = async () => {
             const response = await driversIndex({}, getAccessToken());
@@ -21,11 +25,33 @@ const ChatDispatcher = () => {
         fetchDrivers();
     }, []);
 
+    // завантаження історії повідомлень при виборі водія
+    useEffect(() => {
+        const fetchMessages = async () => {
+            if (!selectedDriver) return;
+            try {
+                const res = await messagesIndex(selectedDriver.id, getAccessToken());
+                setHistoryMessages(res.data);
+            } catch (err) {
+                console.error("Failed to fetch message history", err);
+            }
+        };
+        fetchMessages();
+    }, [selectedDriver]);
+
+    // прокрутка вниз
     useEffect(() => {
         if (messagesEndRef.current) {
             messagesEndRef.current.scrollIntoView({behavior: "smooth"});
         }
-    }, [messages]);
+    }, [socketMessages, historyMessages]);
+
+    // об'єднані повідомлення
+    const combinedMessages = [...historyMessages, ...socketMessages]
+        .filter((msg, index, self) =>
+            index === self.findIndex(m => m.id === msg.id)
+        );
+
     return (
         <div className="container-fluid py-4">
             <div className="row g-4">
@@ -45,11 +71,7 @@ const ChatDispatcher = () => {
                             </div>
                             <div className="card-body d-flex flex-column p-0">
                                 <ChatMessages
-                                    messages={messages.filter(msg =>
-                                        msg.sender === selectedDriver?.id ||
-                                        msg.receiver === selectedDriver?.id ||
-                                        (msg.sender === parseInt(userId) && msg.receiver === selectedDriver?.id)
-                                    )}
+                                    messages={combinedMessages}
                                     userId={userId}
                                     messagesEndRef={messagesEndRef}
                                 />
@@ -67,6 +89,6 @@ const ChatDispatcher = () => {
             </div>
         </div>
     );
-};
+}
 
 export default ChatDispatcher;
