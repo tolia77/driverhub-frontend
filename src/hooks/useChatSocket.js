@@ -18,8 +18,8 @@ const useChatSocket = (selectedDriverId = null) => {
                     setMessages(prev => [...prev, {
                         id: data.id,
                         text: data.text,
-                        sender: data.sender_id,
-                        receiver: data.receiver_id,
+                        sender_id: data.sender_id,
+                        receiver_id: data.receiver_id,
                         created_at: data.created_at
                     }]);
                 }
@@ -41,8 +41,8 @@ const useChatSocket = (selectedDriverId = null) => {
         setMessages(prev => [...prev, {
             id: Date.now(),
             text: text,
-            sender: userId,
-            receiver: selectedDriverId || null,
+            sender_id: userId,
+            receiver_id: selectedDriverId || null,
             created_at: new Date().toISOString()
         }]);
     };
