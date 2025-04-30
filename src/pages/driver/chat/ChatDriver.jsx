@@ -4,7 +4,7 @@ import MessageInput from "src/components/chat/MessageInput";
 import { useRef, useEffect } from "react";
 
 const ChatDriver = () => {
-    const { messages, sendMessage } = useChatSocket(); // no driver_id
+    const { messages, sendMessage } = useChatSocket();
     const messagesEndRef = useRef(null);
     const userId = localStorage.getItem("userId");
 

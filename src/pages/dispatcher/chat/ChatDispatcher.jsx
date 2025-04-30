@@ -13,7 +13,6 @@ const ChatDispatcher = () => {
     const messagesEndRef = useRef(null);
 
     const { messages, sendMessage } = useChatSocket(selectedDriver?.id);
-
     useEffect(() => {
         const fetchDrivers = async () => {
             const response = await driversIndex({}, getAccessToken());
@@ -27,7 +26,6 @@ const ChatDispatcher = () => {
             messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
         }
     }, [messages]);
-
     return (
         <div className="container-fluid py-4">
             <div className="row g-4">
@@ -36,7 +34,7 @@ const ChatDispatcher = () => {
                         drivers={drivers}
                         selectedDriver={selectedDriver}
                         onSelectDriver={setSelectedDriver}
-                        lastMessages={{}} // optionally track recent messages
+                        lastMessages={{}}
                     />
                 </div>
                 <div className="col-md-8">
@@ -47,7 +45,9 @@ const ChatDispatcher = () => {
                             </div>
                             <div className="card-body d-flex flex-column p-0">
                                 <ChatMessages
-                                    messages={messages}
+                                    messages={messages.filter(
+                                        (msg) => msg.sender === selectedDriver.id || msg?.driver_id === selectedDriver.id
+                                    )}
                                     userId={userId}
                                     messagesEndRef={messagesEndRef}
                                 />
