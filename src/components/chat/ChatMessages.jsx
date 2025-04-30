@@ -7,7 +7,7 @@ const ChatMessages = ({ messages, userId, messagesEndRef }) => {
                 <Message
                     key={index}
                     message={msg}
-                    isOwnMessage={msg.sender === userId}
+                    isOwnMessage={msg.sender.toString() === userId.toString()}
                 />
             ))}
             <div ref={messagesEndRef} />

@@ -5,7 +5,7 @@ const useChatSocket = (selectedDriverId = null) => {
     const [messages, setMessages] = useState([]);
     const socketRef = useRef(null);
     const accessToken = getAccessToken();
-
+    const userId = parseInt(localStorage.getItem("userId"));
     useEffect(() => {
         const ws = new WebSocket(`ws://localhost:8000/ws/chat?token=${accessToken}`);
         socketRef.current = ws;
@@ -34,6 +34,10 @@ const useChatSocket = (selectedDriverId = null) => {
             ? { message: text, driver_id: selectedDriverId }
             : { message: text };
         socketRef.current.send(JSON.stringify(msg));
+        setMessages(prev => [...prev, {
+            text: text,
+            sender: userId
+        }]);
     };
 
     return { messages, sendMessage };
