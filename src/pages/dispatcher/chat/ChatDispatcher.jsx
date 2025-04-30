@@ -1,9 +1,9 @@
-import { useEffect, useState, useRef } from "react";
+import {useEffect, useState, useRef} from "react";
 import ChatSidebar from "src/components/chat/ChatSidebar";
 import ChatMessages from "src/components/chat/ChatMessages";
 import MessageInput from "src/components/chat/MessageInput";
-import { driversIndex } from "src/services/backend/driversRequests";
-import { getAccessToken } from "src/utils/auth";
+import {driversIndex} from "src/services/backend/driversRequests";
+import {getAccessToken} from "src/utils/auth";
 import useChatSocket from "src/hooks/useChatSocket";
 
 const ChatDispatcher = () => {
@@ -12,7 +12,7 @@ const ChatDispatcher = () => {
     const userId = localStorage.getItem("userId");
     const messagesEndRef = useRef(null);
 
-    const { messages, sendMessage } = useChatSocket(selectedDriver?.id);
+    const {messages, sendMessage} = useChatSocket(selectedDriver?.id);
     useEffect(() => {
         const fetchDrivers = async () => {
             const response = await driversIndex({}, getAccessToken());
@@ -23,7 +23,7 @@ const ChatDispatcher = () => {
 
     useEffect(() => {
         if (messagesEndRef.current) {
-            messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+            messagesEndRef.current.scrollIntoView({behavior: "smooth"});
         }
     }, [messages]);
     return (
@@ -45,13 +45,15 @@ const ChatDispatcher = () => {
                             </div>
                             <div className="card-body d-flex flex-column p-0">
                                 <ChatMessages
-                                    messages={messages.filter(
-                                        (msg) => msg.sender === selectedDriver.id || msg?.driver_id === selectedDriver.id
+                                    messages={messages.filter(msg =>
+                                        msg.sender === selectedDriver?.id ||
+                                        msg.receiver === selectedDriver?.id ||
+                                        (msg.sender === parseInt(userId) && msg.receiver === selectedDriver?.id)
                                     )}
                                     userId={userId}
                                     messagesEndRef={messagesEndRef}
                                 />
-                                <MessageInput onSendMessage={sendMessage} />
+                                <MessageInput onSendMessage={sendMessage}/>
                             </div>
                         </div>
                     ) : (
