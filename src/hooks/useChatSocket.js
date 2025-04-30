@@ -11,9 +11,17 @@ const useChatSocket = (selectedDriverId = null) => {
         socketRef.current = ws;
 
         ws.onmessage = (event) => {
-            console.log(event.data);
-            const data = JSON.parse(event.data);
-            setMessages(prev => [...prev, data]);
+            try {
+                const data = JSON.parse(event.data);
+                if (data.type === "message") {
+                    setMessages(prev => [...prev, {
+                        text: data.text,
+                        sender: data.sender
+                    }]);
+                }
+            } catch (error) {
+                console.error("Error parsing message:", error);
+            }
         };
 
         ws.onclose = () => console.log("WebSocket closed");
@@ -21,7 +29,7 @@ const useChatSocket = (selectedDriverId = null) => {
     }, [accessToken]);
 
     const sendMessage = (text) => {
-        if (!text.trim() || !socketRef.current?.readyState === WebSocket.OPEN) return;
+        if (!text.trim() || socketRef.current?.readyState !== WebSocket.OPEN) return;
         const msg = selectedDriverId
             ? { message: text, driver_id: selectedDriverId }
             : { message: text };
