@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { deliveriesMyDriver, updateDeliveryStatus } from "src/services/backend/deliveriesRequests";
-import { logBreaksCreate } from "src/services/backend/logBreaksRequests";
+import { deliveriesMyDriverRequest, deliveriesUpdateStatusRequest } from "src/services/backend/deliveriesRequests";
+import { logBreaksCreateRequest } from "src/services/backend/logBreaksRequests";
 import DeliveriesTable from "src/pages/driver/deliveries/DeliveriesTable";
 import StatusUpdateModal from "src/pages/driver/deliveries/StatusUpdateModal";
 import LogBreakModal from "src/pages/driver/deliveries/LogBreakModal";
@@ -26,7 +26,7 @@ const DeliveriesIndexDriver = () => {
     useEffect(() => {
         const fetchDeliveries = async () => {
             try {
-                const response = await deliveriesMyDriver(getAccessToken());
+                const response = await deliveriesMyDriverRequest(getAccessToken());
                 setDeliveries(response.data);
             } catch (err) {
                 console.error("Error fetching deliveries:", err);
@@ -50,7 +50,7 @@ const DeliveriesIndexDriver = () => {
 
     const handleUpdateStatus = async () => {
         try {
-            await updateDeliveryStatus(
+            await deliveriesUpdateStatusRequest(
                 currentDelivery.id,
                 newStatus,
                 localStorage.getItem("accessToken")
@@ -69,7 +69,7 @@ const DeliveriesIndexDriver = () => {
 
     const handleLogBreak = async (logBreakData) => {
         try {
-            await logBreaksCreate(
+            await logBreaksCreateRequest(
                 {
                     ...logBreakData,
                     delivery_id: currentDelivery.id

@@ -1,16 +1,16 @@
 import {useState, useEffect} from "react";
 import {
-    deliveriesIndex,
-    deliveryShow,
-    deliveryCreate,
-    deliveryUpdate,
+    deliveriesIndexRequest,
+    deliveryShowRequest,
+    deliveriesCreateRequest,
+    deliveriesUpdateRequest,
 } from "src/services/backend/deliveriesRequests";
-import {driversIndex} from "src/services/backend/driversRequests";
+import {driversIndexRequest} from "src/services/backend/driversRequests";
 import DeliveriesTable from "src/pages/dispatcher/deliveries/DeliveriesTable";
 import DeliveryModal from "./DeliveryModal";
 import SearchBar from "src/components/SearchBar";
 import {getAccessToken} from "src/utils/auth.js";
-import {clientsIndex} from "src/services/backend/clientsRequests.js";
+import {clientsIndexRequest} from "src/services/backend/clientsRequests.js";
 
 const DeliveriesIndex = () => {
     const [deliveries, setDeliveries] = useState([]);
@@ -42,7 +42,7 @@ const DeliveriesIndex = () => {
 
     const fetchClients = async () => {
         try {
-            const response = await clientsIndex(authorization);
+            const response = await clientsIndexRequest(authorization);
             setClients(response.data);
         } catch (error) {
             console.error("Error fetching clients:", error);
@@ -51,7 +51,7 @@ const DeliveriesIndex = () => {
 
     const fetchDrivers = async () => {
         try {
-            const response = await driversIndex({}, authorization);
+            const response = await driversIndexRequest({}, authorization);
             setDrivers(response.data);
         } catch (error) {
             console.error("Error fetching drivers:", error);
@@ -60,7 +60,7 @@ const DeliveriesIndex = () => {
 
     const fetchDeliveries = async () => {
         try {
-            const response = await deliveriesIndex({}, authorization);
+            const response = await deliveriesIndexRequest({}, authorization);
             setDeliveries(response.data);
         } catch (error) {
             console.error("Error fetching deliveries:", error);
@@ -87,7 +87,7 @@ const DeliveriesIndex = () => {
 
     const handleUpdateDelivery = async (id) => {
         try {
-            const response = await deliveryShow(id, authorization);
+            const response = await deliveryShowRequest(id, authorization);
             setModalType('update');
             setCurrentDelivery(response.data);
             setOriginalDelivery(response.data);
@@ -124,11 +124,11 @@ const DeliveriesIndex = () => {
                 if (!cleanedDelivery.driver_id) cleanedDelivery.driver_id = null;
                 if (!cleanedDelivery.client_id) cleanedDelivery.client_id = null;
 
-                const response = await deliveryCreate(cleanedDelivery, authorization);
+                const response = await deliveriesCreateRequest(cleanedDelivery, authorization);
                 setDeliveries([...deliveries, response.data]);
             } else {
                 const modifiedFields = getModifiedFields();
-                const response = await deliveryUpdate(currentDelivery.id, modifiedFields, authorization);
+                const response = await deliveriesUpdateRequest(currentDelivery.id, modifiedFields, authorization);
                 setDeliveries(deliveries.map(delivery =>
                     delivery.id === currentDelivery.id ? response.data : delivery
                 ));

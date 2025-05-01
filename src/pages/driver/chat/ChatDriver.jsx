@@ -2,7 +2,7 @@ import {useRef, useEffect, useState} from "react";
 import useChatSocket from "src/hooks/useChatSocket";
 import ChatMessages from "src/components/chat/ChatMessages";
 import MessageInput from "src/components/chat/MessageInput";
-import {messagesIndex} from "src/services/backend/messagesRequest";
+import {messagesIndexRequest} from "src/services/backend/messagesRequest";
 import {getAccessToken} from "src/utils/auth";
 
 const ChatDriver = () => {
@@ -14,7 +14,7 @@ const ChatDriver = () => {
     useEffect(() => {
         const fetchMessages = async () => {
             try {
-                const res = await messagesIndex(null, userId, getAccessToken());
+                const res = await messagesIndexRequest(null, userId, getAccessToken());
                 setHistoryMessages(res.data);
             } catch (err) {
                 console.error("Failed to load chat history", err);

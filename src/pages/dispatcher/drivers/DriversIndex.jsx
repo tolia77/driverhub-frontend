@@ -1,17 +1,17 @@
 import {useState, useEffect} from "react";
 import {
-    driversIndex,
-    driverUpdate,
-    driverDelete,
+    driversIndexRequest,
+    driversUpdateRequest,
+    driversDeleteRequest,
 } from "src/services/backend/driversRequests.js";
 import {
-    vehiclesIndex,
+    vehiclesIndexRequest,
 } from "src/services/backend/vehiclesRequests.js";
 import DriversTable from "src/pages/dispatcher/drivers/DriversTable.jsx";
 import DriverModal from "src/pages/dispatcher/drivers/DriverModal";
 import VehicleSelectModal from "src/pages/dispatcher/drivers/VehicleSelectModal";
 import SearchBar from "src/components/SearchBar.jsx";
-import {driversCreate} from "src/services/backend/driversRequests.js";
+import {driversCreateRequest} from "src/services/backend/driversRequests.js";
 import {getAccessToken} from "src/utils/auth.js";
 
 const DriversIndex = () => {
@@ -41,7 +41,7 @@ const DriversIndex = () => {
 
     const fetchDrivers = async () => {
         try {
-            const response = await driversIndex({}, authorization);
+            const response = await driversIndexRequest({}, authorization);
             const driversData = response.data;
             setDrivers(driversData);
         } catch (error) {
@@ -51,7 +51,7 @@ const DriversIndex = () => {
 
     const fetchVehicles = async () => {
         try {
-            const response = await vehiclesIndex({}, authorization);
+            const response = await vehiclesIndexRequest({}, authorization);
             const vehiclesArray = response.data;
             setVehicles(vehiclesArray);
 
@@ -110,10 +110,10 @@ const DriversIndex = () => {
 
         try {
             if (modalType === 'add') {
-                await driversCreate(mapToApiFormat(currentDriver), authorization);
+                await driversCreateRequest(mapToApiFormat(currentDriver), authorization);
                 setDrivers([...drivers, currentDriver]);
             } else {
-                await driverUpdate(currentDriver.id, currentDriver, authorization);
+                await driversUpdateRequest(currentDriver.id, currentDriver, authorization);
             }
             await fetchDrivers();
             setIsModalOpen(false);
@@ -124,7 +124,7 @@ const DriversIndex = () => {
 
     const handleDeleteDriver = async (id) => {
         try {
-            await driverDelete(id, authorization);
+            await driversDeleteRequest(id, authorization);
             setDrivers(drivers.filter(driver => driver.id !== id));
         } catch (error) {
             console.error("Error deleting driver:", error);

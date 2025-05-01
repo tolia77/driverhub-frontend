@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import {
-    vehiclesIndex,
-    vehicleShow,
-    vehicleCreate,
-    vehicleUpdate,
-    vehicleDelete,
+    vehiclesIndexRequest,
+    vehicleShowRequest,
+    vehiclesCreateRequest,
+    vehiclesUpdateRequest,
+    vehiclesDeleteRequest,
 } from "src/services/backend/vehiclesRequests";
 import VehiclesTable from "src/pages/dispatcher/vehicles/VehiclesTable";
 import VehicleModal from "src/pages/dispatcher/vehicles/VehicleModal";
@@ -34,7 +34,7 @@ const VehiclesIndex = () => {
 
     const fetchVehicles = async () => {
         try {
-            const response = await vehiclesIndex({}, authorization);
+            const response = await vehiclesIndexRequest({}, authorization);
             setVehicles(response.data);
         } catch (error) {
             console.error("Error fetching vehicles:", error);
@@ -56,7 +56,7 @@ const VehiclesIndex = () => {
 
     const handleUpdateVehicle = async (id) => {
         try {
-            const response = await vehicleShow(id, authorization);
+            const response = await vehicleShowRequest(id, authorization);
             setModalType('update');
             setCurrentVehicle(response.data);
             setIsModalOpen(true);
@@ -67,7 +67,7 @@ const VehiclesIndex = () => {
 
     const handleDeleteVehicle = async (id) => {
         try {
-            await vehicleDelete(id, authorization);
+            await vehiclesDeleteRequest(id, authorization);
             setVehicles(vehicles.filter(vehicle => vehicle.id !== id));
         } catch (error) {
             console.error("Error deleting vehicle:", error);
@@ -79,10 +79,10 @@ const VehiclesIndex = () => {
 
         try {
             if (modalType === 'add') {
-                const response = await vehicleCreate(currentVehicle, authorization);
+                const response = await vehiclesCreateRequest(currentVehicle, authorization);
                 setVehicles([...vehicles, response.data]);
             } else {
-                await vehicleUpdate(currentVehicle.id, currentVehicle, authorization);
+                await vehiclesUpdateRequest(currentVehicle.id, currentVehicle, authorization);
                 setVehicles(vehicles.map(vehicle =>
                     vehicle.id === currentVehicle.id ? currentVehicle : vehicle
                 ));

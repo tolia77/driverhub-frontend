@@ -1,9 +1,9 @@
 import {useState, useEffect} from "react";
 import LogBreaksTable from "src/pages/dispatcher/log-breaks/LogBreaksTable";
 import DeliverySelect from "src/pages/dispatcher/log-breaks/DeliverySelect.jsx";
-import {deliveriesIndex} from "src/services/backend/deliveriesRequests.js";
+import {deliveriesIndexRequest} from "src/services/backend/deliveriesRequests.js";
 import {getAccessToken} from "src/utils/auth.js";
-import {logBreaksIndex} from "src/services/backend/logBreaksRequests.js";
+import {logBreaksIndexRequest} from "src/services/backend/logBreaksRequests.js";
 
 const LogBreaksIndex = () => {
     const [deliveries, setDeliveries] = useState([]);
@@ -11,14 +11,14 @@ const LogBreaksIndex = () => {
     const [logBreaks, setLogBreaks] = useState([]);
 
     useEffect(() => {
-        deliveriesIndex({}, getAccessToken()).then(res => {
+        deliveriesIndexRequest({}, getAccessToken()).then(res => {
             setDeliveries(res.data);
         });
     }, []);
 
     useEffect(() => {
         if (selectedDelivery) {
-            logBreaksIndex(getAccessToken(), {delivery_id: selectedDelivery.id}).then(res => {
+            logBreaksIndexRequest(getAccessToken(), {delivery_id: selectedDelivery.id}).then(res => {
                 setLogBreaks(res.data);
             });
         }

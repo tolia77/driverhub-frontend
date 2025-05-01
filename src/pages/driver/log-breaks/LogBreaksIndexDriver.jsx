@@ -1,9 +1,9 @@
 import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import {
-    logBreaksDelete,
-    logBreaksMy,
-    logBreaksUpdate
+    logBreaksDeleteRequest,
+    logBreaksMyRequest,
+    logBreaksUpdateRequest
 } from "src/services/backend/logBreaksRequests.js";
 import LogBreaksTable from "src/pages/driver/log-breaks/LogBreaksTable";
 import {getAccessToken} from "src/utils/auth.js";
@@ -24,7 +24,7 @@ const LogBreaksIndexDriver = () => {
     }, []);
 
     const fetchLogBreaks = () => {
-        logBreaksMy(localStorage.getItem("accessToken"))
+        logBreaksMyRequest(localStorage.getItem("accessToken"))
             .then(res => setLogBreaks(res.data))
             .catch(err => console.error("Error fetching log breaks:", err));
     };
@@ -55,7 +55,7 @@ const LogBreaksIndexDriver = () => {
             cost: parseFloat(formData.cost)
         };
 
-        logBreaksUpdate(currentLogBreak.id, updatedData, getAccessToken())
+        logBreaksUpdateRequest(currentLogBreak.id, updatedData, getAccessToken())
             .then(() => {
                 fetchLogBreaks();
                 setIsModalOpen(false);
@@ -68,7 +68,7 @@ const LogBreaksIndexDriver = () => {
 
     const handleDeleteLogBreak = (logBreakId) => {
         if (window.confirm("Are you sure you want to delete this log break?")) {
-            logBreaksDelete(logBreakId, getAccessToken())
+            logBreaksDeleteRequest(logBreakId, getAccessToken())
                 .then(() => fetchLogBreaks())
                 .catch(err => console.error("Error deleting log break:", err));
         }

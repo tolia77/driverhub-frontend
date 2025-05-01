@@ -2,10 +2,10 @@ import {useEffect, useState, useRef} from "react";
 import ChatSidebar from "src/components/chat/ChatSidebar";
 import ChatMessages from "src/components/chat/ChatMessages";
 import MessageInput from "src/components/chat/MessageInput";
-import {driversIndex} from "src/services/backend/driversRequests";
+import {driversIndexRequest} from "src/services/backend/driversRequests";
 import {getAccessToken} from "src/utils/auth";
 import useChatSocket from "src/hooks/useChatSocket";
-import {messagesIndex} from "src/services/backend/messagesRequest.js";
+import {messagesIndexRequest} from "src/services/backend/messagesRequest.js";
 
 const ChatDispatcher = () => {
     const [drivers, setDrivers] = useState([]);
@@ -18,7 +18,7 @@ const ChatDispatcher = () => {
 
     useEffect(() => {
         const fetchDrivers = async () => {
-            const response = await driversIndex({}, getAccessToken());
+            const response = await driversIndexRequest({}, getAccessToken());
             setDrivers(response.data);
         };
         fetchDrivers();
@@ -28,7 +28,7 @@ const ChatDispatcher = () => {
         const fetchMessages = async () => {
             if (!selectedDriver) return;
             try {
-                const res = await messagesIndex(selectedDriver.id, null, getAccessToken());
+                const res = await messagesIndexRequest(selectedDriver.id, null, getAccessToken());
                 setHistoryMessages(res.data);
             } catch (err) {
                 console.error("Failed to fetch message history", err);

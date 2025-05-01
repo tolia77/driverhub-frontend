@@ -1,7 +1,7 @@
 import {instance} from "src/services/backend/config.js";
 
 
-export async function deliveriesIndex(params, authorization) {
+export async function deliveriesIndexRequest(params, authorization) {
     return await instance.get("/deliveries/", {
         params: params,
         headers: {
@@ -10,7 +10,7 @@ export async function deliveriesIndex(params, authorization) {
     })
 }
 
-export async function deliveryShow(driverId, authorization) {
+export async function deliveryShowRequest(driverId, authorization) {
     return await instance.get("/deliveries/" + driverId, {
         headers: {
             Authorization: authorization
@@ -18,7 +18,7 @@ export async function deliveryShow(driverId, authorization) {
     })
 }
 
-export async function deliveryCreate(data, authorization) {
+export async function deliveriesCreateRequest(data, authorization) {
     return await instance.post("/deliveries/", data, {
         headers: {
             authorization: authorization
@@ -26,7 +26,7 @@ export async function deliveryCreate(data, authorization) {
     })
 }
 
-export async function deliveryUpdate(deliveryId, data, authorization) {
+export async function deliveriesUpdateRequest(deliveryId, data, authorization) {
     return await instance.patch("/deliveries/" + deliveryId, data, {
         headers: {
             Authorization: authorization
@@ -34,7 +34,7 @@ export async function deliveryUpdate(deliveryId, data, authorization) {
     })
 }
 
-export async function deliveriesMyDriver(authorization) {
+export async function deliveriesMyDriverRequest(authorization) {
     return await instance.get("/deliveries/driver/me", {
         headers: {
             Authorization: authorization
@@ -42,7 +42,7 @@ export async function deliveriesMyDriver(authorization) {
     })
 }
 
-export async function deliveriesMyClient(authorization) {
+export async function deliveriesMyClientRequest(authorization) {
     return await instance.get("/deliveries/client/me", {
         headers: {
             Authorization: authorization
@@ -50,7 +50,7 @@ export async function deliveriesMyClient(authorization) {
     })
 }
 
-export async function updateDeliveryStatus(deliveryId, status, authorization) {
+export async function deliveriesUpdateStatusRequest(deliveryId, status, authorization) {
     return await instance.patch(`/deliveries/${deliveryId}/status`,
         {
             new_status: status,
@@ -62,7 +62,7 @@ export async function updateDeliveryStatus(deliveryId, status, authorization) {
         })
 }
 
-export async function deliveryDelete(driverId, authorization) {
+export async function deliveriesDeleteRequest(driverId, authorization) {
     return await instance.delete("/deliveries/" + driverId, {
         headers: {
             Authorization: authorization

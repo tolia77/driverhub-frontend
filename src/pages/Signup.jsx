@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {Link, useNavigate} from 'react-router';
-import {registerClient, signIn} from "src/services/backend/authRequests.js";
+import {registerClientRequest, signInRequest} from "src/services/backend/authRequests.js";
 
 function SignUp() {
     const [first_name, setfirst_name] = useState("");
@@ -25,8 +25,8 @@ function SignUp() {
             password: password,
         };
 
-        registerClient(requestData).then(() => {
-            signIn(email, password).then((result) => {
+        registerClientRequest(requestData).then(() => {
+            signInRequest(email, password).then((result) => {
                 localStorage.setItem('accessToken', `Bearer ${result.data.access_token}`);
                 localStorage.setItem('accountType', 'client');
                 navigate("/client/deliveries");

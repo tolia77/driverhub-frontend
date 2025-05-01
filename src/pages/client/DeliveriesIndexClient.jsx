@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-  import { deliveriesMyClient } from "src/services/backend/deliveriesRequests";
+  import { deliveriesMyClientRequest } from "src/services/backend/deliveriesRequests";
   import DeliveriesTable from "./DeliveriesTable";
 import {getAccessToken} from "src/utils/auth.js";
 
@@ -12,7 +12,7 @@ import {getAccessToken} from "src/utils/auth.js";
       useEffect(() => {
           const fetchDeliveries = async () => {
               try {
-                  const response = await deliveriesMyClient(getAccessToken());
+                  const response = await deliveriesMyClientRequest(getAccessToken());
                   setDeliveries(response.data);
               } catch (err) {
                   console.error("Error fetching deliveries:", err);

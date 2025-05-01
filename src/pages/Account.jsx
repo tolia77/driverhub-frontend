@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { getMe } from "src/services/backend/authRequests";
+import { getMeRequest } from "src/services/backend/authRequests";
 import RequireAuth from "src/components/RequireAuth.jsx";
 
 const Account = () => {
@@ -16,7 +16,7 @@ const Account = () => {
     useEffect(() => {
         const fetchAccountData = async () => {
             try {
-                const response = await getMe(localStorage.getItem("accessToken"));
+                const response = await getMeRequest(localStorage.getItem("accessToken"));
                 setAccount({
                     first_name: response.data.first_name,
                     last_name: response.data.last_name,

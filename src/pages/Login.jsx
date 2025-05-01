@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {Link, useNavigate} from 'react-router';
-import {getMe, signIn} from "src/services/backend/authRequests.js";
+import {getMeRequest, signInRequest} from "src/services/backend/authRequests.js";
 import {getUserRole} from "src/utils/auth.js";
 
 function Login() {
@@ -10,9 +10,9 @@ function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        signIn(email, password).then(result => {
+        signInRequest(email, password).then(result => {
             localStorage.setItem('accessToken', `Bearer ${result.data.access_token}`);
-            getMe(`Bearer ${result.data.access_token}`).then(result => {
+            getMeRequest(`Bearer ${result.data.access_token}`).then(result => {
                 localStorage.setItem('accountType', result.data.type);
                 localStorage.setItem('userId', result.data.id)
                 if (getUserRole() === "driver") {
