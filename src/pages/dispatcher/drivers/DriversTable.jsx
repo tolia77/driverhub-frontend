@@ -1,12 +1,13 @@
-const DriversTable = ({ drivers, onUpdate, onDelete }) => {
+const DriversTable = ({drivers, onUpdate, onDelete}) => {
     return (
         <div className="card">
             <div className="card-body p-0">
-                <div className="table-responsive" style={{ maxHeight: '500px' }}>
+                <div className="table-responsive" style={{maxHeight: '500px'}}>
                     <table className="table table-hover table-striped mb-0">
                         <thead className="table-dark sticky-top">
                         <tr>
-                            <th>Name</th>
+                            <th>First Name</th>
+                            <th>Last Name</th>
                             <th>Email</th>
                             <th>License Number</th>
                             <th>Vehicle</th>
@@ -16,7 +17,8 @@ const DriversTable = ({ drivers, onUpdate, onDelete }) => {
                         <tbody>
                         {drivers.map((driver) => (
                             <tr key={driver.id}>
-                                <td>{driver.name}</td>
+                                <td>{driver.first_name}</td>
+                                <td>{driver.last_name}</td>
                                 <td>{driver.email}</td>
                                 <td>{driver.license_number}</td>
                                 <td>

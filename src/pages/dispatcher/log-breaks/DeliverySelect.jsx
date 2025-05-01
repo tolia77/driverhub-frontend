@@ -8,14 +8,14 @@ export default function DeliverySelect({deliveries, selectedDelivery, onSelect})
                         className="form-select"
                         value={selectedDelivery?.id || ""}
                         onChange={(e) => {
-                            const selected = deliveries.find(delivery => delivery.id === e.target.value);
+                            const selected = deliveries.find(delivery => delivery.id === Number(e.target.value));
                             onSelect(selected);
                         }}
                     >
                         <option value="">-- Select a Delivery --</option>
                         {deliveries.map(delivery => (
                             <option key={delivery.id} value={delivery.id}>
-                                {delivery.pickup_location} - {delivery.dropoff_location} ({delivery?.driver?.name})
+                                {delivery.pickup_location} - {delivery.dropoff_location}
                             </option>
                         ))}
                     </select>

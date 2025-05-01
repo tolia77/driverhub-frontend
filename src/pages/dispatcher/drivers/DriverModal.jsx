@@ -27,16 +27,29 @@ const DriverModal = ({
                     </div>
                     <div className="modal-body">
                         <form>
-                            <div className="mb-3">
-                                <label className="form-label">Name</label>
-                                <input
-                                    type="text"
-                                    className={`form-control ${errors.name ? 'is-invalid' : ''}`}
-                                    name="name"
-                                    value={driver.name}
-                                    onChange={onInputChange}
-                                />
-                                {errors.name && <div className="invalid-feedback">{errors.name}</div>}
+                            <div className="row">
+                                <div className="col-md-6 mb-3">
+                                    <label className="form-label">First Name</label>
+                                    <input
+                                        type="text"
+                                        className={`form-control ${errors.first_name ? 'is-invalid' : ''}`}
+                                        name="first_name"
+                                        value={driver.first_name}
+                                        onChange={onInputChange}
+                                    />
+                                    {errors.first_name && <div className="invalid-feedback">{errors.first_name}</div>}
+                                </div>
+                                <div className="col-md-6 mb-3">
+                                    <label className="form-label">Last Name</label>
+                                    <input
+                                        type="text"
+                                        className={`form-control ${errors.last_name ? 'is-invalid' : ''}`}
+                                        name="last_name"
+                                        value={driver.last_name}
+                                        onChange={onInputChange}
+                                    />
+                                    {errors.last_name && <div className="invalid-feedback">{errors.last_name}</div>}
+                                </div>
                             </div>
                             <div className="mb-3">
                                 <label className="form-label">Email</label>

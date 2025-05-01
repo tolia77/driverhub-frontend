@@ -1,74 +1,55 @@
-import { useEffect, useRef, useState } from "react";
-import { ref, push, off, onChildAdded, onValue } from "firebase/database";
-import { realtimeDB } from "src/services/firebase";
-import { driversIndex } from "src/services/backend/driversRequests";
-import ChatSidebar from "src/components/chat/ChatSidebar.jsx";
-import ChatMessages from "src/components/chat/ChatMessages.jsx";
-import MessageInput from "src/components/chat/MessageInput.jsx";
+import {useEffect, useState, useRef} from "react";
+import ChatSidebar from "src/components/chat/ChatSidebar";
+import ChatMessages from "src/components/chat/ChatMessages";
+import MessageInput from "src/components/chat/MessageInput";
+import {driversIndex} from "src/services/backend/driversRequests";
+import {getAccessToken} from "src/utils/auth";
+import useChatSocket from "src/hooks/useChatSocket";
+import {messagesIndex} from "src/services/backend/messagesRequest.js";
 
-function ChatDispatcher() {
+const ChatDispatcher = () => {
     const [drivers, setDrivers] = useState([]);
     const [selectedDriver, setSelectedDriver] = useState(null);
-    const [messages, setMessages] = useState([]);
-    const [lastMessages, setLastMessages] = useState({});
+    const [historyMessages, setHistoryMessages] = useState([]);
     const userId = localStorage.getItem("userId");
     const messagesEndRef = useRef(null);
 
+    const {messages: socketMessages, sendMessage} = useChatSocket(selectedDriver?.id);
+
     useEffect(() => {
-        fetchDrivers();
-        return () => {
-            // Clean up listeners when component unmounts
-            drivers.forEach(driver => {
-                off(ref(realtimeDB, `chats/${driver.id}`));
-            });
+        const fetchDrivers = async () => {
+            const response = await driversIndex({}, getAccessToken());
+            setDrivers(response.data);
         };
+        fetchDrivers();
     }, []);
 
-    const fetchDrivers = async () => {
-        const response = await driversIndex({}, localStorage.getItem("accessToken"));
-        setDrivers(response.data.data.drivers);
-
-        response.data.data.drivers.forEach(driver => {
-            const chatRef = ref(realtimeDB, `chats/${driver.id}`);
-            onValue(chatRef, (snapshot) => {
-                const messages = snapshot.val();
-                if (messages) {
-                    const lastMsg = Object.values(messages).pop();
-                    setLastMessages(prev => ({ ...prev, [driver.id]: lastMsg }));
-                }
-            });
-        });
-    };
-
     useEffect(() => {
-        if (!selectedDriver) return;
-
-        setMessages([]);
-
-        const chatRef = ref(realtimeDB, `chats/${selectedDriver.id}`);
-        onChildAdded(chatRef, (snapshot) => {
-            setMessages((prev) => [...prev, snapshot.val()]);
-        });
-
-        return () => {
-            off(chatRef);
+        const fetchMessages = async () => {
+            if (!selectedDriver) return;
+            try {
+                const res = await messagesIndex(selectedDriver.id, null, getAccessToken());
+                setHistoryMessages(res.data);
+            } catch (err) {
+                console.error("Failed to fetch message history", err);
+            }
         };
+        fetchMessages();
     }, [selectedDriver]);
 
     useEffect(() => {
         if (messagesEndRef.current) {
-            messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+            messagesEndRef.current.scrollIntoView({behavior: "smooth"});
         }
-    }, [messages]);
+    }, [socketMessages, historyMessages]);
 
-    const sendMessage = (message) => {
-        if (!message.trim() || !selectedDriver) return;
-        push(ref(realtimeDB, `chats/${selectedDriver.id}`), {
-            sender: userId,
-            text: message,
-            timestamp: new Date().toISOString()
-        });
-    };
+    const combinedMessages = [...historyMessages, ...socketMessages]
+        .filter((msg, index, self) =>
+            index === self.findIndex(m => m.id === msg.id)
+        ).filter(msg =>
+            msg.sender_id === selectedDriver?.id ||
+            msg.receiver_id === selectedDriver?.id ||
+            (msg.sender_id === parseInt(userId) && msg.receiver_id === selectedDriver?.id));
 
     return (
         <div className="container-fluid py-4">
@@ -77,7 +58,6 @@ function ChatDispatcher() {
                     <ChatSidebar
                         drivers={drivers}
                         selectedDriver={selectedDriver}
-                        lastMessages={lastMessages}
                         onSelectDriver={setSelectedDriver}
                     />
                 </div>
@@ -89,13 +69,11 @@ function ChatDispatcher() {
                             </div>
                             <div className="card-body d-flex flex-column p-0">
                                 <ChatMessages
-                                    messages={messages}
+                                    messages={combinedMessages}
                                     userId={userId}
                                     messagesEndRef={messagesEndRef}
                                 />
-                                <MessageInput
-                                    onSendMessage={sendMessage}
-                                />
+                                <MessageInput onSendMessage={sendMessage}/>
                             </div>
                         </div>
                     ) : (

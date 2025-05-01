@@ -1,11 +1,12 @@
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router';
-import { registerDispatcher } from "src/services/backend/authRequests.js";
-import { firebaseLogin } from "src/services/firebaseLogin.js";
+import {useState} from 'react';
+import {Link, useNavigate} from 'react-router';
+import {registerClient, signIn} from "src/services/backend/authRequests.js";
 
 function SignUp() {
-    const [username, setUsername] = useState("");
+    const [first_name, setfirst_name] = useState("");
+    const [last_name, setlast_name] = useState("");
     const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const navigate = useNavigate();
@@ -17,36 +18,49 @@ function SignUp() {
             return;
         }
         const requestData = {
-            name: username,
+            first_name: first_name,
+            last_name: last_name,
             email: email,
+            phone_number: phone,
             password: password,
-        }
+        };
 
-        registerDispatcher(requestData).then(() => {
-            firebaseLogin(email, password).then((result) => {
-                localStorage.setItem('accessToken', `Bearer ${result.accessToken}`);
-                localStorage.setItem('refreshToken', `Bearer ${result.refreshToken}`);
-                localStorage.setItem('accountType', 'dispatcher');
-                navigate("/dispatcher/deliveries");
-            })
-        })
+        registerClient(requestData).then(() => {
+            signIn(email, password).then((result) => {
+                localStorage.setItem('accessToken', `Bearer ${result.data.access_token}`);
+                localStorage.setItem('accountType', 'client');
+                navigate("/client/deliveries");
+            });
+        });
     };
 
     return (
         <div className="min-vh-100 d-flex justify-content-center align-items-center bg-light">
-            <div className="card shadow-sm p-4" style={{ width: '380px' }}>
+            <div className="card shadow-sm p-4" style={{width: '380px'}}>
                 <div className="card-body">
                     <h2 className="text-center mb-4">Create an Account</h2>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
-                            <label htmlFor="username" className="form-label">Username</label>
+                            <label htmlFor="first_name" className="form-label">First Name</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                id="username"
-                                value={username}
-                                onChange={(e) => setUsername(e.target.value)}
-                                placeholder="Enter your Username"
+                                id="first_name"
+                                value={first_name}
+                                onChange={(e) => setfirst_name(e.target.value)}
+                                placeholder="Enter your first name"
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="last_name" className="form-label">Last Name</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                id="last_name"
+                                value={last_name}
+                                onChange={(e) => setlast_name(e.target.value)}
+                                placeholder="Enter your last name"
                                 required
                             />
                         </div>
@@ -59,6 +73,17 @@ function SignUp() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 placeholder="Enter your email"
+                                required
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="phone" className="form-label">Phone number</label>
+                            <input
+                                className="form-control"
+                                id="phone"
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                                placeholder="Enter your phone number"
                                 required
                             />
                         </div>

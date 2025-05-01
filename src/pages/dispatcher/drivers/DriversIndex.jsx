@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 import {
     driversIndex,
     driverUpdate,
@@ -11,7 +11,7 @@ import DriversTable from "src/pages/dispatcher/drivers/DriversTable.jsx";
 import DriverModal from "src/pages/dispatcher/drivers/DriverModal";
 import VehicleSelectModal from "src/pages/dispatcher/drivers/VehicleSelectModal";
 import SearchBar from "src/components/SearchBar.jsx";
-import {registerDriver} from "src/services/backend/authRequests.js";
+import {driversCreate} from "src/services/backend/driversRequests.js";
 import {getAccessToken} from "src/utils/auth.js";
 
 const DriversIndex = () => {
@@ -23,7 +23,8 @@ const DriversIndex = () => {
     const [modalType, setModalType] = useState('add');
     const [currentDriver, setCurrentDriver] = useState({
         id: '',
-        name: '',
+        first_name: '',
+        last_name: '',
         email: '',
         password: '',
         license_number: '',
@@ -41,7 +42,7 @@ const DriversIndex = () => {
     const fetchDrivers = async () => {
         try {
             const response = await driversIndex({}, authorization);
-            const driversData = response.data.data.drivers;
+            const driversData = response.data;
             setDrivers(driversData);
         } catch (error) {
             console.error("Error fetching driver:", error);
@@ -51,7 +52,7 @@ const DriversIndex = () => {
     const fetchVehicles = async () => {
         try {
             const response = await vehiclesIndex({}, authorization);
-            const vehiclesArray = response.data.data.vehicles;
+            const vehiclesArray = response.data;
             setVehicles(vehiclesArray);
 
             const map = {};
@@ -64,6 +65,14 @@ const DriversIndex = () => {
         }
     };
 
+    const mapToApiFormat = (driver) => ({
+        first_name: driver.first_name,
+        last_name: driver.last_name,
+        email: driver.email,
+        password: driver.password,
+        license_number: driver.license_number,
+        vehicle_id: driver.vehicle_id ? parseInt(driver.vehicle_id, 10) : null
+    });
 
     const handleAddDriver = async () => {
         if (!vehicles.length) {
@@ -72,7 +81,8 @@ const DriversIndex = () => {
         setModalType('add');
         setCurrentDriver({
             id: '',
-            name: '',
+            first_name: '',
+            last_name: '',
             email: '',
             password: '',
             license_number: '',
@@ -100,7 +110,7 @@ const DriversIndex = () => {
 
         try {
             if (modalType === 'add') {
-                await registerDriver(currentDriver, authorization);
+                await driversCreate(mapToApiFormat(currentDriver), authorization);
                 setDrivers([...drivers, currentDriver]);
             } else {
                 await driverUpdate(currentDriver.id, currentDriver, authorization);
@@ -122,12 +132,12 @@ const DriversIndex = () => {
     };
 
     const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setCurrentDriver({ ...currentDriver, [name]: value });
+        const {name, value} = e.target;
+        setCurrentDriver({...currentDriver, [name]: value});
     };
 
     const handleSelectVehicle = (vehicle_id) => {
-        setCurrentDriver({ ...currentDriver, vehicle_id });
+        setCurrentDriver({...currentDriver, vehicle_id});
         setIsSelectVehicleOpen(false);
     };
 
@@ -137,8 +147,9 @@ const DriversIndex = () => {
 
     const filteredDrivers = drivers.filter(driver => {
         const search = searchTerm.toLowerCase();
+        const fullName = `${driver.first_name} ${driver.last_name}`.toLowerCase();
         return (
-            driver.name.toLowerCase().includes(search) ||
+            fullName.includes(search) ||
             driver.email.toLowerCase().includes(search) ||
             driver.license_number.toLowerCase().includes(search) ||
             (driver.vehicle && driver.vehicle.toLowerCase().includes(search)) ||
@@ -148,7 +159,8 @@ const DriversIndex = () => {
 
     const validateForm = () => {
         const errors = {};
-        if (!currentDriver.name.trim()) errors.name = "Name is required";
+        if (!currentDriver.first_name.trim()) errors.first_name = "First name is required";
+        if (!currentDriver.last_name.trim()) errors.last_name = "Last name is required";
         if (!currentDriver.email.trim()) {
             errors.email = "Email is required";
         } else if (!/\S+@\S+\.\S+/.test(currentDriver.email)) {
@@ -173,7 +185,7 @@ const DriversIndex = () => {
                 </button>
             </div>
 
-            <SearchBar searchTerm={searchTerm} onSearchChange={handleSearchChange} />
+            <SearchBar searchTerm={searchTerm} onSearchChange={handleSearchChange}/>
 
             <DriversTable
                 drivers={filteredDrivers}

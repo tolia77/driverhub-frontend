@@ -5,6 +5,7 @@ import { logBreaksCreate } from "src/services/backend/logBreaksRequests";
 import DeliveriesTable from "src/pages/driver/deliveries/DeliveriesTable";
 import StatusUpdateModal from "src/pages/driver/deliveries/StatusUpdateModal";
 import LogBreakModal from "src/pages/driver/deliveries/LogBreakModal";
+import {getAccessToken} from "src/utils/auth.js";
 
 const DeliveriesIndexDriver = () => {
     const navigate = useNavigate();
@@ -25,8 +26,8 @@ const DeliveriesIndexDriver = () => {
     useEffect(() => {
         const fetchDeliveries = async () => {
             try {
-                const response = await deliveriesMyDriver(localStorage.getItem("accessToken"));
-                setDeliveries(response.data.data.deliveries);
+                const response = await deliveriesMyDriver(getAccessToken());
+                setDeliveries(response.data);
             } catch (err) {
                 console.error("Error fetching deliveries:", err);
                 alert("Error fetching deliveries");

@@ -1,11 +1,11 @@
-import {Outlet, useNavigate} from "react-router";
-import {auth} from "src/services/firebase.js";
+import {useNavigate} from "react-router";
 import {useEffect} from "react";
+import {getAccessToken} from "src/utils/auth.js";
 
 function RequireAuth({children}) {
     const navigate = useNavigate();
     useEffect(() => {
-        if (!auth.currentUser) {
+        if (!getAccessToken()) {
             navigate("/login");
         }
     }, [])

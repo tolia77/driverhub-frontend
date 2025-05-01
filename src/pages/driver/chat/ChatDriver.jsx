@@ -1,38 +1,38 @@
-import { useEffect, useRef, useState } from "react";
-import { ref, push, onChildAdded, off } from "firebase/database";
-import { realtimeDB } from "src/services/firebase";
+import {useRef, useEffect, useState} from "react";
+import useChatSocket from "src/hooks/useChatSocket";
 import ChatMessages from "src/components/chat/ChatMessages";
 import MessageInput from "src/components/chat/MessageInput";
+import {messagesIndex} from "src/services/backend/messagesRequest";
+import {getAccessToken} from "src/utils/auth";
 
 const ChatDriver = () => {
-    const [messages, setMessages] = useState([]);
+    const {messages: socketMessages, sendMessage} = useChatSocket();
+    const [historyMessages, setHistoryMessages] = useState([]);
     const messagesEndRef = useRef(null);
     const userId = localStorage.getItem("userId");
 
     useEffect(() => {
-        if (!userId) return;
-        const chatRef = ref(realtimeDB, `chats/${userId}`);
-        onChildAdded(chatRef, (snapshot) => {
-            setMessages((prev) => [...prev, snapshot.val()]);
-        });
-        return () => {
-            off(chatRef);
+        const fetchMessages = async () => {
+            try {
+                const res = await messagesIndex(null, userId, getAccessToken());
+                setHistoryMessages(res.data);
+            } catch (err) {
+                console.error("Failed to load chat history", err);
+            }
         };
-    }, [userId]);
+        fetchMessages();
+    }, []);
 
     useEffect(() => {
         if (messagesEndRef.current) {
-            messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+            messagesEndRef.current.scrollIntoView({behavior: "smooth"});
         }
-    }, [messages]);
+    }, [socketMessages, historyMessages]);
 
-    const handleSendMessage = (text) => {
-        if (!text.trim()) return;
-        push(ref(realtimeDB, `chats/${userId}`), {
-            sender: userId,
-            text: text,
-        });
-    };
+    const combinedMessages = [...historyMessages, ...socketMessages].filter(
+        (msg, index, self) =>
+            index === self.findIndex((m) => m.id === msg.id)
+    );
 
     return (
         <div className="container py-4">
@@ -41,11 +41,11 @@ const ChatDriver = () => {
                     <h5 className="mb-0">Chat with Dispatcher</h5>
                 </div>
                 <ChatMessages
-                    messages={messages}
+                    messages={combinedMessages}
                     userId={userId}
                     messagesEndRef={messagesEndRef}
                 />
-                <MessageInput onSendMessage={handleSendMessage} />
+                <MessageInput onSendMessage={sendMessage}/>
             </div>
         </div>
     );

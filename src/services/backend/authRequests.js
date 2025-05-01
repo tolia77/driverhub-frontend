@@ -1,15 +1,23 @@
 import {instance} from "src/services/backend/config.js";
 
-export async function registerDriver(data, authorization) {
-    return await instance.post("/auth/register-driver", data, {
+export async function signIn(email, password) {
+    return await instance.post("/auth/login", {
+        email: email,
+        password: password
+    })
+}
+
+
+export async function dispatchersCreate(data, authorization) {
+    return await instance.post("/dispatchers/", data, {
         headers: {
             Authorization: authorization
         }
     })
 }
 
-export async function registerDispatcher(data) {
-    return await instance.post("/auth/register-dispatcher", data)
+export async function registerClient(data) {
+    return await instance.post("/auth/signup", data)
 }
 
 export async function getMe(authorization) {
