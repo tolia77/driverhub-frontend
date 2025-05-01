@@ -38,13 +38,6 @@ const useChatSocket = (selectedDriverId = null) => {
             ? {message: text, driver_id: selectedDriverId}
             : {message: text};
         socketRef.current.send(JSON.stringify(msg));
-        setMessages(prev => [...prev, {
-            id: Date.now(),
-            text: text,
-            sender_id: userId,
-            receiver_id: selectedDriverId || null,
-            created_at: new Date().toISOString()
-        }]);
     };
 
     return {messages, sendMessage};
