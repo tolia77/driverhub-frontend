@@ -1,9 +1,8 @@
 import Message from "./Message.jsx";
 
-const ChatMessages = ({ messages, userId, messagesEndRef }) => {
-    console.log(messages)
+const ChatMessages = ({messages, userId, messagesEndRef}) => {
     return (
-        <div className="flex-grow-1 p-3 overflow-auto" style={{ height: '400px' }}>
+        <div className="flex-grow-1 p-3 overflow-auto" style={{height: '400px'}}>
             {messages
                 .sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
                 .map((msg) => (
@@ -13,7 +12,7 @@ const ChatMessages = ({ messages, userId, messagesEndRef }) => {
                         isOwnMessage={msg.sender_id.toString() === userId.toString()}
                     />
                 ))}
-            <div ref={messagesEndRef} />
+            <div ref={messagesEndRef}/>
         </div>
     );
 };

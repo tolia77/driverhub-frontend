@@ -1,17 +1,16 @@
-import { useRef, useEffect, useState } from "react";
+import {useRef, useEffect, useState} from "react";
 import useChatSocket from "src/hooks/useChatSocket";
 import ChatMessages from "src/components/chat/ChatMessages";
 import MessageInput from "src/components/chat/MessageInput";
-import { messagesIndex } from "src/services/backend/messagesRequest";
-import { getAccessToken } from "src/utils/auth";
+import {messagesIndex} from "src/services/backend/messagesRequest";
+import {getAccessToken} from "src/utils/auth";
 
 const ChatDriver = () => {
-    const { messages: socketMessages, sendMessage } = useChatSocket();
+    const {messages: socketMessages, sendMessage} = useChatSocket();
     const [historyMessages, setHistoryMessages] = useState([]);
     const messagesEndRef = useRef(null);
     const userId = localStorage.getItem("userId");
 
-    // Завантаження історії повідомлень
     useEffect(() => {
         const fetchMessages = async () => {
             try {
@@ -24,14 +23,12 @@ const ChatDriver = () => {
         fetchMessages();
     }, []);
 
-    // Прокрутка вниз при оновленні повідомлень
     useEffect(() => {
         if (messagesEndRef.current) {
-            messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+            messagesEndRef.current.scrollIntoView({behavior: "smooth"});
         }
     }, [socketMessages, historyMessages]);
 
-    // Об’єднання історії та сокет-повідомлень
     const combinedMessages = [...historyMessages, ...socketMessages].filter(
         (msg, index, self) =>
             index === self.findIndex((m) => m.id === msg.id)
@@ -48,7 +45,7 @@ const ChatDriver = () => {
                     userId={userId}
                     messagesEndRef={messagesEndRef}
                 />
-                <MessageInput onSendMessage={sendMessage} />
+                <MessageInput onSendMessage={sendMessage}/>
             </div>
         </div>
     );

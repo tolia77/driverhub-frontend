@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { getAccessToken } from "src/utils/auth";
+import {useEffect, useRef, useState} from "react";
+import {getAccessToken} from "src/utils/auth";
 
 const useChatSocket = (selectedDriverId = null) => {
     const [messages, setMessages] = useState([]);
@@ -35,8 +35,8 @@ const useChatSocket = (selectedDriverId = null) => {
     const sendMessage = (text) => {
         if (!text.trim() || socketRef.current?.readyState !== WebSocket.OPEN) return;
         const msg = selectedDriverId
-            ? { message: text, driver_id: selectedDriverId }
-            : { message: text };
+            ? {message: text, driver_id: selectedDriverId}
+            : {message: text};
         socketRef.current.send(JSON.stringify(msg));
         setMessages(prev => [...prev, {
             id: Date.now(),
@@ -47,7 +47,7 @@ const useChatSocket = (selectedDriverId = null) => {
         }]);
     };
 
-    return { messages, sendMessage };
+    return {messages, sendMessage};
 };
 
 export default useChatSocket;

@@ -16,7 +16,6 @@ const ChatDispatcher = () => {
 
     const {messages: socketMessages, sendMessage} = useChatSocket(selectedDriver?.id);
 
-    // завантаження водіїв
     useEffect(() => {
         const fetchDrivers = async () => {
             const response = await driversIndex({}, getAccessToken());
@@ -38,14 +37,12 @@ const ChatDispatcher = () => {
         fetchMessages();
     }, [selectedDriver]);
 
-    // прокрутка вниз
     useEffect(() => {
         if (messagesEndRef.current) {
             messagesEndRef.current.scrollIntoView({behavior: "smooth"});
         }
     }, [socketMessages, historyMessages]);
 
-    // об'єднані повідомлення
     const combinedMessages = [...historyMessages, ...socketMessages]
         .filter((msg, index, self) =>
             index === self.findIndex(m => m.id === msg.id)
