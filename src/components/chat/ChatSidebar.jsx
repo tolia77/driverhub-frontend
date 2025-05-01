@@ -1,4 +1,4 @@
-const ChatSidebar = ({ drivers, selectedDriver, lastMessages, onSelectDriver }) => {
+const ChatSidebar = ({drivers, selectedDriver, onSelectDriver}) => {
     return (
         <div className="card h-100">
             <div className="card-header">
@@ -11,14 +11,9 @@ const ChatSidebar = ({ drivers, selectedDriver, lastMessages, onSelectDriver }) 
                             key={driver.id}
                             className={`list-group-item list-group-item-action ${selectedDriver?.id === driver.id ? 'active' : ''}`}
                             onClick={() => onSelectDriver(driver)}
-                            style={{ cursor: 'pointer' }}
+                            style={{cursor: 'pointer'}}
                         >
-                            <div className="d-flex flex-column">
-                                <span className="fw-bold">{driver.first_name} {driver.last_name}</span>
-                                <small className="text-truncate">
-                                    {lastMessages[driver.id]?.text || "No messages yet"}
-                                </small>
-                            </div>
+                            <span className="fw-bold">{driver.first_name} {driver.last_name}</span>
                         </li>
                     ))}
                 </ul>

@@ -59,7 +59,6 @@ const ChatDispatcher = () => {
                         drivers={drivers}
                         selectedDriver={selectedDriver}
                         onSelectDriver={setSelectedDriver}
-                        lastMessages={{}}
                     />
                 </div>
                 <div className="col-md-8">
