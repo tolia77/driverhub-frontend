@@ -49,7 +49,10 @@ const ChatDispatcher = () => {
     const combinedMessages = [...historyMessages, ...socketMessages]
         .filter((msg, index, self) =>
             index === self.findIndex(m => m.id === msg.id)
-        );
+        ).filter(msg =>
+            msg.sender_id === selectedDriver?.id ||
+            msg.receiver_id === selectedDriver?.id ||
+            (msg.sender_id === parseInt(userId) && msg.receiver_id === selectedDriver?.id));
 
     return (
         <div className="container-fluid py-4">
