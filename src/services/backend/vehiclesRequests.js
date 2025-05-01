@@ -26,7 +26,7 @@ export async function vehiclesCreateRequest(data, authorization) {
 }
 
 export async function vehiclesUpdateRequest(driverId, data, authorization) {
-    return await instance.put("/vehicles/" + driverId, data, {
+    return await instance.patch("/vehicles/" + driverId, data, {
         headers: {
             Authorization: authorization
         }

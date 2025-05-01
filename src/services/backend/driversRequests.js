@@ -26,7 +26,7 @@ export async function driverShowRequest(driverId, authorization) {
 }
 
 export async function driversUpdateRequest(driverId, data, authorization) {
-    return await instance.put("/drivers/" + driverId, data, {
+    return await instance.patch("/drivers/" + driverId, data, {
         headers: {
             Authorization: authorization
         }
