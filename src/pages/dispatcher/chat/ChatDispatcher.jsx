@@ -25,12 +25,11 @@ const ChatDispatcher = () => {
         fetchDrivers();
     }, []);
 
-    // завантаження історії повідомлень при виборі водія
     useEffect(() => {
         const fetchMessages = async () => {
             if (!selectedDriver) return;
             try {
-                const res = await messagesIndex(selectedDriver.id, getAccessToken());
+                const res = await messagesIndex(selectedDriver.id, null, getAccessToken());
                 setHistoryMessages(res.data);
             } catch (err) {
                 console.error("Failed to fetch message history", err);

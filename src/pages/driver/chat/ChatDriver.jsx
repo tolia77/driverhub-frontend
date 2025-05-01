@@ -15,7 +15,7 @@ const ChatDriver = () => {
     useEffect(() => {
         const fetchMessages = async () => {
             try {
-                const res = await messagesIndex(userId, getAccessToken());
+                const res = await messagesIndex(null, userId, getAccessToken());
                 setHistoryMessages(res.data);
             } catch (err) {
                 console.error("Failed to load chat history", err);
