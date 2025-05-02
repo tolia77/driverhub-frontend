@@ -1,22 +1,27 @@
-import { useState } from "react";
+import {useState, useEffect} from "react";
 
 const ReviewModal = ({
                          isOpen,
                          onClose,
                          onSubmit,
-                         isLoading
+                         isLoading,
+                         initialData = {text: "", rating: 5},
+                         isEdit = false
                      }) => {
-    const [reviewData, setReviewData] = useState({
-        text: "",
-        rating: 5
-    });
+    const [reviewData, setReviewData] = useState(initialData);
+
+    useEffect(() => {
+        if (isOpen) {
+            setReviewData(initialData);
+        }
+    }, [isOpen, initialData]);
 
     const handleRatingChange = (rating) => {
-        setReviewData(prev => ({ ...prev, rating }));
+        setReviewData(prev => ({...prev, rating}));
     };
 
     const handleTextChange = (e) => {
-        setReviewData(prev => ({ ...prev, text: e.target.value }));
+        setReviewData(prev => ({...prev, text: e.target.value}));
     };
 
     const handleSubmit = () => {
@@ -26,11 +31,11 @@ const ReviewModal = ({
     if (!isOpen) return null;
 
     return (
-        <div className="modal fade show d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
+        <div className="modal fade show d-block" tabIndex="-1" style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title">Leave Review</h5>
+                        <h5 className="modal-title">{isEdit ? 'Edit Review' : 'Leave Review'}</h5>
                         <button
                             type="button"
                             className="btn-close"
@@ -46,7 +51,7 @@ const ReviewModal = ({
                                     <i
                                         key={star}
                                         className={`bi ${star <= reviewData.rating ? 'bi-star-fill text-warning' : 'bi-star'}`}
-                                        style={{ fontSize: '2rem', cursor: 'pointer' }}
+                                        style={{fontSize: '2rem', cursor: 'pointer'}}
                                         onClick={() => handleRatingChange(star)}
                                     ></i>
                                 ))}
@@ -81,11 +86,12 @@ const ReviewModal = ({
                         >
                             {isLoading ? (
                                 <>
-                                    <span className="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
-                                    Submitting...
+                                    <span className="spinner-border spinner-border-sm me-1" role="status"
+                                          aria-hidden="true"></span>
+                                    {isEdit ? 'Updating...' : 'Submitting...'}
                                 </>
                             ) : (
-                                "Submit"
+                                isEdit ? 'Update' : 'Submit'
                             )}
                         </button>
                     </div>

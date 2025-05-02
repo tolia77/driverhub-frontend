@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
-import { deliveriesMyClientRequest } from "src/services/backend/deliveriesRequests";
-import { reviewsCreateRequest } from "src/services/backend/reviewsRequests";
+import {useEffect, useState} from "react";
+import {deliveriesMyClientRequest} from "src/services/backend/deliveriesRequests";
+import {reviewsCreateRequest, reviewsUpdateRequest, reviewsDeleteRequest} from "src/services/backend/reviewsRequests";
 import DeliveriesTable from "src/pages/client/DeliveriesTable";
 import ReviewModal from "src/pages/client/ReviewModal";
-import { getAccessToken } from "src/utils/auth.js";
+import {getAccessToken} from "src/utils/auth.js";
 
 const DeliveriesIndexClient = () => {
     const [deliveries, setDeliveries] = useState([]);
     const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
     const [currentDelivery, setCurrentDelivery] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [actionType, setActionType] = useState('create'); // 'create', 'edit', or 'delete'
 
     useEffect(() => {
         const fetchDeliveries = async () => {
@@ -25,29 +26,61 @@ const DeliveriesIndexClient = () => {
         fetchDeliveries();
     }, []);
 
-    const openReviewModal = (delivery) => {
+    const openReviewModal = (delivery, action) => {
         setCurrentDelivery(delivery);
+        setActionType(action);
+
+        if (action === 'edit') {
+            setReviewData({
+                text: delivery.review?.text || "",
+                rating: delivery.review?.rating || 5
+            });
+        } else if (action === 'create') {
+            setReviewData({
+                text: "",
+                rating: 5
+            });
+        }
+
         setIsReviewModalOpen(true);
     };
 
-    const handleSubmitReview = async (reviewData) => {
+    const [reviewData, setReviewData] = useState({
+        text: "",
+        rating: 5
+    });
+
+    const handleSubmitReview = async (data) => {
         if (!currentDelivery) return;
 
         try {
             setIsSubmitting(true);
-            await reviewsCreateRequest(getAccessToken(), {
-                delivery_id: currentDelivery.id,
-                ...reviewData
-            });
 
-            // Refresh deliveries to show the review was added
+            if (actionType === 'create') {
+                await reviewsCreateRequest(getAccessToken(), {
+                    delivery_id: currentDelivery.id,
+                    ...data
+                });
+            } else if (actionType === 'edit') {
+                await reviewsUpdateRequest(
+                    getAccessToken(),
+                    currentDelivery.review.id,
+                    data
+                );
+            } else if (actionType === 'delete') {
+                await reviewsDeleteRequest(
+                    getAccessToken(),
+                    currentDelivery.review.id
+                );
+            }
+
+            // Refresh deliveries
             const response = await deliveriesMyClientRequest(getAccessToken());
             setDeliveries(response.data);
-
             setIsReviewModalOpen(false);
         } catch (err) {
-            console.error("Error submitting review:", err);
-            alert("Error submitting review");
+            console.error("Error handling review:", err);
+            alert(`Error ${actionType === 'delete' ? 'deleting' : actionType === 'edit' ? 'updating' : 'creating'} review`);
         } finally {
             setIsSubmitting(false);
         }
@@ -56,14 +89,64 @@ const DeliveriesIndexClient = () => {
     return (
         <div className="container-fluid py-4">
             <h1 className="mb-4">My Deliveries</h1>
-            <DeliveriesTable deliveries={deliveries} onOpenReviewModal={openReviewModal} />
+            <DeliveriesTable deliveries={deliveries} onOpenReviewModal={openReviewModal}/>
 
             <ReviewModal
-                isOpen={isReviewModalOpen}
+                isOpen={isReviewModalOpen && actionType !== 'delete'}
                 onClose={() => setIsReviewModalOpen(false)}
                 onSubmit={handleSubmitReview}
                 isLoading={isSubmitting}
+                initialData={reviewData}
+                isEdit={actionType === 'edit'}
             />
+
+            {/* Delete Confirmation Modal */}
+            {isReviewModalOpen && actionType === 'delete' && (
+                <div className="modal fade show d-block" tabIndex="-1" style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
+                    <div className="modal-dialog modal-dialog-centered">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">Delete Review</h5>
+                                <button
+                                    type="button"
+                                    className="btn-close"
+                                    onClick={() => setIsReviewModalOpen(false)}
+                                    disabled={isSubmitting}
+                                ></button>
+                            </div>
+                            <div className="modal-body">
+                                <p>Are you sure you want to delete this review?</p>
+                            </div>
+                            <div className="modal-footer">
+                                <button
+                                    type="button"
+                                    className="btn btn-secondary"
+                                    onClick={() => setIsReviewModalOpen(false)}
+                                    disabled={isSubmitting}
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    type="button"
+                                    className="btn btn-danger"
+                                    onClick={() => handleSubmitReview({})}
+                                    disabled={isSubmitting}
+                                >
+                                    {isSubmitting ? (
+                                        <>
+                                            <span className="spinner-border spinner-border-sm me-1" role="status"
+                                                  aria-hidden="true"></span>
+                                            Deleting...
+                                        </>
+                                    ) : (
+                                        "Delete"
+                                    )}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
