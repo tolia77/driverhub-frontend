@@ -8,8 +8,8 @@ import {
     vehiclesIndexRequest,
 } from "src/services/backend/vehiclesRequests.js";
 import DriversTable from "src/pages/dispatcher/drivers/DriversTable.jsx";
-import DriverModal from "src/pages/dispatcher/drivers/DriverModal";
-import VehicleSelectModal from "src/pages/dispatcher/drivers/VehicleSelectModal";
+import DriverModal from "src/components/drivers/DriverModal.jsx";
+import VehicleSelectModal from "src/components/drivers/VehicleSelectModal.jsx";
 import SearchBar from "src/components/SearchBar.jsx";
 import {driversCreateRequest} from "src/services/backend/driversRequests.js";
 import {getAccessToken} from "src/utils/auth.js";

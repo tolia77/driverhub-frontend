@@ -1,4 +1,4 @@
-const AdminDeliveryModal = ({
+const DeliveryModal = ({
                                 isOpen,
                                 modalType,
                                 delivery,
@@ -139,4 +139,4 @@ const AdminDeliveryModal = ({
     );
 };
 
-export default AdminDeliveryModal;
+export default DeliveryModal;

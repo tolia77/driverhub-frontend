@@ -7,7 +7,7 @@ import {
 } from "src/services/backend/deliveriesRequests";
 import {driversIndexRequest} from "src/services/backend/driversRequests";
 import DeliveriesTable from "src/pages/dispatcher/deliveries/DeliveriesTable";
-import DeliveryModal from "./DeliveryModal";
+import DeliveryModal from "src/components/deliveries/DeliveryModal";
 import SearchBar from "src/components/SearchBar";
 import {getAccessToken} from "src/utils/auth.js";
 import {clientsIndexRequest} from "src/services/backend/clientsRequests.js";
@@ -93,7 +93,7 @@ const DeliveriesIndex = () => {
             setOriginalDelivery(response.data);
             setIsModalOpen(true);
         } catch (error) {
-            console.error("Error fetching delivery details:", error);
+            console.error("Error fetching deliveries details:", error);
         }
     };
 
@@ -135,7 +135,7 @@ const DeliveriesIndex = () => {
             }
             setIsModalOpen(false);
         } catch (error) {
-            console.error("Error saving delivery:", error);
+            console.error("Error saving deliveries:", error);
         }
     };
 

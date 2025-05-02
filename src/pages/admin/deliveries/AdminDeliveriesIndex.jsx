@@ -8,7 +8,7 @@ import {
 } from "src/services/backend/deliveriesRequests";
 import {driversIndexRequest} from "src/services/backend/driversRequests";
 import AdminDeliveriesTable from "./AdminDeliveriesTable";
-import AdminDeliveryModal from "./AdminDeliveryModal";
+import DeliveryModal from "../../../components/deliveries/DeliveryModal.jsx";
 import SearchBar from "src/components/SearchBar";
 import {getAccessToken} from "src/utils/auth.js";
 import {clientsIndexRequest} from "src/services/backend/clientsRequests.js";
@@ -96,7 +96,7 @@ const AdminDeliveriesIndex = () => {
             setOriginalDelivery(response.data);
             setIsModalOpen(true);
         } catch (error) {
-            console.error("Error fetching delivery details:", error);
+            console.error("Error fetching deliveries details:", error);
         }
     };
 
@@ -112,7 +112,7 @@ const AdminDeliveriesIndex = () => {
             setDeliveries(deliveries.filter(d => d.id !== currentDelivery.id));
             setIsDeleteModalOpen(false);
         } catch (error) {
-            console.error("Error deleting delivery:", error);
+            console.error("Error deleting deliveries:", error);
         } finally {
             setIsDeleting(false);
         }
@@ -156,7 +156,7 @@ const AdminDeliveriesIndex = () => {
             }
             setIsModalOpen(false);
         } catch (error) {
-            console.error("Error saving delivery:", error);
+            console.error("Error saving deliveries:", error);
         }
     };
 
@@ -200,7 +200,7 @@ const AdminDeliveriesIndex = () => {
                 onDelete={handleDeleteDelivery}
             />
 
-            <AdminDeliveryModal
+            <DeliveryModal
                 isOpen={isModalOpen}
                 modalType={modalType}
                 delivery={currentDelivery}
