@@ -16,6 +16,8 @@ import Signup from "src/pages/Signup.jsx";
 import Account from "src/pages/Account.jsx";
 import OnlyClients from "src/components/layout/OnlyClients.jsx";
 import DeliveriesIndexClient from "src/pages/client/DeliveriesIndexClient.jsx";
+import OnlyAdmins from "src/components/OnlyAdmins.jsx";
+import AdminDeliveriesIndex from "src/pages/admin/deliveries/AdminDeliveriesIndex.jsx";
 function App() {
     return (
         <BrowserRouter>
@@ -33,6 +35,9 @@ function App() {
                         <Route path="deliveries/" element={<DeliveriesIndexDriver/>}/>
                         <Route path="log-breaks/" element={<LogBreaksIndexDriver/>}/>
                         <Route path="chat/" element={<ChatDriver/>}/>
+                    </Route>
+                    <Route path="admin/" element={<OnlyAdmins/>}>
+                        <Route path="deliveries/" element={<AdminDeliveriesIndex/>}/>
                     </Route>
                     <Route path="client/" element={<OnlyClients/>}>
                         <Route path="deliveries/" element={<DeliveriesIndexClient/>}/>
