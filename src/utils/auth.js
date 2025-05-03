@@ -5,3 +5,7 @@ export function getAccessToken() {
 export function getUserRole() {
     return localStorage.getItem("accountType");
 }
+
+export function getUserId() {
+    return localStorage.getItem("userId");
+}

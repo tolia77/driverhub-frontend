@@ -3,13 +3,13 @@ import useChatSocket from "src/hooks/useChatSocket";
 import ChatMessages from "src/components/chat/ChatMessages";
 import MessageInput from "src/components/chat/MessageInput";
 import {messagesIndexRequest} from "src/services/backend/messagesRequest";
-import {getAccessToken} from "src/utils/auth";
+import {getAccessToken, getUserId} from "src/utils/auth";
 
 const ChatDriver = () => {
     const {messages: socketMessages, sendMessage} = useChatSocket();
     const [historyMessages, setHistoryMessages] = useState([]);
     const messagesEndRef = useRef(null);
-    const userId = localStorage.getItem("userId");
+    const userId = getUserId();
 
     useEffect(() => {
         const fetchMessages = async () => {

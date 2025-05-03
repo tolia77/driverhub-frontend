@@ -3,7 +3,7 @@ import ChatSidebar from "src/components/chat/ChatSidebar";
 import ChatMessages from "src/components/chat/ChatMessages";
 import MessageInput from "src/components/chat/MessageInput";
 import {driversIndexRequest} from "src/services/backend/driversRequests";
-import {getAccessToken} from "src/utils/auth";
+import {getAccessToken, getUserId} from "src/utils/auth";
 import useChatSocket from "src/hooks/useChatSocket";
 import {messagesIndexRequest} from "src/services/backend/messagesRequest.js";
 
@@ -11,7 +11,7 @@ const ChatDispatcher = () => {
     const [drivers, setDrivers] = useState([]);
     const [selectedDriver, setSelectedDriver] = useState(null);
     const [historyMessages, setHistoryMessages] = useState([]);
-    const userId = localStorage.getItem("userId");
+    const userId = getUserId();
     const messagesEndRef = useRef(null);
 
     const {messages: socketMessages, sendMessage} = useChatSocket(selectedDriver?.id);

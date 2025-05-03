@@ -8,21 +8,12 @@ import LogBreakModal from "src/pages/driver/deliveries/LogBreakModal";
 import {getAccessToken} from "src/utils/auth.js";
 
 const DeliveriesIndexDriver = () => {
-    const navigate = useNavigate();
     const [deliveries, setDeliveries] = useState([]);
     const [isStatusModalOpen, setIsStatusModalOpen] = useState(false);
     const [isLogBreakModalOpen, setIsLogBreakModalOpen] = useState(false);
     const [currentDelivery, setCurrentDelivery] = useState(null);
     const [newStatus, setNewStatus] = useState("");
 
-    // Redirect if not driver
-    useEffect(() => {
-        if (localStorage.getItem("accountType") !== "driver") {
-            navigate("/");
-        }
-    }, [navigate]);
-
-    // Fetch deliveries
     useEffect(() => {
         const fetchDeliveries = async () => {
             try {
