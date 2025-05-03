@@ -5,10 +5,10 @@ import {
     vehiclesCreateRequest,
     vehiclesUpdateRequest,
     vehiclesDeleteRequest,
-} from "src/services/backend/vehiclesRequests";
-import VehiclesTable from "src/pages/dispatcher/vehicles/VehiclesTable";
-import VehicleModal from "src/pages/dispatcher/vehicles/VehicleModal";
-import SearchBar from "src/components/SearchBar";
+} from "src/services/backend/vehiclesRequests.js";
+import VehiclesTable from "src/components/vehicles/VehiclesTable.jsx";
+import VehicleModal from "src/components/vehicles/VehicleModal.jsx";
+import SearchBar from "src/components/SearchBar.jsx";
 import {getAccessToken} from "src/utils/auth.js";
 
 const VehiclesIndex = () => {

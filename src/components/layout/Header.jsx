@@ -1,5 +1,5 @@
-import { Link } from "react-router";
-import { getUserRole } from "src/utils/auth.js";
+import {Link} from "react-router";
+import {getUserRole} from "src/utils/auth.js";
 import logo from "src/assets/img/logo-light-no-bg.png";
 
 export default function Header() {
@@ -9,11 +9,9 @@ export default function Header() {
         <header className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
             <div className="container-fluid">
                 <Link to="/" className="navbar-brand d-flex align-items-center me-4">
-                    <img src={logo} alt="Logo" height="50" className="me-2" />
+                    <img src={logo} alt="Logo" height="50" className="me-2"/>
                     <span className="fw-bold">DriverHub</span>
                 </Link>
-
-                {/* Toggle button */}
                 <button
                     className="navbar-toggler"
                     type="button"
@@ -47,7 +45,24 @@ export default function Header() {
                                 </li>
                             </>
                         )}
-
+                        {userRole === 'admin' && (
+                            <>
+                                <>
+                                    <li className="nav-item">
+                                        <Link to="/admin/deliveries" className="nav-link px-2">Deliveries</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link to="/admin/drivers" className="nav-link px-2">Drivers</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link to="/admin/vehicles" className="nav-link px-2">Vehicles</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link to="/admin/log-breaks" className="nav-link px-2">Breaks</Link>
+                                    </li>
+                                </>
+                            </>
+                        )}
                         {userRole === 'driver' && (
                             <>
                                 <li className="nav-item">

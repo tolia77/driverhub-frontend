@@ -3,7 +3,6 @@ import Layout from "src/components/layout/Layout.jsx";
 import Index from "src/pages/Index.jsx";
 import OnlyDispatchers from "src/components/OnlyDispatchers.jsx";
 import DeliveriesIndex from "src/pages/dispatcher/deliveries/DeliveriesIndex.jsx";
-import VehiclesIndex from "src/pages/dispatcher/vehicles/VehiclesIndex.jsx";
 import LogBreaksIndex from "src/pages/dispatcher/log-breaks/LogBreaksIndex.jsx";
 import ChatDispatcher from "src/pages/dispatcher/chat/ChatDispatcher.jsx";
 import OnlyDrivers from "src/components/OnlyDrivers.jsx";
@@ -19,6 +18,8 @@ import OnlyAdmins from "src/components/OnlyAdmins.jsx";
 import DeliveriesIndexAdmin from "src/pages/admin/deliveries/DeliveriesIndexAdmin.jsx";
 import DriversIndexDispatcher from "src/pages/dispatcher/drivers/DriversIndexDispatcher.jsx";
 import DriversIndexAdmin from "src/pages/admin/drivers/DriversIndexAdmin.jsx";
+import VehiclesIndexDispatcher from "src/pages/dispatcher/vehicles/VehiclesIndexDispatcher.jsx";
+import VehiclesIndexAdmin from "src/pages/admin/vehicles/VehiclesIndexAdmin.jsx";
 
 function App() {
     return (
@@ -29,7 +30,7 @@ function App() {
                     <Route path="dispatcher/" element={<OnlyDispatchers/>}>
                         <Route path="deliveries/" element={<DeliveriesIndex/>}/>
                         <Route path="drivers/" element={<DriversIndexDispatcher/>}/>
-                        <Route path="vehicles/" element={<VehiclesIndex/>}/>
+                        <Route path="vehicles/" element={<VehiclesIndexDispatcher/>}/>
                         <Route path="log-breaks/" element={<LogBreaksIndex/>}/>
                         <Route path="chat/" element={<ChatDispatcher/>}/>
                     </Route>
@@ -41,6 +42,7 @@ function App() {
                     <Route path="admin/" element={<OnlyAdmins/>}>
                         <Route path="deliveries/" element={<DeliveriesIndexAdmin/>}/>
                         <Route path="drivers/" element={<DriversIndexAdmin/>}/>
+                        <Route path="vehicles/" element={<VehiclesIndexAdmin/>}/>
                     </Route>
                     <Route path="client/" element={<OnlyClients/>}>
                         <Route path="deliveries/" element={<DeliveriesIndexClient/>}/>
