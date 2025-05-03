@@ -7,13 +7,13 @@ import {
     deliveriesDeleteRequest
 } from "src/services/backend/deliveriesRequests";
 import {driversIndexRequest} from "src/services/backend/driversRequests";
-import AdminDeliveriesTable from "./AdminDeliveriesTable";
+import DeliveriesTableAdmin from "./DeliveriesTableAdmin.jsx";
 import DeliveryModal from "../../../components/deliveries/DeliveryModal.jsx";
 import SearchBar from "src/components/SearchBar";
 import {getAccessToken} from "src/utils/auth.js";
 import {clientsIndexRequest} from "src/services/backend/clientsRequests.js";
 
-const AdminDeliveriesIndex = () => {
+const DeliveriesIndexAdmin = () => {
     const [deliveries, setDeliveries] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalType, setModalType] = useState('add');
@@ -194,7 +194,7 @@ const AdminDeliveriesIndex = () => {
                 placeholder="Search deliveries..."
             />
 
-            <AdminDeliveriesTable
+            <DeliveriesTableAdmin
                 deliveries={filteredDeliveries}
                 onUpdate={handleUpdateDelivery}
                 onDelete={handleDeleteDelivery}
@@ -263,4 +263,4 @@ const AdminDeliveriesIndex = () => {
     );
 };
 
-export default AdminDeliveriesIndex;
+export default DeliveriesIndexAdmin;

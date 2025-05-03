@@ -1,4 +1,4 @@
-const AdminDeliveriesTable = ({ deliveries, onUpdate, onDelete }) => {
+const DeliveriesTableAdmin = ({ deliveries, onUpdate, onDelete }) => {
     if (deliveries.length === 0) {
         return <div className="alert alert-info">No deliveries found</div>;
     }
@@ -54,4 +54,4 @@ const AdminDeliveriesTable = ({ deliveries, onUpdate, onDelete }) => {
     );
 };
 
-export default AdminDeliveriesTable;
+export default DeliveriesTableAdmin;

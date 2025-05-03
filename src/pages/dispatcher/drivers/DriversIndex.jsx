@@ -5,7 +5,7 @@ import {
     driversDeleteRequest,
 } from "src/services/backend/driversRequests.js";
 import {
-    vehiclesIndexRequest,
+    vehiclesUnassignedRequest,
 } from "src/services/backend/vehiclesRequests.js";
 import DriversTable from "src/pages/dispatcher/drivers/DriversTable.jsx";
 import DriverModal from "src/components/drivers/DriverModal.jsx";
@@ -51,7 +51,7 @@ const DriversIndex = () => {
 
     const fetchVehicles = async () => {
         try {
-            const response = await vehiclesIndexRequest({}, authorization);
+            const response = await vehiclesUnassignedRequest(authorization);
             const vehiclesArray = response.data;
             setVehicles(vehiclesArray);
 

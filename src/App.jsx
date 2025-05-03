@@ -17,7 +17,7 @@ import Account from "src/pages/Account.jsx";
 import OnlyClients from "src/components/layout/OnlyClients.jsx";
 import DeliveriesIndexClient from "src/pages/client/DeliveriesIndexClient.jsx";
 import OnlyAdmins from "src/components/OnlyAdmins.jsx";
-import AdminDeliveriesIndex from "src/pages/admin/deliveries/AdminDeliveriesIndex.jsx";
+import DeliveriesIndexAdmin from "src/pages/admin/deliveries/DeliveriesIndexAdmin.jsx";
 function App() {
     return (
         <BrowserRouter>
@@ -37,7 +37,7 @@ function App() {
                         <Route path="chat/" element={<ChatDriver/>}/>
                     </Route>
                     <Route path="admin/" element={<OnlyAdmins/>}>
-                        <Route path="deliveries/" element={<AdminDeliveriesIndex/>}/>
+                        <Route path="deliveries/" element={<DeliveriesIndexAdmin/>}/>
                     </Route>
                     <Route path="client/" element={<OnlyClients/>}>
                         <Route path="deliveries/" element={<DeliveriesIndexClient/>}/>
