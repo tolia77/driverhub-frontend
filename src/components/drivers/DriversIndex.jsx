@@ -7,7 +7,7 @@ import {
 import {
     vehiclesUnassignedRequest,
 } from "src/services/backend/vehiclesRequests.js";
-import DriversTable from "src/pages/dispatcher/drivers/DriversTable.jsx";
+import DriversTable from "src/components/drivers/DriversTable.jsx";
 import DriverModal from "src/components/drivers/DriverModal.jsx";
 import VehicleSelectModal from "src/components/drivers/VehicleSelectModal.jsx";
 import SearchBar from "src/components/SearchBar.jsx";
@@ -152,7 +152,7 @@ const DriversIndex = () => {
             fullName.includes(search) ||
             driver.email.toLowerCase().includes(search) ||
             driver.license_number.toLowerCase().includes(search) ||
-            (driver.vehicle && driver.vehicle.toLowerCase().includes(search)) ||
+            (driver.vehicle && driver.vehicle.model.toLowerCase().includes(search)) ||
             (driver.current_delivery && driver.current_delivery.toLowerCase().includes(search))
         );
     });

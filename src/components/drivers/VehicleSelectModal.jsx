@@ -1,4 +1,5 @@
 import {Link} from "react-router";
+import {getUserRole} from "src/utils/auth.js";
 
 const VehicleSelectModal = ({
                                 isOpen,
@@ -35,7 +36,7 @@ const VehicleSelectModal = ({
                                     </button>
                                 ))}
                             </div> :
-                            <p>There is no unassigned vehicles left. <Link to="/dispatcher/vehicles/">Add new vehicle</Link>
+                            <p>There is no unassigned vehicles left. <Link to={`/${getUserRole()}/vehicles/`}>Add new vehicle</Link>
                             </p>
                         }
                     </div>
