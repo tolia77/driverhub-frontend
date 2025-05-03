@@ -1,6 +1,6 @@
 import {useState, useEffect} from "react";
 import LogBreaksTable from "src/pages/dispatcher/log-breaks/LogBreaksTable";
-import DeliverySelect from "src/pages/dispatcher/log-breaks/DeliverySelect.jsx";
+import DeliverySelect from "src/components/log-breaks/DeliverySelect.jsx";
 import {deliveriesIndexRequest} from "src/services/backend/deliveriesRequests.js";
 import {getAccessToken} from "src/utils/auth.js";
 import {logBreaksIndexRequest} from "src/services/backend/logBreaksRequests.js";
