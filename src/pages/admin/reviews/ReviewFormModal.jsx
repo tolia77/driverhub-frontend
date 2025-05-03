@@ -1,11 +1,11 @@
-const DispatcherFormModal = ({
-                                 show,
-                                 onHide,
-                                 onSubmit,
-                                 formData,
-                                 onChange,
-                                 isEditing
-                             }) => {
+const ReviewFormModal = ({
+                             show,
+                             onHide,
+                             onSubmit,
+                             formData,
+                             onChange,
+                             isEditing
+                         }) => {
     return (
         <div className={`modal fade ${show ? 'show' : ''}`}
              style={{ display: show ? 'block' : 'none', backgroundColor: 'rgba(0,0,0,0.5)' }}>
@@ -13,7 +13,7 @@ const DispatcherFormModal = ({
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">
-                            {isEditing ? "Update" : "Create"} Dispatcher
+                            {isEditing ? "Update" : "Create"} Review
                         </h5>
                         <button
                             type="button"
@@ -24,51 +24,44 @@ const DispatcherFormModal = ({
                     <div className="modal-body">
                         {!isEditing && (
                             <div className="mb-3">
-                                <label className="form-label">Email</label>
+                                <label className="form-label">Delivery ID</label>
                                 <input
-                                    type="email"
+                                    type="number"
                                     className="form-control"
-                                    name="email"
-                                    value={formData.email}
+                                    name="delivery_id"
+                                    value={formData.delivery_id || ''}
                                     onChange={onChange}
                                     required
                                     disabled={isEditing}
+                                    min="1"
                                 />
                             </div>
                         )}
                         <div className="mb-3">
-                            <label className="form-label">First Name</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                name="first_name"
-                                value={formData.first_name}
+                            <label className="form-label">Rating (1-5)</label>
+                            <select
+                                className="form-select"
+                                name="rating"
+                                value={formData.rating}
                                 onChange={onChange}
                                 required
-                            />
+                            >
+                                <option value="">Select rating</option>
+                                {[1, 2, 3, 4, 5].map(num => (
+                                    <option key={num} value={num}>
+                                        {num} ★
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                         <div className="mb-3">
-                            <label className="form-label">Last Name</label>
-                            <input
-                                type="text"
+                            <label className="form-label">Review Text</label>
+                            <textarea
                                 className="form-control"
-                                name="last_name"
-                                value={formData.last_name}
+                                name="text"
+                                value={formData.text || ''}
                                 onChange={onChange}
-                                required
-                            />
-                        </div>
-                        <div className="mb-3">
-                            <label className="form-label">
-                                {isEditing ? "New Password (leave blank to keep current)" : "Password"}
-                            </label>
-                            <input
-                                type="password"
-                                className="form-control"
-                                name="password"
-                                value={formData.password}
-                                onChange={onChange}
-                                required={!isEditing}
+                                rows="3"
                             />
                         </div>
                     </div>
@@ -92,4 +85,4 @@ const DispatcherFormModal = ({
     );
 };
 
-export default DispatcherFormModal;
+export default ReviewFormModal;

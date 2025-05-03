@@ -63,6 +63,9 @@ export default function Header() {
                                     <li className="nav-item">
                                         <Link to="/admin/dispatchers" className="nav-link px-2">Dispatchers</Link>
                                     </li>
+                                    <li className="nav-item">
+                                        <Link to="/admin/reviews" className="nav-link px-2">Reviews</Link>
+                                    </li>
                                 </>
                             </>
                         )}

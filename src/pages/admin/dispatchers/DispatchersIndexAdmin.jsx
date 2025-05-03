@@ -7,7 +7,7 @@ import {
 } from "src/services/backend/dispatchersRequests.js";
 import { getAccessToken } from "src/utils/auth.js";
 import DispatchersTable from "src/pages/admin/dispatchers/DispatchersTable";
-import DispatcherFormModal from "src/pages/admin/dispatchers/DispatcherFormModal";
+import DispatcherModal from "src/pages/admin/dispatchers/DispatcherModal.jsx";
 
 const DispatchersIndexAdmin = () => {
     const [dispatchers, setDispatchers] = useState([]);
@@ -137,7 +137,7 @@ const DispatchersIndexAdmin = () => {
                 onDelete={handleDeleteDispatcher}
             />
 
-            <DispatcherFormModal
+            <DispatcherModal
                 show={isModalOpen}
                 onHide={() => setIsModalOpen(false)}
                 onSubmit={handleSubmitDispatcher}
