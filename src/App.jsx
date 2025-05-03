@@ -21,6 +21,7 @@ import DriversIndexAdmin from "src/pages/admin/drivers/DriversIndexAdmin.jsx";
 import VehiclesIndexDispatcher from "src/pages/dispatcher/vehicles/VehiclesIndexDispatcher.jsx";
 import VehiclesIndexAdmin from "src/pages/admin/vehicles/VehiclesIndexAdmin.jsx";
 import LogBreaksIndexAdmin from "src/pages/admin/log-breaks/LogBreaksIndexAdmin.jsx";
+import DispatchersIndexAdmin from "src/pages/admin/dispatchers/DispatchersIndexAdmin.jsx";
 
 function App() {
     return (
@@ -45,6 +46,7 @@ function App() {
                         <Route path="drivers/" element={<DriversIndexAdmin/>}/>
                         <Route path="vehicles/" element={<VehiclesIndexAdmin/>}/>
                         <Route path="log-breaks/" element={<LogBreaksIndexAdmin/>}/>
+                        <Route path="dispatchers/" element={<DispatchersIndexAdmin/>}/>
                     </Route>
                     <Route path="client/" element={<OnlyClients/>}>
                         <Route path="deliveries/" element={<DeliveriesIndexClient/>}/>
