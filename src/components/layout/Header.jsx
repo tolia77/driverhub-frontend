@@ -49,19 +49,22 @@ export default function Header() {
                             <>
                                 <>
                                     <li className="nav-item">
-                                        <Link to="/admin/deliveries" className="nav-link px-2">Deliveries</Link>
+                                        <Link to="/admin/drivers" className="nav-link px-2">Drivers</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link to="/admin/drivers" className="nav-link px-2">Drivers</Link>
+                                        <Link to="/admin/dispatchers" className="nav-link px-2">Dispatchers</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link to="/admin/clients" className="nav-link px-2">Clients</Link>
+                                    </li>
+                                    <li className="nav-item">
+                                        <Link to="/admin/deliveries" className="nav-link px-2">Deliveries</Link>
                                     </li>
                                     <li className="nav-item">
                                         <Link to="/admin/vehicles" className="nav-link px-2">Vehicles</Link>
                                     </li>
                                     <li className="nav-item">
                                         <Link to="/admin/log-breaks" className="nav-link px-2">Breaks</Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link to="/admin/dispatchers" className="nav-link px-2">Dispatchers</Link>
                                     </li>
                                     <li className="nav-item">
                                         <Link to="/admin/reviews" className="nav-link px-2">Reviews</Link>
