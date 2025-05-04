@@ -13,7 +13,7 @@ import Login from "src/pages/Login.jsx";
 import Signup from "src/pages/Signup.jsx";
 import Account from "src/pages/Account.jsx";
 import OnlyClients from "src/components/layout/OnlyClients.jsx";
-import DeliveriesIndexClient from "src/pages/client/DeliveriesIndexClient.jsx";
+import DeliveriesIndexClient from "src/pages/client/deliveries/DeliveriesIndexClient.jsx";
 import OnlyAdmins from "src/components/OnlyAdmins.jsx";
 import DeliveriesIndexAdmin from "src/pages/admin/deliveries/DeliveriesIndexAdmin.jsx";
 import DriversIndexDispatcher from "src/pages/dispatcher/drivers/DriversIndexDispatcher.jsx";
@@ -24,6 +24,7 @@ import LogBreaksIndexAdmin from "src/pages/admin/log-breaks/LogBreaksIndexAdmin.
 import DispatchersIndexAdmin from "src/pages/admin/dispatchers/DispatchersIndexAdmin.jsx";
 import ReviewsIndexAdmin from "src/pages/admin/reviews/ReviewsIndexAdmin.jsx";
 import ClientsIndexAdmin from "src/pages/admin/clients/ClientsIndexAdmin.jsx";
+import ClientReviewsIndex from "src/pages/client/reviews/ClientReviewsIndex.jsx";
 
 function App() {
     return (
@@ -54,6 +55,7 @@ function App() {
                     </Route>
                     <Route path="client/" element={<OnlyClients/>}>
                         <Route path="deliveries/" element={<DeliveriesIndexClient/>}/>
+                        <Route path="reviews/" element={<ClientReviewsIndex/>}/>
                     </Route>
                     <Route path="login/" element={<Login/>}/>
                     <Route path="signup/" element={<Signup/>}/>

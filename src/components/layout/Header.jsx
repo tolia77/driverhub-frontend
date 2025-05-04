@@ -87,9 +87,14 @@ export default function Header() {
                         )}
 
                         {userRole === 'client' && (
-                            <li className="nav-item">
-                                <Link to="/client/deliveries" className="nav-link px-2">Deliveries</Link>
-                            </li>
+                            <>
+                                <li className="nav-item">
+                                    <Link to="/client/deliveries" className="nav-link px-2">Deliveries</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link to="/client/reviews" className="nav-link px-2">My reviews</Link>
+                                </li>
+                            </>
                         )}
                     </ul>
 

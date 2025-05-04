@@ -39,3 +39,11 @@ export async function reviewShowRequest(authorization, id) {
         }
     })
 }
+
+export async function reviewsMyRequest(authorization) {
+    return await instance.get("reviews/client/me/", {
+        headers: {
+            Authorization: authorization
+        }
+    })
+}

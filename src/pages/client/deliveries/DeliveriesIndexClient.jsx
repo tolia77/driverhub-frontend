@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
-import {deliveriesMyClientRequest} from "src/services/backend/deliveriesRequests";
-import {reviewsCreateRequest, reviewsUpdateRequest, reviewsDeleteRequest} from "src/services/backend/reviewsRequests";
-import DeliveriesTable from "src/pages/client/DeliveriesTable";
-import ReviewModal from "src/pages/client/ReviewModal";
+import {deliveriesMyClientRequest} from "src/services/backend/deliveriesRequests.js";
+import {reviewsCreateRequest, reviewsUpdateRequest, reviewsDeleteRequest} from "src/services/backend/reviewsRequests.js";
+import DeliveriesTable from "src/pages/client/deliveries/DeliveriesTable.jsx";
+import ReviewModal from "src/components/reviews/ReviewModal.jsx";
 import {getAccessToken} from "src/utils/auth.js";
 
 const DeliveriesIndexClient = () => {
