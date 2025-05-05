@@ -3,20 +3,16 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaf
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-
 const LocationMarker = ({ position, setPosition, initialPosition }) => {
-    const map = useMapEvents({
+    useMapEvents({
         click(e) {
             setPosition(e.latlng);
-            map.flyTo(e.latlng, map.getZoom());
         },
     });
 
     useEffect(() => {
         if (initialPosition && !position) {
-            const newPos = L.latLng(initialPosition.lat, initialPosition.lng);
-            setPosition(newPos);
-            map.flyTo(newPos, 15);
+            setPosition(L.latLng(initialPosition.lat, initialPosition.lng));
         }
     }, [initialPosition]);
 
@@ -83,9 +79,8 @@ const LogBreakModal = ({ isOpen, onSubmit, onClose, initialData }) => {
                                 <div style={{ height: '300px', width: '100%' }}>
                                     <MapContainer
                                         center={position || [51.505, -0.09]}
-                                        zoom={position ? 15 : 13}
+                                        zoom={13}
                                         style={{ height: '100%', width: '100%' }}
-                                        key={JSON.stringify(position)} // Додано key для перерендеру
                                     >
                                         <TileLayer
                                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
