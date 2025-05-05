@@ -1,4 +1,3 @@
-import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import {
     logBreaksCreateRequest,
@@ -10,6 +9,7 @@ import LogBreaksTable from "src/pages/admin/log-breaks/LogBreaksTable";
 import DeliverySelect from "src/components/log-breaks/DeliverySelect.jsx";
 import { deliveriesIndexRequest } from "src/services/backend/deliveriesRequests.js";
 import { getAccessToken } from "src/utils/auth.js";
+import LogBreakModal from "src/components/log-breaks/LogBreakModal.jsx";
 
 const LogBreaksIndexAdmin = () => {
     const [deliveries, setDeliveries] = useState([]);
@@ -17,13 +17,6 @@ const LogBreaksIndexAdmin = () => {
     const [logBreaks, setLogBreaks] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentLogBreak, setCurrentLogBreak] = useState(null);
-    const [formData, setFormData] = useState({
-        location: "",
-        start_time: "",
-        end_time: "",
-        cost: "",
-        delivery_id: ""
-    });
     const [isEditing, setIsEditing] = useState(false);
 
     useEffect(() => {
@@ -51,42 +44,18 @@ const LogBreaksIndexAdmin = () => {
     const openCreateModal = () => {
         setCurrentLogBreak(null);
         setIsEditing(false);
-        setFormData({
-            location: "",
-            start_time: format(new Date(), "yyyy-MM-dd'T'HH:mm"),
-            end_time: format(new Date(), "yyyy-MM-dd'T'HH:mm"),
-            cost: "0",
-            delivery_id: selectedDelivery.id
-        });
         setIsModalOpen(true);
     };
 
     const openUpdateModal = (logBreak) => {
         setCurrentLogBreak(logBreak);
         setIsEditing(true);
-        setFormData({
-            location: logBreak.location,
-            start_time: format(new Date(logBreak.start_time), "yyyy-MM-dd'T'HH:mm"),
-            end_time: format(new Date(logBreak.end_time), "yyyy-MM-dd'T'HH:mm"),
-            cost: logBreak.cost.toString(),
-            delivery_id: logBreak.delivery_id
-        });
         setIsModalOpen(true);
     };
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
-    };
-
-    const handleSubmitLogBreak = () => {
-        if (!validateForm()) return;
-
+    const handleSubmitLogBreak = (logBreakData) => {
         const submitData = {
-            location: formData.location,
-            start_time: new Date(formData.start_time).toISOString(),
-            end_time: new Date(formData.end_time).toISOString(),
-            cost: parseFloat(formData.cost),
+            ...logBreakData,
             delivery_id: selectedDelivery.id
         };
 
@@ -111,26 +80,6 @@ const LogBreaksIndexAdmin = () => {
                 .then(() => fetchLogBreaks())
                 .catch(err => console.error("Error deleting log break:", err));
         }
-    };
-
-    const validateForm = () => {
-        if (!formData.location.trim()) {
-            alert("Location is required");
-            return false;
-        }
-        if (!formData.start_time || !formData.end_time) {
-            alert("Both start and end times are required");
-            return false;
-        }
-        if (new Date(formData.end_time) <= new Date(formData.start_time)) {
-            alert("End time must be after start time");
-            return false;
-        }
-        if (isNaN(parseFloat(formData.cost)) || parseFloat(formData.cost) < 0) {
-            alert("Cost must be a positive number");
-            return false;
-        }
-        return true;
     };
 
     return (
@@ -162,86 +111,12 @@ const LogBreaksIndexAdmin = () => {
                 />
             )}
 
-            {isModalOpen && (
-                <div className="modal fade show" style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.5)' }}>
-                    <div className="modal-dialog">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title">
-                                    {isEditing ? "Update" : "Create"} Log Break
-                                </h5>
-                                <button
-                                    type="button"
-                                    className="btn-close"
-                                    onClick={() => setIsModalOpen(false)}
-                                ></button>
-                            </div>
-                            <div className="modal-body">
-                                <div className="mb-3">
-                                    <label className="form-label">Location</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        name="location"
-                                        value={formData.location}
-                                        onChange={handleInputChange}
-                                        required
-                                    />
-                                </div>
-                                <div className="mb-3">
-                                    <label className="form-label">Start Time</label>
-                                    <input
-                                        type="datetime-local"
-                                        className="form-control"
-                                        name="start_time"
-                                        value={formData.start_time}
-                                        onChange={handleInputChange}
-                                        required
-                                    />
-                                </div>
-                                <div className="mb-3">
-                                    <label className="form-label">End Time</label>
-                                    <input
-                                        type="datetime-local"
-                                        className="form-control"
-                                        name="end_time"
-                                        value={formData.end_time}
-                                        onChange={handleInputChange}
-                                        required
-                                    />
-                                </div>
-                                <div className="mb-3">
-                                    <label className="form-label">Cost</label>
-                                    <input
-                                        type="number"
-                                        step="0.01"
-                                        min="0"
-                                        className="form-control"
-                                        name="cost"
-                                        value={formData.cost}
-                                        onChange={handleInputChange}
-                                        required
-                                    />
-                                </div>
-                            </div>
-                            <div className="modal-footer">
-                                <button
-                                    className="btn btn-secondary"
-                                    onClick={() => setIsModalOpen(false)}
-                                >
-                                    Cancel
-                                </button>
-                                <button
-                                    className="btn btn-primary"
-                                    onClick={handleSubmitLogBreak}
-                                >
-                                    {isEditing ? "Update" : "Create"}
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            )}
+            <LogBreakModal
+                isOpen={isModalOpen}
+                onSubmit={handleSubmitLogBreak}
+                onClose={() => setIsModalOpen(false)}
+                initialData={currentLogBreak}
+            />
         </div>
     );
 };

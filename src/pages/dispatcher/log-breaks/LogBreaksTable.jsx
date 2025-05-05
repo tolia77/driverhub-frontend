@@ -27,7 +27,7 @@ const LogBreaksTable = ({ logBreaks }) => {
                         {logBreaks.map((logBreak) => (
                             <tr key={logBreak.id}>
                                 <td>{logBreak.id}</td>
-                                <td>{logBreak.location}</td>
+                                <td>{logBreak.location.address || `${logBreak.location.latitude}, ${logBreak.location.longitude}`}</td>
                                 <td>{format(new Date(logBreak.start_time), "yyyy-MM-dd HH:mm")}</td>
                                 <td>{format(new Date(logBreak.end_time), "yyyy-MM-dd HH:mm")}</td>
                                 <td>${logBreak.cost.toFixed(2)}</td>

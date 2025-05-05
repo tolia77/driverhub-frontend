@@ -15,7 +15,7 @@ export default function DeliverySelect({deliveries, selectedDelivery, onSelect})
                         <option value="">-- Select a Delivery --</option>
                         {deliveries.map(delivery => (
                             <option key={delivery.id} value={delivery.id}>
-                                {delivery.pickup_location} - {delivery.dropoff_location}
+                                {delivery?.pickup_location?.address || `${delivery.pickup_location.latitude}, ${delivery.pickup_location.longitude}`} - {delivery?.dropoff_location?.address || `${delivery.dropoff_location.latitude}, ${delivery.dropoff_location.longitude}`}
                             </option>
                         ))}
                     </select>
