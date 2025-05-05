@@ -1,15 +1,42 @@
 import { useState } from "react";
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+
+
+const LocationMarker = ({ position, setPosition }) => {
+    const map = useMapEvents({
+        click(e) {
+            setPosition(e.latlng);
+            map.flyTo(e.latlng, map.getZoom());
+        },
+    });
+
+    return position === null ? null : (
+        <Marker position={position}>
+            <Popup>Selected location</Popup>
+        </Marker>
+    );
+};
 
 const LogBreakModal = ({ isOpen, onSubmit, onClose }) => {
-    const [location, setLocation] = useState("");
+    const [position, setPosition] = useState(null);
     const [startTime, setStartTime] = useState("");
     const [endTime, setEndTime] = useState("");
     const [cost, setCost] = useState("");
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        if (!position) {
+            alert("Please select a location on the map");
+            return;
+        }
+
         onSubmit({
-            location,
+            location: {
+                latitude: position.lat,
+                longitude: position.lng
+            },
             start_time: new Date(startTime).toISOString(),
             end_time: new Date(endTime).toISOString(),
             cost: parseFloat(cost)
@@ -20,7 +47,7 @@ const LogBreakModal = ({ isOpen, onSubmit, onClose }) => {
 
     return (
         <div className="modal fade show d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
-            <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-dialog modal-dialog-centered modal-lg">
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">Log Break</h5>
@@ -29,14 +56,27 @@ const LogBreakModal = ({ isOpen, onSubmit, onClose }) => {
                     <form onSubmit={handleSubmit}>
                         <div className="modal-body">
                             <div className="mb-3">
-                                <label className="form-label">Location</label>
-                                <input
-                                    type="text"
-                                    className="form-control"
-                                    value={location}
-                                    onChange={(e) => setLocation(e.target.value)}
-                                    required
-                                />
+                                <label className="form-label">Select Location (click on map)</label>
+                                <div style={{ height: '300px', width: '100%' }}>
+                                    <MapContainer
+                                        center={[51.505, -0.09]}
+                                        zoom={13}
+                                        style={{ height: '100%', width: '100%' }}
+                                    >
+                                        <TileLayer
+                                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                        />
+                                        <LocationMarker position={position} setPosition={setPosition} />
+                                    </MapContainer>
+                                </div>
+                                {position && (
+                                    <div className="mt-2">
+                                        <small className="text-muted">
+                                            Selected coordinates: {position.lat.toFixed(6)}, {position.lng.toFixed(6)}
+                                        </small>
+                                    </div>
+                                )}
                             </div>
                             <div className="mb-3">
                                 <label className="form-label">Start Time</label>
