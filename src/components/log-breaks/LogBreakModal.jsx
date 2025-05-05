@@ -39,10 +39,10 @@ const LogBreakModal = ({ isOpen, onSubmit, onClose, initialData }) => {
             setEndTime(initialData.end_time || "");
             setCost(initialData.cost || "");
             if (initialData.location) {
-                setPosition(L.latLng(
-                    initialData.location.latitude,
-                    initialData.location.longitude
-                ));
+                setPosition({
+                    lat: initialData.location.latitude,
+                    lng: initialData.location.longitude
+                });
             }
         }
     }, [initialData]);
@@ -85,6 +85,7 @@ const LogBreakModal = ({ isOpen, onSubmit, onClose, initialData }) => {
                                         center={position || [51.505, -0.09]}
                                         zoom={position ? 15 : 13}
                                         style={{ height: '100%', width: '100%' }}
+                                        key={JSON.stringify(position)} // Додано key для перерендеру
                                     >
                                         <TileLayer
                                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -93,7 +94,7 @@ const LogBreakModal = ({ isOpen, onSubmit, onClose, initialData }) => {
                                         <LocationMarker
                                             position={position}
                                             setPosition={setPosition}
-                                            initialPosition={position}
+                                            initialPosition={initialData?.location || null}
                                         />
                                     </MapContainer>
                                 </div>
