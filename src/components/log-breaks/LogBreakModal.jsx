@@ -3,18 +3,12 @@ import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaf
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-const LocationMarker = ({ position, setPosition, initialPosition }) => {
+const LocationMarker = ({ position, setPosition }) => {
     useMapEvents({
         click(e) {
             setPosition(e.latlng);
         },
     });
-
-    useEffect(() => {
-        if (initialPosition && !position) {
-            setPosition(L.latLng(initialPosition.lat, initialPosition.lng));
-        }
-    }, [initialPosition]);
 
     return position === null ? null : (
         <Marker position={position}>
@@ -28,6 +22,9 @@ const LogBreakModal = ({ isOpen, onSubmit, onClose, initialData }) => {
     const [startTime, setStartTime] = useState("");
     const [endTime, setEndTime] = useState("");
     const [cost, setCost] = useState("");
+    const [mapCenter, setMapCenter] = useState(
+        [initialData?.location?.latitude || 50.455050, initialData?.location?.longitude || 30.533405]
+    ); // Початковий центр
 
     useEffect(() => {
         if (initialData) {
@@ -35,10 +32,12 @@ const LogBreakModal = ({ isOpen, onSubmit, onClose, initialData }) => {
             setEndTime(initialData.end_time || "");
             setCost(initialData.cost || "");
             if (initialData.location) {
-                setPosition({
+                const newPosition = {
                     lat: initialData.location.latitude,
                     lng: initialData.location.longitude
-                });
+                };
+                setPosition(newPosition);
+                setMapCenter([newPosition.lat, newPosition.lng]);
             }
         }
     }, [initialData]);
@@ -78,7 +77,7 @@ const LogBreakModal = ({ isOpen, onSubmit, onClose, initialData }) => {
                                 <label className="form-label">Select Location (click on map)</label>
                                 <div style={{ height: '300px', width: '100%' }}>
                                     <MapContainer
-                                        center={position || [51.505, -0.09]}
+                                        center={mapCenter}
                                         zoom={13}
                                         style={{ height: '100%', width: '100%' }}
                                     >
@@ -89,7 +88,6 @@ const LogBreakModal = ({ isOpen, onSubmit, onClose, initialData }) => {
                                         <LocationMarker
                                             position={position}
                                             setPosition={setPosition}
-                                            initialPosition={initialData?.location || null}
                                         />
                                     </MapContainer>
                                 </div>
