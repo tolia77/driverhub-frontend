@@ -4,7 +4,7 @@ import { deliveriesMyDriverRequest, deliveriesUpdateStatusRequest } from "src/se
 import { logBreaksCreateRequest } from "src/services/backend/logBreaksRequests";
 import DeliveriesTable from "src/pages/driver/deliveries/DeliveriesTable";
 import StatusUpdateModal from "src/pages/driver/deliveries/StatusUpdateModal";
-import LogBreakModal from "src/pages/driver/deliveries/LogBreakModal";
+import LogBreakModal from "src/components/log-breaks/LogBreakModal.jsx";
 import {getAccessToken} from "src/utils/auth.js";
 
 const DeliveriesIndexDriver = () => {

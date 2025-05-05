@@ -1,15 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
+import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 
-const LocationMarker = ({ position, setPosition }) => {
+const LocationMarker = ({ position, setPosition, initialPosition }) => {
     const map = useMapEvents({
         click(e) {
             setPosition(e.latlng);
             map.flyTo(e.latlng, map.getZoom());
         },
     });
+
+    useEffect(() => {
+        if (initialPosition && !position) {
+            const newPos = L.latLng(initialPosition.lat, initialPosition.lng);
+            setPosition(newPos);
+            map.flyTo(newPos, 15);
+        }
+    }, [initialPosition]);
 
     return position === null ? null : (
         <Marker position={position}>
@@ -18,11 +27,25 @@ const LocationMarker = ({ position, setPosition }) => {
     );
 };
 
-const LogBreakModal = ({ isOpen, onSubmit, onClose }) => {
+const LogBreakModal = ({ isOpen, onSubmit, onClose, initialData }) => {
     const [position, setPosition] = useState(null);
     const [startTime, setStartTime] = useState("");
     const [endTime, setEndTime] = useState("");
     const [cost, setCost] = useState("");
+
+    useEffect(() => {
+        if (initialData) {
+            setStartTime(initialData.start_time || "");
+            setEndTime(initialData.end_time || "");
+            setCost(initialData.cost || "");
+            if (initialData.location) {
+                setPosition(L.latLng(
+                    initialData.location.latitude,
+                    initialData.location.longitude
+                ));
+            }
+        }
+    }, [initialData]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -50,7 +73,7 @@ const LogBreakModal = ({ isOpen, onSubmit, onClose }) => {
             <div className="modal-dialog modal-dialog-centered modal-lg">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title">Log Break</h5>
+                        <h5 className="modal-title">{initialData ? "Update" : "Log"} Break</h5>
                         <button type="button" className="btn-close" onClick={onClose}></button>
                     </div>
                     <form onSubmit={handleSubmit}>
@@ -59,15 +82,19 @@ const LogBreakModal = ({ isOpen, onSubmit, onClose }) => {
                                 <label className="form-label">Select Location (click on map)</label>
                                 <div style={{ height: '300px', width: '100%' }}>
                                     <MapContainer
-                                        center={[51.505, -0.09]}
-                                        zoom={13}
+                                        center={position || [51.505, -0.09]}
+                                        zoom={position ? 15 : 13}
                                         style={{ height: '100%', width: '100%' }}
                                     >
                                         <TileLayer
                                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                                         />
-                                        <LocationMarker position={position} setPosition={setPosition} />
+                                        <LocationMarker
+                                            position={position}
+                                            setPosition={setPosition}
+                                            initialPosition={position}
+                                        />
                                     </MapContainer>
                                 </div>
                                 {position && (
@@ -122,7 +149,7 @@ const LogBreakModal = ({ isOpen, onSubmit, onClose }) => {
                                 type="submit"
                                 className="btn btn-primary"
                             >
-                                Submit
+                                {initialData ? "Update" : "Submit"}
                             </button>
                         </div>
                     </form>
