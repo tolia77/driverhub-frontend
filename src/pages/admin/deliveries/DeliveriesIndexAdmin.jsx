@@ -25,8 +25,16 @@ const DeliveriesIndexAdmin = () => {
         id: '',
         driver_id: '',
         client_id: '',
-        pickup_location: '',
-        dropoff_location: '',
+        pickup_location: {
+            latitude: 50.4501,
+            longitude: 30.5234,
+            address: ''
+        },
+        dropoff_location: {
+            latitude: 50.4501,
+            longitude: 30.5234,
+            address: ''
+        },
         package_details: '',
         status: 'Pending',
         delivery_notes: '',
@@ -72,18 +80,25 @@ const DeliveriesIndexAdmin = () => {
 
     const handleAddDelivery = () => {
         setModalType('add');
-        const newDelivery = {
+        setCurrentDelivery({
             id: '',
             driver_id: '',
             client_id: '',
-            pickup_location: '',
-            dropoff_location: '',
+            pickup_location: {
+                latitude: 50.4501,
+                longitude: 30.5234,
+                address: ''
+            },
+            dropoff_location: {
+                latitude: 50.4501,
+                longitude: 30.5234,
+                address: ''
+            },
             package_details: '',
             status: 'Pending',
             delivery_notes: '',
             created_at: new Date().toISOString().split('T')[0],
-        };
-        setCurrentDelivery(newDelivery);
+        });
         setOriginalDelivery(null);
         setIsModalOpen(true);
     };
@@ -120,7 +135,21 @@ const DeliveriesIndexAdmin = () => {
 
     const handleInputChange = (e) => {
         const {name, value} = e.target;
-        setCurrentDelivery({...currentDelivery, [name]: value || null});
+
+        if (name === 'pickup_location' || name === 'dropoff_location') {
+            setCurrentDelivery(prev => ({
+                ...prev,
+                [name]: {
+                    ...prev[name],
+                    ...value
+                }
+            }));
+        } else {
+            setCurrentDelivery(prev => ({
+                ...prev,
+                [name]: value || null
+            }));
+        }
     };
 
     const getModifiedFields = () => {
@@ -129,7 +158,12 @@ const DeliveriesIndexAdmin = () => {
         const modified = {};
         for (const key in currentDelivery) {
             if (key === 'id') continue;
-            if (currentDelivery[key] !== originalDelivery[key]) {
+
+            if (key === 'pickup_location' || key === 'dropoff_location') {
+                if (JSON.stringify(currentDelivery[key]) !== JSON.stringify(originalDelivery[key])) {
+                    modified[key] = currentDelivery[key];
+                }
+            } else if (currentDelivery[key] !== originalDelivery[key]) {
                 modified[key] = currentDelivery[key] || null;
             }
         }
@@ -141,7 +175,18 @@ const DeliveriesIndexAdmin = () => {
 
         try {
             if (modalType === 'add') {
-                const cleanedDelivery = { ...currentDelivery };
+                const cleanedDelivery = {
+                    ...currentDelivery,
+                    pickup_location: {
+                        ...currentDelivery.pickup_location,
+                        address: `Location at ${currentDelivery.pickup_location.latitude.toFixed(6)}, ${currentDelivery.pickup_location.longitude.toFixed(6)}`
+                    },
+                    dropoff_location: {
+                        ...currentDelivery.dropoff_location,
+                        address: `Location at ${currentDelivery.dropoff_location.latitude.toFixed(6)}, ${currentDelivery.dropoff_location.longitude.toFixed(6)}`
+                    }
+                };
+
                 if (!cleanedDelivery.driver_id) cleanedDelivery.driver_id = null;
                 if (!cleanedDelivery.client_id) cleanedDelivery.client_id = null;
 
@@ -162,8 +207,8 @@ const DeliveriesIndexAdmin = () => {
 
     const validateForm = () => {
         const errors = {};
-        if (!currentDelivery.pickup_location?.trim()) errors.pickup_location = "Pickup location is required";
-        if (!currentDelivery.dropoff_location?.trim()) errors.dropoff_location = "Dropoff location is required";
+        if (!currentDelivery.pickup_location?.latitude) errors.pickup_location = "Pickup location is required";
+        if (!currentDelivery.dropoff_location?.latitude) errors.dropoff_location = "Dropoff location is required";
         if (!currentDelivery.package_details?.trim()) errors.package_details = "Package details are required";
 
         setFormErrors(errors);
@@ -173,10 +218,10 @@ const DeliveriesIndexAdmin = () => {
     const filteredDeliveries = deliveries.filter(delivery => {
         const search = searchTerm.toLowerCase();
         return (
-            delivery.pickup_location.toLowerCase().includes(search) ||
-            delivery.dropoff_location.toLowerCase().includes(search) ||
-            delivery.status.toLowerCase().includes(search)
-        );
+            (delivery.pickup_location?.address?.toLowerCase().includes(search) ||
+                (delivery.dropoff_location?.address?.toLowerCase().includes(search)) ||
+                delivery.status.toLowerCase().includes(search)
+            ));
     });
 
     return (
