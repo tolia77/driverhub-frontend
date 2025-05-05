@@ -22,8 +22,8 @@ const DeliveriesTable = ({deliveries, onOpenReviewModal}) => {
                         {deliveries.map((delivery) => (
                             <tr key={delivery.id}>
                                 <td>{delivery.id}</td>
-                                <td>{delivery.pickup_location}</td>
-                                <td>{delivery.dropoff_location}</td>
+                                <td>{delivery?.pickup_location?.address || `${delivery.pickup_location.latitude}, ${delivery.pickup_location.longitude}`}</td>
+                                <td>{delivery?.dropoff_location?.address || `${delivery.dropoff_location.latitude}, ${delivery.dropoff_location.longitude}`}</td>
                                 <td>{delivery.package_details}</td>
                                 <td>{delivery.status}</td>
                                 <td>

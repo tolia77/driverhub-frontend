@@ -20,8 +20,8 @@ const DeliveriesTable = ({ deliveries, onUpdate }) => {
                             <tr key={delivery.id}>
                                 <td>{delivery.id}</td>
                                 <td>{delivery.driver_id || 'None'}</td>
-                                <td>{delivery.pickup_location}</td>
-                                <td>{delivery.dropoff_location}</td>
+                                <td>{delivery?.pickup_location?.address || `${delivery.pickup_location.latitude}, ${delivery.pickup_location.longitude}`}</td>
+                                <td>{delivery?.dropoff_location?.address || `${delivery.dropoff_location.latitude}, ${delivery.dropoff_location.longitude}`}</td>
                                 <td>{delivery.status}</td>
                                 <td>{delivery.created_at}</td>
                                 <td>

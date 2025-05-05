@@ -1,14 +1,86 @@
+import { useState, useEffect } from "react";
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+
+const LocationMarker = ({ position, setPosition }) => {
+    useMapEvents({
+        click(e) {
+            setPosition(e.latlng);
+        },
+    });
+
+    return position === null ? null : (
+        <Marker position={position}>
+            <Popup>Selected location</Popup>
+        </Marker>
+    );
+};
+
 const DeliveryModal = ({
-                                isOpen,
-                                modalType,
-                                delivery,
-                                errors,
-                                onInputChange,
-                                onClose,
-                                onConfirm,
-                                drivers,
-                                clients
-                            }) => {
+                           isOpen,
+                           modalType,
+                           delivery,
+                           errors,
+                           onInputChange,
+                           onClose,
+                           onConfirm,
+                           drivers,
+                           clients
+                       }) => {
+    const [pickupPosition, setPickupPosition] = useState(null);
+    const [dropoffPosition, setDropoffPosition] = useState(null);
+    const [pickupMapCenter, setPickupMapCenter] = useState([50.455050, 30.533405]);
+    const [dropoffMapCenter, setDropoffMapCenter] = useState([50.455050, 30.533405]);
+
+    useEffect(() => {
+        if (delivery?.pickup_location) {
+            const pos = {
+                lat: parseFloat(delivery.pickup_location.latitude),
+                lng: parseFloat(delivery.pickup_location.longitude)
+            };
+            setPickupPosition(pos);
+            setPickupMapCenter([pos.lat, pos.lng]);
+        }
+
+        if (delivery?.dropoff_location) {
+            const pos = {
+                lat: parseFloat(delivery.dropoff_location.latitude),
+                lng: parseFloat(delivery.dropoff_location.longitude)
+            };
+            setDropoffPosition(pos);
+            setDropoffMapCenter([pos.lat, pos.lng]);
+        }
+    }, [delivery]);
+
+    const handlePickupLocationChange = (position) => {
+        setPickupPosition(position);
+        onInputChange({
+            target: {
+                name: "pickup_location",
+                value: {
+                    latitude: position.lat,
+                    longitude: position.lng,
+                    address: `Location at ${position.lat.toFixed(6)}, ${position.lng.toFixed(6)}`
+                }
+            }
+        });
+    };
+
+    const handleDropoffLocationChange = (position) => {
+        setDropoffPosition(position);
+        onInputChange({
+            target: {
+                name: "dropoff_location",
+                value: {
+                    latitude: position.lat,
+                    longitude: position.lng,
+                    address: `Location at ${position.lat.toFixed(6)}, ${position.lng.toFixed(6)}`
+                }
+            }
+        });
+    };
+
     if (!isOpen) return null;
 
     return (
@@ -67,28 +139,60 @@ const DeliveryModal = ({
                             <div className="row">
                                 <div className="col-md-6 mb-3">
                                     <label className="form-label">Pickup Location</label>
-                                    <input
-                                        type="text"
-                                        className={`form-control ${errors.pickup_location ? 'is-invalid' : ''}`}
-                                        name="pickup_location"
-                                        value={delivery.pickup_location}
-                                        onChange={onInputChange}
-                                    />
+                                    <div style={{ height: '300px', width: '100%', marginBottom: '10px' }}>
+                                        <MapContainer
+                                            center={pickupMapCenter}
+                                            zoom={13}
+                                            style={{ height: '100%', width: '100%' }}
+                                        >
+                                            <TileLayer
+                                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                            />
+                                            <LocationMarker
+                                                position={pickupPosition}
+                                                setPosition={handlePickupLocationChange}
+                                            />
+                                        </MapContainer>
+                                    </div>
+                                    {pickupPosition && (
+                                        <div className="text-center">
+                                            <small className="text-muted">
+                                                Selected coordinates: {pickupPosition.lat.toFixed(6)}, {pickupPosition.lng.toFixed(6)}
+                                            </small>
+                                        </div>
+                                    )}
                                     {errors.pickup_location &&
-                                        <div className="invalid-feedback">{errors.pickup_location}</div>}
+                                        <div className="invalid-feedback d-block">{errors.pickup_location}</div>}
                                 </div>
 
                                 <div className="col-md-6 mb-3">
                                     <label className="form-label">Dropoff Location</label>
-                                    <input
-                                        type="text"
-                                        className={`form-control ${errors.dropoff_location ? 'is-invalid' : ''}`}
-                                        name="dropoff_location"
-                                        value={delivery.dropoff_location}
-                                        onChange={onInputChange}
-                                    />
+                                    <div style={{ height: '300px', width: '100%', marginBottom: '10px' }}>
+                                        <MapContainer
+                                            center={dropoffMapCenter}
+                                            zoom={13}
+                                            style={{ height: '100%', width: '100%' }}
+                                        >
+                                            <TileLayer
+                                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                            />
+                                            <LocationMarker
+                                                position={dropoffPosition}
+                                                setPosition={handleDropoffLocationChange}
+                                            />
+                                        </MapContainer>
+                                    </div>
+                                    {dropoffPosition && (
+                                        <div className="text-center">
+                                            <small className="text-muted">
+                                                Selected coordinates: {dropoffPosition.lat.toFixed(6)}, {dropoffPosition.lng.toFixed(6)}
+                                            </small>
+                                        </div>
+                                    )}
                                     {errors.dropoff_location &&
-                                        <div className="invalid-feedback">{errors.dropoff_location}</div>}
+                                        <div className="invalid-feedback d-block">{errors.dropoff_location}</div>}
                                 </div>
                             </div>
 
