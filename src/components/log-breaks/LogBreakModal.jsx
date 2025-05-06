@@ -1,6 +1,5 @@
 import {useState, useEffect} from "react";
 import {MapContainer, TileLayer, Marker, Popup, useMapEvents} from 'react-leaflet';
-import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
 const LocationMarker = ({position, setPosition}) => {
@@ -24,7 +23,7 @@ const LogBreakModal = ({isOpen, onSubmit, onClose, initialData}) => {
     const [cost, setCost] = useState("");
     const [mapCenter, setMapCenter] = useState(
         [initialData?.location?.latitude || 50.455050, initialData?.location?.longitude || 30.533405]
-    ); // Початковий центр
+    );
 
     useEffect(() => {
         if (initialData) {

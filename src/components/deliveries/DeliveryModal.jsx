@@ -1,9 +1,18 @@
-import { useState, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
-import L from 'leaflet';
+import {useState, useEffect} from "react";
+import {MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap} from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
-const LocationMarker = ({ position, setPosition }) => {
+const RecenterMap = ({center}) => {
+    const map = useMap();
+    useEffect(() => {
+        if (center) {
+            map.setView(center, map.getZoom());
+        }
+    }, [center, map]);
+    return null;
+};
+
+const LocationMarker = ({position, setPosition}) => {
     useMapEvents({
         click(e) {
             setPosition(e.latlng);
@@ -139,16 +148,14 @@ const DeliveryModal = ({
                             <div className="row">
                                 <div className="col-md-6 mb-3">
                                     <label className="form-label">Pickup Location</label>
-                                    <div style={{ height: '300px', width: '100%', marginBottom: '10px' }}>
-                                        <MapContainer
-                                            center={pickupMapCenter}
-                                            zoom={13}
-                                            style={{ height: '100%', width: '100%' }}
-                                        >
+                                    <div style={{height: '300px', width: '100%', marginBottom: '10px'}}>
+                                        <MapContainer center={pickupMapCenter} zoom={13}
+                                                      style={{height: '100%', width: '100%'}}>
                                             <TileLayer
                                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                                             />
+                                            <RecenterMap center={pickupMapCenter}/>
                                             <LocationMarker
                                                 position={pickupPosition}
                                                 setPosition={handlePickupLocationChange}
@@ -158,7 +165,8 @@ const DeliveryModal = ({
                                     {pickupPosition && (
                                         <div className="text-center">
                                             <small className="text-muted">
-                                                Selected coordinates: {pickupPosition.lat.toFixed(6)}, {pickupPosition.lng.toFixed(6)}
+                                                Selected
+                                                coordinates: {pickupPosition.lat.toFixed(6)}, {pickupPosition.lng.toFixed(6)}
                                             </small>
                                         </div>
                                     )}
@@ -168,16 +176,14 @@ const DeliveryModal = ({
 
                                 <div className="col-md-6 mb-3">
                                     <label className="form-label">Dropoff Location</label>
-                                    <div style={{ height: '300px', width: '100%', marginBottom: '10px' }}>
-                                        <MapContainer
-                                            center={dropoffMapCenter}
-                                            zoom={13}
-                                            style={{ height: '100%', width: '100%' }}
-                                        >
+                                    <div style={{height: '300px', width: '100%', marginBottom: '10px'}}>
+                                        <MapContainer center={dropoffMapCenter} zoom={13}
+                                                      style={{height: '100%', width: '100%'}}>
                                             <TileLayer
                                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                                             />
+                                            <RecenterMap center={dropoffMapCenter}/>
                                             <LocationMarker
                                                 position={dropoffPosition}
                                                 setPosition={handleDropoffLocationChange}
@@ -187,7 +193,8 @@ const DeliveryModal = ({
                                     {dropoffPosition && (
                                         <div className="text-center">
                                             <small className="text-muted">
-                                                Selected coordinates: {dropoffPosition.lat.toFixed(6)}, {dropoffPosition.lng.toFixed(6)}
+                                                Selected
+                                                coordinates: {dropoffPosition.lat.toFixed(6)}, {dropoffPosition.lng.toFixed(6)}
                                             </small>
                                         </div>
                                     )}
@@ -196,6 +203,7 @@ const DeliveryModal = ({
                                 </div>
                             </div>
 
+                            {/* Package Details & Notes */}
                             <div className="mb-3">
                                 <label className="form-label">Package Details</label>
                                 <input
@@ -208,7 +216,6 @@ const DeliveryModal = ({
                                 {errors.package_details &&
                                     <div className="invalid-feedback">{errors.package_details}</div>}
                             </div>
-
                             <div className="mb-3">
                                 <label className="form-label">Delivery Notes</label>
                                 <textarea
