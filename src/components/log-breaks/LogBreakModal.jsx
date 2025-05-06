@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet';
+import {useState, useEffect} from "react";
+import {MapContainer, TileLayer, Marker, Popup, useMapEvents} from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-const LocationMarker = ({ position, setPosition }) => {
+const LocationMarker = ({position, setPosition}) => {
     useMapEvents({
         click(e) {
             setPosition(e.latlng);
@@ -17,7 +17,7 @@ const LocationMarker = ({ position, setPosition }) => {
     );
 };
 
-const LogBreakModal = ({ isOpen, onSubmit, onClose, initialData }) => {
+const LogBreakModal = ({isOpen, onSubmit, onClose, initialData}) => {
     const [position, setPosition] = useState(null);
     const [startTime, setStartTime] = useState("");
     const [endTime, setEndTime] = useState("");
@@ -39,6 +39,8 @@ const LogBreakModal = ({ isOpen, onSubmit, onClose, initialData }) => {
                 setPosition(newPosition);
                 setMapCenter([newPosition.lat, newPosition.lng]);
             }
+        } else {
+            setStartTime(new Date().toISOString().slice(0, 16));
         }
     }, [initialData]);
 
@@ -64,7 +66,7 @@ const LogBreakModal = ({ isOpen, onSubmit, onClose, initialData }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="modal fade show d-block" tabIndex="-1" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
+        <div className="modal fade show d-block" tabIndex="-1" style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
             <div className="modal-dialog modal-dialog-centered modal-lg">
                 <div className="modal-content">
                     <div className="modal-header">
@@ -75,11 +77,11 @@ const LogBreakModal = ({ isOpen, onSubmit, onClose, initialData }) => {
                         <div className="modal-body">
                             <div className="mb-3">
                                 <label className="form-label">Select Location (click on map)</label>
-                                <div style={{ height: '300px', width: '100%' }}>
+                                <div style={{height: '300px', width: '100%'}}>
                                     <MapContainer
                                         center={mapCenter}
                                         zoom={13}
-                                        style={{ height: '100%', width: '100%' }}
+                                        style={{height: '100%', width: '100%'}}
                                     >
                                         <TileLayer
                                             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
