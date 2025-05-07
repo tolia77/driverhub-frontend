@@ -10,7 +10,7 @@ export default function Header() {
             <div className="container-fluid">
                 <Link to="/" className="navbar-brand d-flex align-items-center me-4">
                     <img src={logo} alt="Logo" height="50" className="me-2"/>
-                    <span className="fw-bold">DriverHub</span>
+                    <span className="fw-bold">DriveTrack</span>
                 </Link>
                 <button
                     className="navbar-toggler"
