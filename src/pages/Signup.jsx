@@ -35,8 +35,8 @@ function SignUp() {
     };
 
     return (
-        <div className="min-vh-100 d-flex justify-content-center align-items-center bg-light">
-            <div className="card shadow-sm p-4" style={{width: '380px'}}>
+        <div className="min-vh-100 d-flex justify-content-center align-items-center">
+            <div className="card shadow-sm p-4 my-4" style={{width: '380px'}}>
                 <div className="card-body">
                     <h2 className="text-center mb-4">Create an Account</h2>
                     <form onSubmit={handleSubmit}>
