@@ -8,7 +8,6 @@ import {
 import {driversIndexRequest} from "src/services/backend/driversRequests";
 import DeliveriesTable from "src/pages/dispatcher/deliveries/DeliveriesTable";
 import DeliveryModal from "src/components/deliveries/DeliveryModal";
-import SearchBar from "src/components/SearchBar";
 import {getAccessToken} from "src/utils/auth.js";
 import {clientsIndexRequest} from "src/services/backend/clientsRequests.js";
 
@@ -39,7 +38,16 @@ const DeliveriesIndex = () => {
         delivery_notes: '',
         created_at: new Date().toISOString().split('T')[0],
     });
-    const [searchTerm, setSearchTerm] = useState('');
+    const [filters, setFilters] = useState({
+        driver_id: '',
+        client_id: '',
+        pickup_address: '',
+        dropoff_address: '',
+        status: '',
+        package_details: '',
+        delivery_notes: '',
+        created_at: ''
+    });
     const authorization = getAccessToken();
 
     useEffect(() => {
@@ -131,6 +139,27 @@ const DeliveriesIndex = () => {
         }
     };
 
+    const handleFilterChange = (e) => {
+        const {name, value} = e.target;
+        setFilters(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    const resetFilters = () => {
+        setFilters({
+            driver_id: '',
+            client_id: '',
+            pickup_address: '',
+            dropoff_address: '',
+            status: '',
+            package_details: '',
+            delivery_notes: '',
+            created_at: ''
+        });
+    };
+
     const getModifiedFields = () => {
         if (!originalDelivery) return currentDelivery;
 
@@ -189,11 +218,20 @@ const DeliveriesIndex = () => {
     };
 
     const filteredDeliveries = deliveries.filter(delivery => {
-        const search = searchTerm.toLowerCase();
         return (
-            delivery?.pickup_location?.address?.toLowerCase()?.includes(search) ||
-            delivery?.dropoff_location?.address?.toLowerCase()?.includes(search) ||
-            delivery.status.toLowerCase().includes(search)
+            (filters.driver_id === '' || delivery.driver_id === filters.driver_id) &&
+            (filters.client_id === '' || delivery.client_id === filters.client_id) &&
+            (filters.pickup_address === '' ||
+                delivery.pickup_location?.address?.toLowerCase().includes(filters.pickup_address.toLowerCase())) &&
+            (filters.dropoff_address === '' ||
+                delivery.dropoff_location?.address?.toLowerCase().includes(filters.dropoff_address.toLowerCase())) &&
+            (filters.status === '' || delivery.status.toLowerCase().includes(filters.status.toLowerCase())) &&
+            (filters.package_details === '' ||
+                delivery.package_details?.toLowerCase().includes(filters.package_details.toLowerCase())) &&
+            (filters.delivery_notes === '' ||
+                delivery.delivery_notes?.toLowerCase().includes(filters.delivery_notes.toLowerCase())) &&
+            (filters.created_at === '' ||
+                delivery.created_at?.includes(filters.created_at))
         );
     });
 
@@ -206,11 +244,121 @@ const DeliveriesIndex = () => {
                 </button>
             </div>
 
-            <SearchBar
-                searchTerm={searchTerm}
-                onSearchChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search deliveries..."
-            />
+            <div className="card mb-4">
+                <div className="card-header">
+                    <div className="d-flex justify-content-between align-items-center">
+                        <h5 className="mb-0">Filters</h5>
+                        <button className="btn btn-sm btn-outline-secondary" onClick={resetFilters}>
+                            Reset Filters
+                        </button>
+                    </div>
+                </div>
+                <div className="card-body">
+                    <div className="row g-3">
+                        <div className="col-md-3">
+                            <label className="form-label">Driver</label>
+                            <select
+                                className="form-select"
+                                name="driver_id"
+                                value={filters.driver_id}
+                                onChange={handleFilterChange}
+                            >
+                                <option value="">All Drivers</option>
+                                {drivers.map(driver => (
+                                    <option key={driver.id} value={driver.id}>
+                                        {driver.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="col-md-3">
+                            <label className="form-label">Client</label>
+                            <select
+                                className="form-select"
+                                name="client_id"
+                                value={filters.client_id}
+                                onChange={handleFilterChange}
+                            >
+                                <option value="">All Clients</option>
+                                {clients.map(client => (
+                                    <option key={client.id} value={client.id}>
+                                        {client.name}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className="col-md-3">
+                            <label className="form-label">Pickup Address</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Filter by pickup address"
+                                name="pickup_address"
+                                value={filters.pickup_address}
+                                onChange={handleFilterChange}
+                            />
+                        </div>
+                        <div className="col-md-3">
+                            <label className="form-label">Dropoff Address</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Filter by dropoff address"
+                                name="dropoff_address"
+                                value={filters.dropoff_address}
+                                onChange={handleFilterChange}
+                            />
+                        </div>
+                        <div className="col-md-3">
+                            <label className="form-label">Status</label>
+                            <select
+                                className="form-select"
+                                name="status"
+                                value={filters.status}
+                                onChange={handleFilterChange}
+                            >
+                                <option value="">All Statuses</option>
+                                <option value="Pending">Pending</option>
+                                <option value="In-Transit">In-Transit</option>
+                                <option value="Completed">Completed</option>
+                                <option value="Cancelled">Cancelled</option>
+                            </select>
+                        </div>
+                        <div className="col-md-3">
+                            <label className="form-label">Package Details</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Filter by package details"
+                                name="package_details"
+                                value={filters.package_details}
+                                onChange={handleFilterChange}
+                            />
+                        </div>
+                        <div className="col-md-3">
+                            <label className="form-label">Delivery Notes</label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Filter by delivery notes"
+                                name="delivery_notes"
+                                value={filters.delivery_notes}
+                                onChange={handleFilterChange}
+                            />
+                        </div>
+                        <div className="col-md-3">
+                            <label className="form-label">Created At</label>
+                            <input
+                                type="date"
+                                className="form-control"
+                                name="created_at"
+                                value={filters.created_at}
+                                onChange={handleFilterChange}
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <DeliveriesTable
                 deliveries={filteredDeliveries}

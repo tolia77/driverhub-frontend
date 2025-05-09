@@ -6,10 +6,12 @@ const DeliveriesTable = ({ deliveries, onUpdate }) => {
                     <table className="table table-hover table-striped mb-0">
                         <thead className="table-dark sticky-top">
                         <tr>
-                            <th>ID</th>
-                            <th>Driver ID</th>
+                            <th>Driver</th>
+                            <th>Client</th>
                             <th>Pickup Location</th>
                             <th>Dropoff Location</th>
+                            <th>Package details</th>
+                            <th>Delivery notes</th>
                             <th>Status</th>
                             <th>Created At</th>
                             <th>Actions</th>
@@ -18,10 +20,12 @@ const DeliveriesTable = ({ deliveries, onUpdate }) => {
                         <tbody>
                         {deliveries.map(delivery => (
                             <tr key={delivery.id}>
-                                <td>{delivery.id}</td>
-                                <td>{delivery.driver_id || 'None'}</td>
+                                <td>{delivery.driver ? `${delivery.driver.first_name} ${delivery.driver.last_name}` : 'None'}</td>
+                                <td>{delivery.client ? `${delivery.client.first_name} ${delivery.client.last_name}` : 'None'}</td>
                                 <td>{delivery?.pickup_location?.address || `${delivery.pickup_location.latitude}, ${delivery.pickup_location.longitude}`}</td>
                                 <td>{delivery?.dropoff_location?.address || `${delivery.dropoff_location.latitude}, ${delivery.dropoff_location.longitude}`}</td>
+                                <td>{delivery.package_details}</td>
+                                <td>{delivery.delivery_notes}</td>
                                 <td>{delivery.status}</td>
                                 <td>{delivery.created_at}</td>
                                 <td>
