@@ -1,3 +1,5 @@
+import {format} from "date-fns";
+
 const DeliveriesTable = ({ deliveries, onUpdate }) => {
     return (
         <div className="card">
@@ -27,7 +29,7 @@ const DeliveriesTable = ({ deliveries, onUpdate }) => {
                                 <td>{delivery.package_details}</td>
                                 <td>{delivery.delivery_notes}</td>
                                 <td>{delivery.status}</td>
-                                <td>{delivery.created_at}</td>
+                                <td>{format(new Date(delivery.created_at), "yyyy-MM-dd HH:mm")}</td>
                                 <td>
                                     <div className="d-flex gap-2">
                                         <button
