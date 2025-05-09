@@ -21,6 +21,8 @@ function Login() {
                     navigate("/dispatcher/deliveries");
                 } else if (getUserRole() === "client") {
                     navigate("/client/deliveries");
+                }else if (getUserRole() === "admin") {
+                    navigate("/admin/deliveries");
                 }
             })
         }).catch(error => {

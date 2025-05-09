@@ -1,9 +1,23 @@
 import React from 'react';
+import {Link} from "react-router";
+import {getUserId} from "src/utils/auth.js";
 
 function Index() {
     return (
-        <section>
-            <h1>Welcome</h1>
+        <section className="text-center mt-5">
+            <h1 className="mb-4 fw-bold">Welcome to <span className="text-primary">DriveTrack</span></h1>
+
+            {!getUserId() ? <div className="d-flex justify-content-center gap-3">
+                <Link to="/login" className="btn btn-primary px-4 py-2">
+                    Login
+                </Link>
+
+                <Link to="/signup" className="btn btn-outline-primary px-4 py-2">
+                    Sign Up
+                </Link>
+            </div> : <div className="d-flex justify-content-center gap-3">
+
+            </div>}
         </section>
     );
 }
