@@ -39,8 +39,8 @@ const DeliveriesIndex = () => {
         created_at: new Date().toISOString().split('T')[0],
     });
     const [filters, setFilters] = useState({
-        driver_id: '',
-        client_id: '',
+        driver_name: '',
+        client_name: '',
         pickup_address: '',
         dropoff_address: '',
         status: '',
@@ -149,8 +149,8 @@ const DeliveriesIndex = () => {
 
     const resetFilters = () => {
         setFilters({
-            driver_id: '',
-            client_id: '',
+            driver_name: '',
+            client_name: '',
             pickup_address: '',
             dropoff_address: '',
             status: '',
@@ -218,9 +218,16 @@ const DeliveriesIndex = () => {
     };
 
     const filteredDeliveries = deliveries.filter(delivery => {
+        const driverFullName = delivery.driver ?
+            `${delivery.driver.first_name} ${delivery.driver.last_name}`.toLowerCase() : '';
+        const clientFullName = delivery.client ?
+            `${delivery.client.first_name} ${delivery.client.last_name}`.toLowerCase() : '';
+
         return (
-            (filters.driver_id === '' || delivery.driver_id === filters.driver_id) &&
-            (filters.client_id === '' || delivery.client_id === filters.client_id) &&
+            (filters.driver_name === '' ||
+                driverFullName.includes(filters.driver_name.toLowerCase())) &&
+            (filters.client_name === '' ||
+                clientFullName.includes(filters.client_name.toLowerCase())) &&
             (filters.pickup_address === '' ||
                 delivery.pickup_location?.address?.toLowerCase().includes(filters.pickup_address.toLowerCase())) &&
             (filters.dropoff_address === '' ||
@@ -257,35 +264,25 @@ const DeliveriesIndex = () => {
                     <div className="row g-3">
                         <div className="col-md-3">
                             <label className="form-label">Driver</label>
-                            <select
-                                className="form-select"
-                                name="driver_id"
-                                value={filters.driver_id}
+                            <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Filter by driver name"
+                                name="driver_name"
+                                value={filters.driver_name}
                                 onChange={handleFilterChange}
-                            >
-                                <option value="">All Drivers</option>
-                                {drivers.map(driver => (
-                                    <option key={driver.id} value={driver.id}>
-                                        {driver.name}
-                                    </option>
-                                ))}
-                            </select>
+                            />
                         </div>
                         <div className="col-md-3">
                             <label className="form-label">Client</label>
-                            <select
-                                className="form-select"
-                                name="client_id"
-                                value={filters.client_id}
+                            <input
+                                type="text"
+                                className="form-control"
+                                placeholder="Filter by client name"
+                                name="client_name"
+                                value={filters.client_name}
                                 onChange={handleFilterChange}
-                            >
-                                <option value="">All Clients</option>
-                                {clients.map(client => (
-                                    <option key={client.id} value={client.id}>
-                                        {client.name}
-                                    </option>
-                                ))}
-                            </select>
+                            />
                         </div>
                         <div className="col-md-3">
                             <label className="form-label">Pickup Address</label>
