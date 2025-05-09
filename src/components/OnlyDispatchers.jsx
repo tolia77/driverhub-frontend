@@ -1,19 +1,14 @@
-import React, {useEffect} from 'react';
-import {Outlet, useNavigate} from "react-router";
+import React from 'react';
+import {Outlet} from "react-router";
 import RequireAuth from "src/components/RequireAuth.jsx";
 import {getUserRole} from "src/utils/auth.js";
+import AccessDenied from "src/components/AccessDenied.jsx";
 
 function OnlyDispatchers() {
-    const navigate = useNavigate();
-    useEffect(() => {
-        if (getUserRole() !== "dispatcher") {
-            console.log(getUserRole());
-            navigate("/login");
-        }
-    }, [])
+    const role = getUserRole();
     return (
         <RequireAuth>
-            <Outlet/>
+            {role === "dispatcher" ? <Outlet/> : <AccessDenied/>}
         </RequireAuth>
     );
 }

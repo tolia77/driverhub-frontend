@@ -1,19 +1,14 @@
-import React, {useEffect} from 'react';
-import {Outlet, useNavigate} from "react-router";
+import React from 'react';
+import {Outlet} from "react-router";
 import RequireAuth from "src/components/RequireAuth.jsx";
 import {getUserRole} from "src/utils/auth.js";
+import AccessDenied from "src/components/AccessDenied.jsx";
 
 function OnlyDrivers() {
-    const navigate = useNavigate();
-    useEffect(() => {
-        if (getUserRole() !== "driver") {
-            console.log(getUserRole());
-            navigate("/login");
-        }
-    }, [])
+    const role = getUserRole();
     return (
         <RequireAuth>
-            <Outlet/>
+            {role === "driver" ? <Outlet/> : <AccessDenied/>}
         </RequireAuth>
     );
 }

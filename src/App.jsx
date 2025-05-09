@@ -12,7 +12,7 @@ import ChatDriver from "src/pages/driver/chat/ChatDriver.jsx";
 import Login from "src/pages/Login.jsx";
 import Signup from "src/pages/Signup.jsx";
 import Account from "src/pages/Account.jsx";
-import OnlyClients from "src/components/layout/OnlyClients.jsx";
+import OnlyClients from "src/components/OnlyClients.jsx";
 import DeliveriesIndexClient from "src/pages/client/deliveries/DeliveriesIndexClient.jsx";
 import OnlyAdmins from "src/components/OnlyAdmins.jsx";
 import DeliveriesIndexAdmin from "src/pages/admin/deliveries/DeliveriesIndexAdmin.jsx";
