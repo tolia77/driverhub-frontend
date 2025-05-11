@@ -17,10 +17,10 @@ const LogBreaksTable = ({ logBreaks }) => {
                         <thead className="table-dark sticky-top">
                         <tr>
                             <th>ID</th>
-                            <th>Location</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                            <th>Cost</th>
+                            <th>Адреса</th>
+                            <th>Час початку</th>
+                            <th>Час завершення</th>
+                            <th>Вартість</th>
                         </tr>
                         </thead>
                         <tbody>

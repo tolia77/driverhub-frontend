@@ -27,7 +27,7 @@ const StatusUpdateModal = ({ isOpen, currentStatus, onStatusChange, onConfirm, o
                             className="btn btn-secondary"
                             onClick={onClose}
                         >
-                            Cancel
+                            Скасувати
                         </button>
                         <button
                             type="button"

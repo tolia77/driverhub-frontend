@@ -69,13 +69,13 @@ const LogBreakModal = ({isOpen, onSubmit, onClose, initialData}) => {
             <div className="modal-dialog modal-dialog-centered modal-lg">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title">{initialData ? "Оновити" : "Log"} Break</h5>
+                        <h5 className="modal-title">{initialData ? "Оновити" : "Додати"} запис про перерву</h5>
                         <button type="button" className="btn-close" onClick={onClose}></button>
                     </div>
                     <form onSubmit={handleSubmit}>
                         <div className="modal-body">
                             <div className="mb-3">
-                                <label className="form-label">Виберіть Location (click on map)</label>
+                                <label className="form-label">Виберіть адресу (на мапі)</label>
                                 <div style={{height: '300px', width: '100%'}}>
                                     <MapContainer
                                         center={mapCenter}
@@ -101,7 +101,7 @@ const LogBreakModal = ({isOpen, onSubmit, onClose, initialData}) => {
                                 )}
                             </div>
                             <div className="mb-3">
-                                <label className="form-label">Start Time</label>
+                                <label className="form-label">Час початку</label>
                                 <input
                                     type="datetime-local"
                                     className="form-control"
@@ -111,7 +111,7 @@ const LogBreakModal = ({isOpen, onSubmit, onClose, initialData}) => {
                                 />
                             </div>
                             <div className="mb-3">
-                                <label className="form-label">End Time</label>
+                                <label className="form-label">Час завершення</label>
                                 <input
                                     type="datetime-local"
                                     className="form-control"
@@ -121,7 +121,7 @@ const LogBreakModal = ({isOpen, onSubmit, onClose, initialData}) => {
                                 />
                             </div>
                             <div className="mb-3">
-                                <label className="form-label">Cost</label>
+                                <label className="form-label">Вартість</label>
                                 <input
                                     type="number"
                                     step="0.01"
@@ -138,13 +138,13 @@ const LogBreakModal = ({isOpen, onSubmit, onClose, initialData}) => {
                                 className="btn btn-secondary"
                                 onClick={onClose}
                             >
-                                Cancel
+                                Скасувати
                             </button>
                             <button
                                 type="submit"
                                 className="btn btn-primary"
                             >
-                                {initialData ? "Оновити" : "Submit"}
+                                {initialData ? "Оновити" : "Підтвердити"}
                             </button>
                         </div>
                     </form>

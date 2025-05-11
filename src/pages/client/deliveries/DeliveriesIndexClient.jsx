@@ -124,7 +124,7 @@ const DeliveriesIndexClient = () => {
                                     onClick={() => setIsReviewModalOpen(false)}
                                     disabled={isSubmitting}
                                 >
-                                    Cancel
+                                    Скасувати
                                 </button>
                                 <button
                                     type="button"

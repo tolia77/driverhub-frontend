@@ -234,7 +234,7 @@ const DeliveryModal = ({
                             className="btn btn-secondary"
                             onClick={onClose}
                         >
-                            Cancel
+                            Скасувати
                         </button>
                         <button
                             type="button"

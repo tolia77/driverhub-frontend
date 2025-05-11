@@ -179,11 +179,11 @@ const DeliveriesIndexAdmin = () => {
                     ...currentDelivery,
                     pickup_location: {
                         ...currentDelivery.pickup_location,
-                        address: `Location at ${currentDelivery.pickup_location.latitude.toFixed(6)}, ${currentDelivery.pickup_location.longitude.toFixed(6)}`
+                        address: `Місцезнаходження ${currentDelivery.pickup_location.latitude.toFixed(6)}, ${currentDelivery.pickup_location.longitude.toFixed(6)}`
                     },
                     dropoff_location: {
                         ...currentDelivery.dropoff_location,
-                        address: `Location at ${currentDelivery.dropoff_location.latitude.toFixed(6)}, ${currentDelivery.dropoff_location.longitude.toFixed(6)}`
+                        address: `Місцезнаходження ${currentDelivery.dropoff_location.latitude.toFixed(6)}, ${currentDelivery.dropoff_location.longitude.toFixed(6)}`
                     }
                 };
 
@@ -281,7 +281,7 @@ const DeliveriesIndexAdmin = () => {
                                     onClick={() => setIsDeleteModalOpen(false)}
                                     disabled={isDeleting}
                                 >
-                                    Cancel
+                                    Скасувати
                                 </button>
                                 <button
                                     type="button"

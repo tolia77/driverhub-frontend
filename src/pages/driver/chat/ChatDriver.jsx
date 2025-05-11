@@ -38,7 +38,7 @@ const ChatDriver = () => {
         <div className="container py-4">
             <div className="card shadow-sm">
                 <div className="card-header bg-primary text-white">
-                    <h5 className="mb-0">Чат with Dispatcher</h5>
+                    <h5 className="mb-0">Чат з Диспетчером</h5>
                 </div>
                 <ChatMessages
                     messages={combinedMessages}

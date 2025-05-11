@@ -76,7 +76,7 @@ const ReviewModal = ({
                             onClick={onClose}
                             disabled={isLoading}
                         >
-                            Cancel
+                            Скасувати
                         </button>
                         <button
                             type="button"
@@ -91,7 +91,7 @@ const ReviewModal = ({
                                     {isEdit ? 'Updating...' : 'Submitting...'}
                                 </>
                             ) : (
-                                isEdit ? 'Оновити' : 'Submit'
+                                isEdit ? 'Оновити' : 'Підтвердити'
                             )}
                         </button>
                     </div>

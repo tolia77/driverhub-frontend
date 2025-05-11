@@ -86,7 +86,7 @@ const ClientFormModal = ({
                             className="btn btn-secondary"
                             onClick={onHide}
                         >
-                            Cancel
+                            Скасувати
                         </button>
                         <button
                             className="btn btn-primary"

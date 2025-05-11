@@ -46,7 +46,7 @@ const VehicleSelectModal = ({
                             className="btn btn-secondary"
                             onClick={onClose}
                         >
-                            Cancel
+                            Скасувати
                         </button>
                     </div>
                 </div>
