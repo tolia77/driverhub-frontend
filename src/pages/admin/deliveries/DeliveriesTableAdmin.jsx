@@ -23,7 +23,7 @@ const DeliveriesTableAdmin = ({ deliveries, onUpdate, onDelete }) => {
                         {deliveries.map(delivery => (
                             <tr key={delivery.id}>
                                 <td>{delivery.id}</td>
-                                <td>{delivery.driver_id || 'None'}</td>
+                                <td>{delivery.driver_id || 'Не вказано'}</td>
                                 <td>{delivery?.pickup_location?.address || `${delivery.pickup_location.latitude}, ${delivery.pickup_location.longitude}`}</td>
                                 <td>{delivery?.dropoff_location?.address || `${delivery.dropoff_location.latitude}, ${delivery.dropoff_location.longitude}`}</td>
                                 <td>{delivery.status}</td>

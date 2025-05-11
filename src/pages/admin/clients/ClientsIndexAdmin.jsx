@@ -88,7 +88,7 @@ const ClientsIndexAdmin = () => {
     };
 
     const handleDeleteClient = (clientId) => {
-        if (window.confirm("Are you sure you want to delete this client?")) {
+        if (window.confirm("Ви впевнені що хочете видалити цього клієнта?")) {
             clientDeleteRequest(clientId, getAccessToken())
                 .then(() => fetchClients())
                 .catch(err => console.error("Error deleting client:", err));
@@ -97,19 +97,19 @@ const ClientsIndexAdmin = () => {
 
     const validateForm = () => {
         if (!formData.first_name.trim()) {
-            alert("Ім'я is required");
+            alert("Ім'я є обов'язковим");
             return false;
         }
         if (!formData.last_name.trim()) {
-            alert("Прізвище is required");
+            alert("Прізвище є обов'язковим");
             return false;
         }
         if (!formData.phone_number.trim()) {
-            alert("Номер телефону is required");
+            alert("Номер телефону є обов'язковим");
             return false;
         }
         if (!isEditing && !formData.password.trim()) {
-            alert("Password is required for new clients");
+            alert("Пароль є обов'язковим");
             return false;
         }
         return true;

@@ -13,7 +13,7 @@ const DispatcherModal = ({
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">
-                            {isEditing ? "Оновити" : "Create"} Dispatcher
+                            {isEditing ? "Оновити" : "Додати"} диспетчера
                         </h5>
                         <button
                             type="button"
@@ -83,7 +83,7 @@ const DispatcherModal = ({
                             className="btn btn-primary"
                             onClick={onSubmit}
                         >
-                            {isEditing ? "Оновити" : "Create"}
+                            {isEditing ? "Оновити" : "Створити"}
                         </button>
                     </div>
                 </div>

@@ -13,7 +13,7 @@ const ReviewFormModal = ({
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">
-                            {isEditing ? "Оновити" : "Create"} Відгук
+                            {isEditing ? "Оновити" : "Додати"} відгук
                         </h5>
                         <button
                             type="button"
@@ -76,7 +76,7 @@ const ReviewFormModal = ({
                             className="btn btn-primary"
                             onClick={onSubmit}
                         >
-                            {isEditing ? "Оновити" : "Create"}
+                            {isEditing ? "Оновити" : "Створити"}
                         </button>
                     </div>
                 </div>

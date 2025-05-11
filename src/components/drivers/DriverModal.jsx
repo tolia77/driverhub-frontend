@@ -64,7 +64,7 @@ const DriverModal = ({
                             </div>
                             {modalType === 'add' && (
                                 <div className="mb-3">
-                                    <label className="form-label">Password</label>
+                                    <label className="form-label">Пароль</label>
                                     <input
                                         type="password"
                                         className={`form-control ${errors.password ? 'is-invalid' : ''}`}
@@ -96,7 +96,7 @@ const DriverModal = ({
                   <span>
                     {driver.vehicle_id && vehiclesMap[driver.vehicle_id]
                         ? `${vehiclesMap[driver.vehicle_id].model} (${vehiclesMap[driver.vehicle_id].license_plate})`
-                        : "Choose vehicle..."}
+                        : "Обрати транспортний засіб..."}
                   </span>
                                     <i className="bi bi-chevron-down"></i>
                                 </div>

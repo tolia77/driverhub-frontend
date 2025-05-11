@@ -69,7 +69,7 @@ const ClientFormModal = ({
                         </div>
                         <div className="mb-3">
                             <label className="form-label">
-                                {isEditing ? "New Password (leave blank to keep current)" : "Password"}
+                                {isEditing ? "Новий пароль (залишіть пустим якщо не міняєте)" : "Пароль"}
                             </label>
                             <input
                                 type="password"
@@ -92,7 +92,7 @@ const ClientFormModal = ({
                             className="btn btn-primary"
                             onClick={onSubmit}
                         >
-                            {isEditing ? "Оновити" : "Create"}
+                            {isEditing ? "Оновити" : "Створити"}
                         </button>
                     </div>
                 </div>

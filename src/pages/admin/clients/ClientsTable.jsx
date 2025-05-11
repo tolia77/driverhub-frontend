@@ -4,7 +4,7 @@ const ClientsTable = ({ clients, onEdit, onDelete }) => {
     if (clients.length === 0) {
         return (
             <div className="alert alert-info">
-                No clients found.
+                Клієнтів немає
             </div>
         );
     }

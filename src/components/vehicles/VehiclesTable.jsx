@@ -23,7 +23,7 @@ const VehiclesTable = ({ vehicles, onUpdate, onDelete }) => {
                                 <td>{vehicle.license_plate}</td>
                                 <td>{vehicle.capacity}</td>
                                 <td>{vehicle.mileage}</td>
-                                <td>{vehicle.maintenance_due_date || "None"}</td>
+                                <td>{vehicle.maintenance_due_date || "Не вказано"}</td>
                                 <td>
                                     <div className="d-flex gap-2">
                                         <button

@@ -70,7 +70,7 @@ const DeliveryModal = ({
                 value: {
                     latitude: position.lat,
                     longitude: position.lng,
-                    address: `Location at ${position.lat.toFixed(6)}, ${position.lng.toFixed(6)}`
+                    address: `Місцезнаходження ${position.lat.toFixed(6)}, ${position.lng.toFixed(6)}`
                 }
             }
         });
@@ -84,7 +84,7 @@ const DeliveryModal = ({
                 value: {
                     latitude: position.lat,
                     longitude: position.lng,
-                    address: `Location at ${position.lat.toFixed(6)}, ${position.lng.toFixed(6)}`
+                    address: `Місцезнаходження ${position.lat.toFixed(6)}, ${position.lng.toFixed(6)}`
                 }
             }
         });
@@ -165,8 +165,7 @@ const DeliveryModal = ({
                                     {pickupPosition && (
                                         <div className="text-center">
                                             <small className="text-muted">
-                                                Selected
-                                                coordinates: {pickupPosition.lat.toFixed(6)}, {pickupPosition.lng.toFixed(6)}
+                                                Обрані координати: {pickupPosition.lat.toFixed(6)}, {pickupPosition.lng.toFixed(6)}
                                             </small>
                                         </div>
                                     )}
@@ -193,8 +192,7 @@ const DeliveryModal = ({
                                     {dropoffPosition && (
                                         <div className="text-center">
                                             <small className="text-muted">
-                                                Selected
-                                                coordinates: {dropoffPosition.lat.toFixed(6)}, {dropoffPosition.lng.toFixed(6)}
+                                                Обрані координати: {dropoffPosition.lat.toFixed(6)}, {dropoffPosition.lng.toFixed(6)}
                                             </small>
                                         </div>
                                     )}

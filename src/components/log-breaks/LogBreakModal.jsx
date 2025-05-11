@@ -95,7 +95,7 @@ const LogBreakModal = ({isOpen, onSubmit, onClose, initialData}) => {
                                 {position && (
                                     <div className="mt-2">
                                         <small className="text-muted">
-                                            Selected coordinates: {position.lat.toFixed(6)}, {position.lng.toFixed(6)}
+                                            Обрані координати: {position.lat.toFixed(6)}, {position.lng.toFixed(6)}
                                         </small>
                                     </div>
                                 )}
