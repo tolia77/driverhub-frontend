@@ -13,7 +13,7 @@ const ClientFormModal = ({
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">
-                            {isEditing ? "Оновити" : "Create"} Client
+                            {isEditing ? "Оновити" : "Створити"} клієнта
                         </h5>
                         <button
                             type="button"

@@ -13,7 +13,7 @@ const DeliveriesTable = ({ deliveries, onUpdateStatus, onLogBreak }) => {
                             <th>ID</th>
                             <th>Адреса завантаження</th>
                             <th>Адреса вивантаження</th>
-                            <th>Package Details</th>
+                            <th>Деталі доставки</th>
                             <th>Статус</th>
                             <th>Дії</th>
                         </tr>

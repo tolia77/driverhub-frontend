@@ -14,7 +14,7 @@ function SignUp() {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (password !== confirmPassword) {
-            alert("Passwords do not match!");
+            alert("Паролі не сходяться!");
             return;
         }
         const requestData = {
@@ -38,7 +38,7 @@ function SignUp() {
         <div className="min-vh-100 d-flex justify-content-center align-items-center">
             <div className="card shadow-sm p-4 my-4" style={{width: '380px'}}>
                 <div className="card-body">
-                    <h2 className="text-center mb-4">Create an Account</h2>
+                    <h2 className="text-center mb-4">Створити обліковий запис</h2>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
                             <label htmlFor="first_name" className="form-label">Ім'я</label>
@@ -48,7 +48,7 @@ function SignUp() {
                                 id="first_name"
                                 value={first_name}
                                 onChange={(e) => setfirst_name(e.target.value)}
-                                placeholder="Enter your first name"
+                                placeholder="Введіть своє ім'я"
                                 required
                             />
                         </div>
@@ -60,7 +60,7 @@ function SignUp() {
                                 id="last_name"
                                 value={last_name}
                                 onChange={(e) => setlast_name(e.target.value)}
-                                placeholder="Enter your last name"
+                                placeholder="Введіть своє прізвище"
                                 required
                             />
                         </div>
@@ -72,7 +72,7 @@ function SignUp() {
                                 id="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder="Enter your email"
+                                placeholder="Введіть свій email"
                                 required
                             />
                         </div>
@@ -83,37 +83,37 @@ function SignUp() {
                                 id="phone"
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
-                                placeholder="Enter your номер телефону"
+                                placeholder="Введіть свій номер телефону"
                                 required
                             />
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="password" className="form-label">Password</label>
+                            <label htmlFor="password" className="form-label">Пароль</label>
                             <input
                                 type="password"
                                 className="form-control"
                                 id="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                placeholder="Enter your password"
+                                placeholder="Введіть пароль"
                                 required
                             />
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
+                            <label htmlFor="confirmPassword" className="form-label">Підтвердіть пароль</label>
                             <input
                                 type="password"
                                 className="form-control"
                                 id="confirmPassword"
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
-                                placeholder="Confirm your password"
+                                placeholder="Підтвердіть пароль"
                                 required
                             />
                         </div>
-                        <button type="submit" className="btn btn-primary w-100 py-2 mb-3">Sign Up</button>
+                        <button type="submit" className="btn btn-primary w-100 py-2 mb-3">Створити обліковий запис</button>
                         <p className="text-center text-muted mb-0">
-                            Already have an account? <Link to="/login" className="text-decoration-none">Log In</Link>
+                            Вже маєте акаунт? <Link to="/login" className="text-decoration-none">Увійти</Link>
                         </p>
                     </form>
                 </div>

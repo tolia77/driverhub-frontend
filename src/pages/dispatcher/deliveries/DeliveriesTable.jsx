@@ -9,11 +9,11 @@ const DeliveriesTable = ({ deliveries, onUpdate }) => {
                         <thead className="table-dark sticky-top">
                         <tr>
                             <th>Водій</th>
-                            <th>Client</th>
+                            <th>Клієнт</th>
                             <th>Адреса завантаження</th>
                             <th>Адреса вивантаження</th>
-                            <th>Package details</th>
-                            <th>Delivery notes</th>
+                            <th>Деталі доставки</th>
+                            <th>Примітки</th>
                             <th>Статус</th>
                             <th>Дата створення</th>
                             <th>Дії</th>

@@ -209,7 +209,7 @@ const DeliveriesIndexAdmin = () => {
         const errors = {};
         if (!currentDelivery.pickup_location?.latitude) errors.pickup_location = "Адреса завантаження is required";
         if (!currentDelivery.dropoff_location?.latitude) errors.dropoff_location = "Адреса вивантаження is required";
-        if (!currentDelivery.package_details?.trim()) errors.package_details = "Package details are required";
+        if (!currentDelivery.package_details?.trim()) errors.package_details = "Деталі доставки are required";
 
         setFormErrors(errors);
         return Object.keys(errors).length === 0;

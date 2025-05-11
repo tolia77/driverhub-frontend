@@ -27,7 +27,7 @@ function Login() {
             })
         }).catch(error => {
             console.log(error);
-            alert("Error signing in!")
+            alert("Помилка входу. Перевірте правильність введених даних.");
         });
     };
 
@@ -35,7 +35,7 @@ function Login() {
         <div className="min-vh-100 d-flex justify-content-center align-items-center">
             <div className="card shadow-sm p-4" style={{width: '380px'}}>
                 <div className="card-body">
-                    <h2 className="text-center mb-4">Welcome Back</h2>
+                    <h2 className="text-center mb-4">Увійти</h2>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
                             <label htmlFor="email" className="form-label">Email</label>
@@ -45,25 +45,25 @@ function Login() {
                                 id="email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                placeholder="Enter your email"
+                                placeholder="Введіть email"
                                 required
                             />
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="password" className="form-label">Password</label>
+                            <label htmlFor="password" className="form-label">Пароль</label>
                             <input
                                 type="password"
                                 className="form-control"
                                 id="password"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                placeholder="Enter your password"
+                                placeholder="Введіть пароль"
                                 required
                             />
                         </div>
-                        <button type="submit" className="btn btn-primary w-100 py-2 mb-3">Log In</button>
+                        <button type="submit" className="btn btn-primary w-100 py-2 mb-3">Увійти</button>
                         <p className="text-center text-muted mb-0">
-                            Don't have an account? <Link to="/signup" className="text-decoration-none">Sign up</Link>
+                            Не маєте акаунта? <Link to="/signup" className="text-decoration-none">Створити акаунт</Link>
                         </p>
                     </form>
                 </div>

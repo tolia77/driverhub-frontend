@@ -211,7 +211,7 @@ const DeliveriesIndex = () => {
         const errors = {};
         if (!currentDelivery.pickup_location?.latitude) errors.pickup_location = "Адреса завантаження is required";
         if (!currentDelivery.dropoff_location?.latitude) errors.dropoff_location = "Адреса вивантаження is required";
-        if (!currentDelivery.package_details?.trim()) errors.package_details = "Package details are required";
+        if (!currentDelivery.package_details?.trim()) errors.package_details = "Деталі доставки are required";
 
         setFormErrors(errors);
         return Object.keys(errors).length === 0;
@@ -254,9 +254,9 @@ const DeliveriesIndex = () => {
             <div className="card mb-4">
                 <div className="card-header">
                     <div className="d-flex justify-content-between align-items-center">
-                        <h5 className="mb-0">Filters</h5>
+                        <h5 className="mb-0">Фільтри</h5>
                         <button className="btn btn-sm btn-outline-secondary" onClick={resetFilters}>
-                            Reset Filters
+                            Скинути фільтри
                         </button>
                     </div>
                 </div>
@@ -267,40 +267,40 @@ const DeliveriesIndex = () => {
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Filter by driver name"
+                                placeholder="Фільтрувати за ім'ям водія"
                                 name="driver_name"
                                 value={filters.driver_name}
                                 onChange={handleFilterChange}
                             />
                         </div>
                         <div className="col-md-3">
-                            <label className="form-label">Client</label>
+                            <label className="form-label">Клієнт</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Filter by client name"
+                                placeholder="Фільтрувати за ім'ям клієнта"
                                 name="client_name"
                                 value={filters.client_name}
                                 onChange={handleFilterChange}
                             />
                         </div>
                         <div className="col-md-3">
-                            <label className="form-label">Pickup Address</label>
+                            <label className="form-label">Адреса завантаження</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Filter by pickup address"
+                                placeholder="Фільтрувати за адресою завантаження"
                                 name="pickup_address"
                                 value={filters.pickup_address}
                                 onChange={handleFilterChange}
                             />
                         </div>
                         <div className="col-md-3">
-                            <label className="form-label">Dropoff Address</label>
+                            <label className="form-label">Адреса вивантаження</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Filter by dropoff address"
+                                placeholder="Фільтрувати за адресою вивантаження"
                                 name="dropoff_address"
                                 value={filters.dropoff_address}
                                 onChange={handleFilterChange}
@@ -322,22 +322,22 @@ const DeliveriesIndex = () => {
                             </select>
                         </div>
                         <div className="col-md-3">
-                            <label className="form-label">Package Details</label>
+                            <label className="form-label">Деталі доставки</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Filter by package details"
+                                placeholder="Фільтрувати за деталями доставки"
                                 name="package_details"
                                 value={filters.package_details}
                                 onChange={handleFilterChange}
                             />
                         </div>
                         <div className="col-md-3">
-                            <label className="form-label">Delivery Notes</label>
+                            <label className="form-label">Примітки</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Filter by delivery notes"
+                                placeholder="Фільтрувати за примітками"
                                 name="delivery_notes"
                                 value={filters.delivery_notes}
                                 onChange={handleFilterChange}

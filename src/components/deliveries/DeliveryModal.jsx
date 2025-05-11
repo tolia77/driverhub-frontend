@@ -127,7 +127,7 @@ const DeliveryModal = ({
                                     {errors.driver_id && <div className="invalid-feedback">{errors.driver_id}</div>}
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label className="form-label">Client</label>
+                                    <label className="form-label">Клієнт</label>
                                     <select
                                         className={`form-control ${errors.client_id ? 'is-invalid' : ''}`}
                                         name="client_id"
@@ -137,7 +137,7 @@ const DeliveryModal = ({
                                         <option value="">Оберіть клієнта</option>
                                         {clients.map(client => (
                                             <option key={client.id} value={client.id}>
-                                                {`${client.first_name} ${client.last_name}` || `Client ${client.id}`}
+                                                {`${client.first_name} ${client.last_name}` || `Клієнт ${client.id}`}
                                             </option>
                                         ))}
                                     </select>
@@ -203,9 +203,9 @@ const DeliveryModal = ({
                                 </div>
                             </div>
 
-                            {/* Package Details & Notes */}
+                            {/* Деталі доставки & Notes */}
                             <div className="mb-3">
-                                <label className="form-label">Package Details</label>
+                                <label className="form-label">Деталі доставки</label>
                                 <input
                                     type="text"
                                     className={`form-control ${errors.package_details ? 'is-invalid' : ''}`}
@@ -217,7 +217,7 @@ const DeliveryModal = ({
                                     <div className="invalid-feedback">{errors.package_details}</div>}
                             </div>
                             <div className="mb-3">
-                                <label className="form-label">Delivery Notes</label>
+                                <label className="form-label">Примітки</label>
                                 <textarea
                                     className="form-control"
                                     name="delivery_notes"
