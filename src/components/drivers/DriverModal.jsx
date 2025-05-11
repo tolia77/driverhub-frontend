@@ -17,7 +17,7 @@ const DriverModal = ({
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">
-                            {modalType === 'add' ? 'Add Driver' : 'Update Driver'}
+                            {modalType === 'add' ? 'Add Водій' : 'Update Водій'}
                         </h5>
                         <button
                             type="button"
@@ -87,7 +87,7 @@ const DriverModal = ({
                                 {errors.license_number && <div className="invalid-feedback">{errors.license_number}</div>}
                             </div>
                             <div className="mb-3">
-                                <label className="form-label">Vehicle</label>
+                                <label className="form-label">Транспортний засіб</label>
                                 <div
                                     className="form-control d-flex justify-content-between align-items-center"
                                     onClick={onSelectVehicle}

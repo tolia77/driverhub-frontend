@@ -10,7 +10,7 @@ const DriversTable = ({drivers, onUpdate, onDelete}) => {
                             <th>Last Name</th>
                             <th>Email</th>
                             <th>License Number</th>
-                            <th>Vehicle</th>
+                            <th>Транспортний засіб</th>
                             <th>Actions</th>
                         </tr>
                         </thead>

@@ -134,12 +134,12 @@ const VehiclesIndex = () => {
     return (
         <div className="container-fluid py-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <h1 className="mb-0">Vehicles</h1>
+                <h1 className="mb-0">Транспортні засоби</h1>
                 <button
                     className="btn btn-success"
                     onClick={handleAddVehicle}
                 >
-                    <i className="bi bi-plus-circle me-2"></i>Add Vehicle
+                    <i className="bi bi-plus-circle me-2"></i>Add Транспортний засіб
                 </button>
             </div>
 

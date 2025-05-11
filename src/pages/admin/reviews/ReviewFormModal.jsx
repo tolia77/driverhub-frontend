@@ -13,7 +13,7 @@ const ReviewFormModal = ({
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">
-                            {isEditing ? "Update" : "Create"} Review
+                            {isEditing ? "Update" : "Create"} Відгук
                         </h5>
                         <button
                             type="button"
@@ -55,7 +55,7 @@ const ReviewFormModal = ({
                             </select>
                         </div>
                         <div className="mb-3">
-                            <label className="form-label">Review Text</label>
+                            <label className="form-label">Текст відгуку</label>
                             <textarea
                                 className="form-control"
                                 name="text"

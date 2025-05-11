@@ -8,7 +8,7 @@ const DeliveriesTable = ({ deliveries, onUpdate }) => {
                     <table className="table table-hover table-striped mb-0">
                         <thead className="table-dark sticky-top">
                         <tr>
-                            <th>Driver</th>
+                            <th>Водій</th>
                             <th>Client</th>
                             <th>Pickup Location</th>
                             <th>Dropoff Location</th>

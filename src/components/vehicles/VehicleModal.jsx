@@ -15,7 +15,7 @@ const VehicleModal = ({
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">
-                            {modalType === 'add' ? 'Add Vehicle' : 'Update Vehicle'}
+                            {modalType === 'add' ? 'Add Транспортний засіб' : 'Update Транспортний засіб'}
                         </h5>
                         <button
                             type="button"

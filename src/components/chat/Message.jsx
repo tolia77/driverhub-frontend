@@ -16,5 +16,4 @@ const Message = ({message, isOwnMessage}) => {
         </div>
     );
 };
-
 export default Message;

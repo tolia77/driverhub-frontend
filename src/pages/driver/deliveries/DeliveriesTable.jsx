@@ -38,7 +38,7 @@ const DeliveriesTable = ({ deliveries, onUpdateStatus, onLogBreak }) => {
                                             className="btn btn-sm btn-info"
                                             onClick={() => onLogBreak(delivery)}
                                         >
-                                            <i className="bi bi-stopwatch"></i> Log Break
+                                            <i className="bi bi-stopwatch"></i> Запис про перерву
                                         </button>
                                     </div>
                                 </td>

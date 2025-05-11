@@ -35,7 +35,7 @@ const DeliveriesTable = ({deliveries, onOpenReviewModal}) => {
                                                         className="btn btn-sm btn-warning"
                                                         onClick={() => onOpenReviewModal(delivery, 'edit')}
                                                     >
-                                                        Edit Review
+                                                        Edit Відгук
                                                     </button>
                                                     <button
                                                         className="btn btn-sm btn-danger"
@@ -49,7 +49,7 @@ const DeliveriesTable = ({deliveries, onOpenReviewModal}) => {
                                                     className="btn btn-sm btn-primary"
                                                     onClick={() => onOpenReviewModal(delivery, 'create')}
                                                 >
-                                                    Leave Review
+                                                    Leave Відгук
                                                 </button>
                                             )}
                                         </div>

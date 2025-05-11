@@ -16,5 +16,4 @@ const ChatMessages = ({messages, userId, messagesEndRef}) => {
         </div>
     );
 };
-
 export default ChatMessages;

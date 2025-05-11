@@ -113,12 +113,12 @@ const ReviewsIndexAdmin = () => {
     return (
         <div className="container py-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <h1 className="mb-0">Reviews Management</h1>
+                <h1 className="mb-0">Керування відгуками</h1>
                 <button
                     className="btn btn-primary"
                     onClick={openCreateModal}
                 >
-                    Add New Review
+                    Add New Відгук
                 </button>
             </div>
 

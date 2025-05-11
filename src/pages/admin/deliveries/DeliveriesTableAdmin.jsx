@@ -11,7 +11,7 @@ const DeliveriesTableAdmin = ({ deliveries, onUpdate, onDelete }) => {
                         <thead className="table-dark sticky-top">
                         <tr>
                             <th>ID</th>
-                            <th>Driver ID</th>
+                            <th>Водій ID</th>
                             <th>Pickup Location</th>
                             <th>Dropoff Location</th>
                             <th>Status</th>

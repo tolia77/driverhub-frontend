@@ -29,19 +29,19 @@ export default function Header() {
                         {userRole === 'dispatcher' && (
                             <>
                                 <li className="nav-item">
-                                    <Link to="/dispatcher/deliveries" className="nav-link px-2">Deliveries</Link>
+                                    <Link to="/dispatcher/deliveries" className="nav-link px-2">Доставки</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/dispatcher/drivers" className="nav-link px-2">Drivers</Link>
+                                    <Link to="/dispatcher/drivers" className="nav-link px-2">Водії</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/dispatcher/vehicles" className="nav-link px-2">Vehicles</Link>
+                                    <Link to="/dispatcher/vehicles" className="nav-link px-2">Транспортні засоби</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/dispatcher/log-breaks" className="nav-link px-2">Breaks</Link>
+                                    <Link to="/dispatcher/log-breaks" className="nav-link px-2">Перерви</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/dispatcher/chat" className="nav-link px-2">Chat</Link>
+                                    <Link to="/dispatcher/chat" className="nav-link px-2">Чат</Link>
                                 </li>
                             </>
                         )}
@@ -52,22 +52,22 @@ export default function Header() {
                                         <Link to="/admin/drivers" className="nav-link px-2">Drivers</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link to="/admin/dispatchers" className="nav-link px-2">Dispatchers</Link>
+                                        <Link to="/admin/dispatchers" className="nav-link px-2">Диспетчери</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link to="/admin/clients" className="nav-link px-2">Clients</Link>
+                                        <Link to="/admin/clients" className="nav-link px-2">Клієнти</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link to="/admin/deliveries" className="nav-link px-2">Deliveries</Link>
+                                        <Link to="/admin/deliveries" className="nav-link px-2">Доставки</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link to="/admin/vehicles" className="nav-link px-2">Vehicles</Link>
+                                        <Link to="/admin/vehicles" className="nav-link px-2">Транспортні засоби</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link to="/admin/log-breaks" className="nav-link px-2">Breaks</Link>
+                                        <Link to="/admin/log-breaks" className="nav-link px-2">Перерви</Link>
                                     </li>
                                     <li className="nav-item">
-                                        <Link to="/admin/reviews" className="nav-link px-2">Reviews</Link>
+                                        <Link to="/admin/reviews" className="nav-link px-2">Відгуки</Link>
                                     </li>
                                 </>
                             </>
@@ -75,13 +75,13 @@ export default function Header() {
                         {userRole === 'driver' && (
                             <>
                                 <li className="nav-item">
-                                    <Link to="/driver/deliveries" className="nav-link px-2">Deliveries</Link>
+                                    <Link to="/driver/deliveries" className="nav-link px-2">Доставки</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/driver/log-breaks" className="nav-link px-2">Breaks</Link>
+                                    <Link to="/driver/log-breaks" className="nav-link px-2">Перерви</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/driver/chat" className="nav-link px-2">Chat</Link>
+                                    <Link to="/driver/chat" className="nav-link px-2">Чат</Link>
                                 </li>
                             </>
                         )}
@@ -89,7 +89,7 @@ export default function Header() {
                         {userRole === 'client' && (
                             <>
                                 <li className="nav-item">
-                                    <Link to="/client/deliveries" className="nav-link px-2">Deliveries</Link>
+                                    <Link to="/client/deliveries" className="nav-link px-2">Доставки</Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link to="/client/reviews" className="nav-link px-2">My reviews</Link>
@@ -101,7 +101,7 @@ export default function Header() {
                     <ul className="navbar-nav">
                         {userRole ? (
                             <li className="nav-item">
-                                <Link to="/account" className="nav-link px-2">My account</Link>
+                                <Link to="/account" className="nav-link px-2">Мій акаунт</Link>
                             </li>
                         ) : (
                             <>

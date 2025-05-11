@@ -159,8 +159,8 @@ const DriversIndex = () => {
 
     const validateForm = () => {
         const errors = {};
-        if (!currentDriver.first_name.trim()) errors.first_name = "First name is required";
-        if (!currentDriver.last_name.trim()) errors.last_name = "Last name is required";
+        if (!currentDriver.first_name.trim()) errors.first_name = "Ім'я is required";
+        if (!currentDriver.last_name.trim()) errors.last_name = "Прізвище is required";
         if (!currentDriver.email.trim()) {
             errors.email = "Email is required";
         } else if (!/\S+@\S+\.\S+/.test(currentDriver.email)) {
@@ -181,7 +181,7 @@ const DriversIndex = () => {
                     className="btn btn-success"
                     onClick={handleAddDriver}
                 >
-                    <i className="bi bi-plus-circle me-2"></i>Add Driver
+                    <i className="bi bi-plus-circle me-2"></i>Add Водій
                 </button>
             </div>
 

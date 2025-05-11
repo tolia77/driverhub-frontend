@@ -70,7 +70,7 @@ const ClientReviewsIndex = () => {
     return (
         <div className="container py-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <h1 className="mb-0">My Reviews</h1>
+                <h1 className="mb-0">Мої відгуки</h1>
             </div>
 
             {isLoading && !isModalOpen ? (

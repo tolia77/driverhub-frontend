@@ -85,13 +85,13 @@ const LogBreaksIndexAdmin = () => {
     return (
         <div className="container py-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <h1 className="mb-0">Admin Log Breaks Management</h1>
+                <h1 className="mb-0">Керування записами про зупинки</h1>
                 {selectedDelivery && (
                     <button
                         className="btn btn-primary"
                         onClick={openCreateModal}
                     >
-                        Add New Log Break
+                        Додати запис про перерву
                     </button>
                 )}
             </div>

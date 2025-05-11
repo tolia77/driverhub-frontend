@@ -245,7 +245,7 @@ const DeliveriesIndex = () => {
     return (
         <div className="container-fluid py-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <h1 className="mb-0">Deliveries</h1>
+                <h1 className="mb-0">Доставки</h1>
                 <button className="btn btn-success" onClick={handleAddDelivery}>
                     <i className="bi bi-plus-circle me-2"></i>Add Delivery
                 </button>
@@ -263,7 +263,7 @@ const DeliveriesIndex = () => {
                 <div className="card-body">
                     <div className="row g-3">
                         <div className="col-md-3">
-                            <label className="form-label">Driver</label>
+                            <label className="form-label">Водій</label>
                             <input
                                 type="text"
                                 className="form-control"

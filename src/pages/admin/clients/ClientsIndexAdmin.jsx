@@ -97,11 +97,11 @@ const ClientsIndexAdmin = () => {
 
     const validateForm = () => {
         if (!formData.first_name.trim()) {
-            alert("First name is required");
+            alert("Ім'я is required");
             return false;
         }
         if (!formData.last_name.trim()) {
-            alert("Last name is required");
+            alert("Прізвище is required");
             return false;
         }
         if (!formData.phone_number.trim()) {
@@ -118,7 +118,7 @@ const ClientsIndexAdmin = () => {
     return (
         <div className="container py-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <h1 className="mb-0">Clients Management</h1>
+                <h1 className="mb-0">Керування клієнтами</h1>
             </div>
 
             <ClientsTable

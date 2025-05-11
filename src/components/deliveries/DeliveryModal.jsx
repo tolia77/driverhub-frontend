@@ -110,7 +110,7 @@ const DeliveryModal = ({
                         <form>
                             <div className="row">
                                 <div className="col-md-6 mb-3">
-                                    <label className="form-label">Driver</label>
+                                    <label className="form-label">Водій</label>
                                     <select
                                         className={`form-control ${errors.driver_id ? 'is-invalid' : ''}`}
                                         name="driver_id"
@@ -120,7 +120,7 @@ const DeliveryModal = ({
                                         <option value="">Select a driver</option>
                                         {drivers.map(driver => (
                                             <option key={driver.id} value={driver.id}>
-                                                {`${driver.first_name} ${driver.last_name}` || `Driver ${driver.id}`}
+                                                {`${driver.first_name} ${driver.last_name}` || `Водій ${driver.id}`}
                                             </option>
                                         ))}
                                     </select>
