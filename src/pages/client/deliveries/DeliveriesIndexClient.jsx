@@ -100,13 +100,13 @@ const DeliveriesIndexClient = () => {
                 isEdit={actionType === 'edit'}
             />
 
-            {/* Delete Confirmation Modal */}
+            {/* Видалити Confirmation Modal */}
             {isReviewModalOpen && actionType === 'delete' && (
                 <div className="modal fade show d-block" tabIndex="-1" style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
                     <div className="modal-dialog modal-dialog-centered">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title">Delete Відгук</h5>
+                                <h5 className="modal-title">Видалити Відгук</h5>
                                 <button
                                     type="button"
                                     className="btn-close"
@@ -139,7 +139,7 @@ const DeliveriesIndexClient = () => {
                                             Deleting...
                                         </>
                                     ) : (
-                                        "Delete"
+                                        "Видалити"
                                     )}
                                 </button>
                             </div>

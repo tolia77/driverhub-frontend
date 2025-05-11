@@ -7,12 +7,12 @@ const VehiclesTable = ({ vehicles, onUpdate, onDelete }) => {
                         <thead className="table-dark sticky-top">
                         <tr>
                             <th>ID</th>
-                            <th>Model</th>
-                            <th>License Plate</th>
-                            <th>Capacity</th>
-                            <th>Mileage</th>
-                            <th>Maintenance Due Date</th>
-                            <th>Actions</th>
+                            <th>Модель</th>
+                            <th>Номерний знак</th>
+                            <th>Вантажопідйомність</th>
+                            <th>Пробіг</th>
+                            <th>Наступний техогляд</th>
+                            <th>Дії</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -30,13 +30,13 @@ const VehiclesTable = ({ vehicles, onUpdate, onDelete }) => {
                                             className="btn btn-sm btn-warning"
                                             onClick={() => onUpdate(vehicle.id)}
                                         >
-                                            <i className="bi bi-pencil"></i> Update
+                                            <i className="bi bi-pencil"></i> Оновити
                                         </button>
                                         <button
                                             className="btn btn-sm btn-danger"
                                             onClick={() => onDelete(vehicle.id)}
                                         >
-                                            <i className="bi bi-trash"></i> Delete
+                                            <i className="bi bi-trash"></i> Видалити
                                         </button>
                                     </div>
                                 </td>

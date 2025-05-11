@@ -105,7 +105,7 @@ const ClientsIndexAdmin = () => {
             return false;
         }
         if (!formData.phone_number.trim()) {
-            alert("Phone number is required");
+            alert("Номер телефону is required");
             return false;
         }
         if (!isEditing && !formData.password.trim()) {

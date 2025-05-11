@@ -11,11 +11,11 @@ const DeliveriesTable = ({ deliveries, onUpdateStatus, onLogBreak }) => {
                         <thead className="table-dark sticky-top">
                         <tr>
                             <th>ID</th>
-                            <th>Pickup Location</th>
-                            <th>Dropoff Location</th>
+                            <th>Адреса завантаження</th>
+                            <th>Адреса вивантаження</th>
                             <th>Package Details</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                            <th>Статус</th>
+                            <th>Дії</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -32,7 +32,7 @@ const DeliveriesTable = ({ deliveries, onUpdateStatus, onLogBreak }) => {
                                             className="btn btn-sm btn-warning"
                                             onClick={() => onUpdateStatus(delivery)}
                                         >
-                                            <i className="bi bi-pencil"></i> Update
+                                            <i className="bi bi-pencil"></i> Оновити
                                         </button>
                                         <button
                                             className="btn btn-sm btn-info"

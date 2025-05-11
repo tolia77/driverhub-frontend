@@ -12,11 +12,11 @@ const DeliveriesTableAdmin = ({ deliveries, onUpdate, onDelete }) => {
                         <tr>
                             <th>ID</th>
                             <th>Водій ID</th>
-                            <th>Pickup Location</th>
-                            <th>Dropoff Location</th>
-                            <th>Status</th>
-                            <th>Created At</th>
-                            <th>Actions</th>
+                            <th>Адреса завантаження</th>
+                            <th>Адреса вивантаження</th>
+                            <th>Статус</th>
+                            <th>Дата створення</th>
+                            <th>Дії</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -34,13 +34,13 @@ const DeliveriesTableAdmin = ({ deliveries, onUpdate, onDelete }) => {
                                             className="btn btn-sm btn-warning"
                                             onClick={() => onUpdate(delivery.id)}
                                         >
-                                            <i className="bi bi-pencil"></i> Edit
+                                            <i className="bi bi-pencil"></i> Редагувати
                                         </button>
                                         <button
                                             className="btn btn-sm btn-danger"
                                             onClick={() => onDelete(delivery.id)}
                                         >
-                                            <i className="bi bi-trash"></i> Delete
+                                            <i className="bi bi-trash"></i> Видалити
                                         </button>
                                     </div>
                                 </td>

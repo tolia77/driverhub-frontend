@@ -3,7 +3,7 @@ export default function DeliverySelect({deliveries, selectedDelivery, onSelect})
         <div className="card mb-4">
             <div className="card-body">
                 <div className="mb-3">
-                    <label className="form-label">Select Delivery</label>
+                    <label className="form-label">Оберіть доставку</label>
                     <select
                         className="form-select"
                         value={selectedDelivery?.id || ""}
@@ -12,7 +12,7 @@ export default function DeliverySelect({deliveries, selectedDelivery, onSelect})
                             onSelect(selected);
                         }}
                     >
-                        <option value="">-- Select a Delivery --</option>
+                        <option value="">-- Оберіть доставку --</option>
                         {deliveries.map(delivery => (
                             <option key={delivery.id} value={delivery.id}>
                                 {delivery?.pickup_location?.address || `${delivery.pickup_location.latitude}, ${delivery.pickup_location.longitude}`} - {delivery?.dropoff_location?.address || `${delivery.dropoff_location.latitude}, ${delivery.dropoff_location.longitude}`}

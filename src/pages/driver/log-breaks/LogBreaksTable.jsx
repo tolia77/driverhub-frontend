@@ -13,7 +13,7 @@ const LogBreaksTable = ({ logBreaks, onEdit, onDelete }) => {
                             <th>Start Time</th>
                             <th>End Time</th>
                             <th>Cost</th>
-                            <th>Actions</th>
+                            <th>Дії</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -37,13 +37,13 @@ const LogBreaksTable = ({ logBreaks, onEdit, onDelete }) => {
                                                 className="btn btn-sm btn-warning"
                                                 onClick={() => onEdit(logBreak)}
                                             >
-                                                <i className="bi bi-pencil"></i> Edit
+                                                <i className="bi bi-pencil"></i> Редагувати
                                             </button>
                                             <button
                                                 className="btn btn-sm btn-danger"
                                                 onClick={() => onDelete(logBreak.id)}
                                             >
-                                                <i className="bi bi-trash"></i> Delete
+                                                <i className="bi bi-trash"></i> Видалити
                                             </button>
                                         </div>
                                     </td>

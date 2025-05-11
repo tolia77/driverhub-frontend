@@ -104,13 +104,13 @@ const VehiclesIndex = () => {
 
     const validateForm = () => {
         const errors = {};
-        if (!currentVehicle.model.trim()) errors.model = "Model is required";
-        if (!currentVehicle.license_plate.trim()) errors.license_plate = "License plate is required";
+        if (!currentVehicle.model.trim()) errors.model = "Модель is required";
+        if (!currentVehicle.license_plate.trim()) errors.license_plate = "Номерний знак is required";
         if (!currentVehicle.capacity || isNaN(currentVehicle.capacity) || currentVehicle.capacity <= 0) {
-            errors.capacity = "Capacity must be a positive number";
+            errors.capacity = "Вантажопідйомність must be a positive number";
         }
         if (!currentVehicle.mileage || isNaN(currentVehicle.mileage) || currentVehicle.mileage < 0) {
-            errors.mileage = "Mileage must be a non-negative number";
+            errors.mileage = "Пробіг must be a non-negative number";
         }
         if (!currentVehicle.maintenance_due_date.trim()) {
             errors.maintenance_due_date = "Maintenance due date is required";
@@ -139,7 +139,7 @@ const VehiclesIndex = () => {
                     className="btn btn-success"
                     onClick={handleAddVehicle}
                 >
-                    <i className="bi bi-plus-circle me-2"></i>Add Транспортний засіб
+                    <i className="bi bi-plus-circle me-2"></i>Додати Транспортний засіб
                 </button>
             </div>
 

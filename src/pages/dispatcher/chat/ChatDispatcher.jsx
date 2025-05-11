@@ -79,7 +79,7 @@ const ChatDispatcher = () => {
                     ) : (
                         <div className="card h-100">
                             <div className="card-body d-flex align-items-center justify-content-center">
-                                <p className="mb-0 text-muted">Select a driver to start chatting</p>
+                                <p className="mb-0 text-muted">Оберіть водія для початку розмови</p>
                             </div>
                         </div>
                     )}

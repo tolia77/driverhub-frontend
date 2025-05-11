@@ -127,7 +127,7 @@ const DispatchersIndexAdmin = () => {
                     className="btn btn-primary"
                     onClick={openCreateModal}
                 >
-                    Add New Dispatcher
+                    Додати нового диспетчера
                 </button>
             </div>
 

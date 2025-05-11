@@ -18,11 +18,11 @@ const ClientsTable = ({ clients, onEdit, onDelete }) => {
                         <tr>
                             <th>ID</th>
                             <th>Email</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Phone</th>
-                            <th>Created At</th>
-                            <th>Actions</th>
+                            <th>Ім'я</th>
+                            <th>Прізвище</th>
+                            <th>Номер телефону</th>
+                            <th>Дата створення</th>
+                            <th>Дії</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -39,13 +39,13 @@ const ClientsTable = ({ clients, onEdit, onDelete }) => {
                                         className="btn btn-sm btn-warning me-2"
                                         onClick={() => onEdit(client)}
                                     >
-                                        Edit
+                                        Редагувати
                                     </button>
                                     <button
                                         className="btn btn-sm btn-danger"
                                         onClick={() => onDelete(client.id)}
                                     >
-                                        Delete
+                                        Видалити
                                     </button>
                                 </td>
                             </tr>

@@ -167,7 +167,7 @@ const DriversIndex = () => {
             errors.email = "Invalid email format";
         }
         if (modalType === 'add' && !currentDriver.password) errors.password = "Password is required";
-        if (!currentDriver.license_number.trim()) errors.license_number = "License number is required";
+        if (!currentDriver.license_number.trim()) errors.license_number = "Номер водійського посвідчення is required";
 
         setFormErrors(errors);
         return Object.keys(errors).length === 0;
@@ -176,12 +176,12 @@ const DriversIndex = () => {
     return (
         <div className="container-fluid py-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <h1 className="mb-0">Drivers</h1>
+                <h1 className="mb-0">Водії</h1>
                 <button
                     className="btn btn-success"
                     onClick={handleAddDriver}
                 >
-                    <i className="bi bi-plus-circle me-2"></i>Add Водій
+                    <i className="bi bi-plus-circle me-2"></i>Додати Водія
                 </button>
             </div>
 

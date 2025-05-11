@@ -13,7 +13,7 @@ const ReviewFormModal = ({
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">
-                            {isEditing ? "Update" : "Create"} Відгук
+                            {isEditing ? "Оновити" : "Create"} Відгук
                         </h5>
                         <button
                             type="button"
@@ -24,7 +24,7 @@ const ReviewFormModal = ({
                     <div className="modal-body">
                         {!isEditing && (
                             <div className="mb-3">
-                                <label className="form-label">Delivery ID</label>
+                                <label className="form-label">ID Доставки</label>
                                 <input
                                     type="number"
                                     className="form-control"
@@ -46,7 +46,7 @@ const ReviewFormModal = ({
                                 onChange={onChange}
                                 required
                             >
-                                <option value="">Select rating</option>
+                                <option value="">Оберіть оцінку</option>
                                 {[1, 2, 3, 4, 5].map(num => (
                                     <option key={num} value={num}>
                                         {num} ★
@@ -76,7 +76,7 @@ const ReviewFormModal = ({
                             className="btn btn-primary"
                             onClick={onSubmit}
                         >
-                            {isEditing ? "Update" : "Create"}
+                            {isEditing ? "Оновити" : "Create"}
                         </button>
                     </div>
                 </div>

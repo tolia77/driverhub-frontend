@@ -6,7 +6,7 @@ const StatusUpdateModal = ({ isOpen, currentStatus, onStatusChange, onConfirm, o
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title">Update Delivery Status</h5>
+                        <h5 className="modal-title">Оновити статус доставки</h5>
                         <button type="button" className="btn-close" onClick={onClose}></button>
                     </div>
                     <div className="modal-body">
@@ -15,10 +15,10 @@ const StatusUpdateModal = ({ isOpen, currentStatus, onStatusChange, onConfirm, o
                             value={currentStatus}
                             onChange={(e) => onStatusChange(e.target.value)}
                         >
-                            <option value="Pending">Pending</option>
-                            <option value="In-Transit">In-Transit</option>
+                            <option value="Pending">Очікує</option>
+                            <option value="In-Transit">В процесі</option>
                             <option value="Delivered">Delivered</option>
-                            <option value="Failed">Failed</option>
+                            <option value="Failed">Невдала</option>
                         </select>
                     </div>
                     <div className="modal-footer">
@@ -34,7 +34,7 @@ const StatusUpdateModal = ({ isOpen, currentStatus, onStatusChange, onConfirm, o
                             className="btn btn-primary"
                             onClick={onConfirm}
                         >
-                            Update
+                            Оновити
                         </button>
                     </div>
                 </div>

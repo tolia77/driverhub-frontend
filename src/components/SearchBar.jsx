@@ -1,4 +1,4 @@
-const SearchBar = ({ searchTerm, onSearchChange, placeholder="Search..." }) => {
+const SearchBar = ({ searchTerm, onSearchChange, placeholder="Шукати..." }) => {
     return (
         <div className="card mb-4">
             <div className="card-body">

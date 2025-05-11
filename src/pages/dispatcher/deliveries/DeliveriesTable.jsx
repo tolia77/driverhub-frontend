@@ -10,13 +10,13 @@ const DeliveriesTable = ({ deliveries, onUpdate }) => {
                         <tr>
                             <th>Водій</th>
                             <th>Client</th>
-                            <th>Pickup Location</th>
-                            <th>Dropoff Location</th>
+                            <th>Адреса завантаження</th>
+                            <th>Адреса вивантаження</th>
                             <th>Package details</th>
                             <th>Delivery notes</th>
-                            <th>Status</th>
-                            <th>Created At</th>
-                            <th>Actions</th>
+                            <th>Статус</th>
+                            <th>Дата створення</th>
+                            <th>Дії</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -36,7 +36,7 @@ const DeliveriesTable = ({ deliveries, onUpdate }) => {
                                             className="btn btn-sm btn-warning"
                                             onClick={() => onUpdate(delivery.id)}
                                         >
-                                            <i className="bi bi-pencil"></i> Update
+                                            <i className="bi bi-pencil"></i> Оновити
                                         </button>
                                     </div>
                                 </td>

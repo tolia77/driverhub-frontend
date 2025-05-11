@@ -49,7 +49,7 @@ export default function Header() {
                             <>
                                 <>
                                     <li className="nav-item">
-                                        <Link to="/admin/drivers" className="nav-link px-2">Drivers</Link>
+                                        <Link to="/admin/drivers" className="nav-link px-2">Водії</Link>
                                     </li>
                                     <li className="nav-item">
                                         <Link to="/admin/dispatchers" className="nav-link px-2">Диспетчери</Link>

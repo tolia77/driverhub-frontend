@@ -209,8 +209,8 @@ const DeliveriesIndex = () => {
 
     const validateForm = () => {
         const errors = {};
-        if (!currentDelivery.pickup_location?.latitude) errors.pickup_location = "Pickup location is required";
-        if (!currentDelivery.dropoff_location?.latitude) errors.dropoff_location = "Dropoff location is required";
+        if (!currentDelivery.pickup_location?.latitude) errors.pickup_location = "Адреса завантаження is required";
+        if (!currentDelivery.dropoff_location?.latitude) errors.dropoff_location = "Адреса вивантаження is required";
         if (!currentDelivery.package_details?.trim()) errors.package_details = "Package details are required";
 
         setFormErrors(errors);
@@ -247,7 +247,7 @@ const DeliveriesIndex = () => {
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <h1 className="mb-0">Доставки</h1>
                 <button className="btn btn-success" onClick={handleAddDelivery}>
-                    <i className="bi bi-plus-circle me-2"></i>Add Delivery
+                    <i className="bi bi-plus-circle me-2"></i>Додати доставку
                 </button>
             </div>
 
@@ -307,18 +307,18 @@ const DeliveriesIndex = () => {
                             />
                         </div>
                         <div className="col-md-3">
-                            <label className="form-label">Status</label>
+                            <label className="form-label">Статус</label>
                             <select
                                 className="form-select"
                                 name="status"
                                 value={filters.status}
                                 onChange={handleFilterChange}
                             >
-                                <option value="">All Statuses</option>
-                                <option value="Pending">Pending</option>
-                                <option value="In-Transit">In-Transit</option>
-                                <option value="Completed">Completed</option>
-                                <option value="Cancelled">Cancelled</option>
+                                <option value="">Всі статуси</option>
+                                <option value="Pending">Очікує</option>
+                                <option value="In-Transit">В процесі</option>
+                                <option value="Completed">Завершена</option>
+                                <option value="Failed">Невдала</option>
                             </select>
                         </div>
                         <div className="col-md-3">
@@ -344,7 +344,7 @@ const DeliveriesIndex = () => {
                             />
                         </div>
                         <div className="col-md-3">
-                            <label className="form-label">Created At</label>
+                            <label className="form-label">Дата створення</label>
                             <input
                                 type="date"
                                 className="form-control"

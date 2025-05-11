@@ -13,7 +13,7 @@ const DispatcherModal = ({
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">
-                            {isEditing ? "Update" : "Create"} Dispatcher
+                            {isEditing ? "Оновити" : "Create"} Dispatcher
                         </h5>
                         <button
                             type="button"
@@ -37,7 +37,7 @@ const DispatcherModal = ({
                             </div>
                         )}
                         <div className="mb-3">
-                            <label className="form-label">First Name</label>
+                            <label className="form-label">Ім'я</label>
                             <input
                                 type="text"
                                 className="form-control"
@@ -48,7 +48,7 @@ const DispatcherModal = ({
                             />
                         </div>
                         <div className="mb-3">
-                            <label className="form-label">Last Name</label>
+                            <label className="form-label">Прізвище</label>
                             <input
                                 type="text"
                                 className="form-control"
@@ -83,7 +83,7 @@ const DispatcherModal = ({
                             className="btn btn-primary"
                             onClick={onSubmit}
                         >
-                            {isEditing ? "Update" : "Create"}
+                            {isEditing ? "Оновити" : "Create"}
                         </button>
                     </div>
                 </div>

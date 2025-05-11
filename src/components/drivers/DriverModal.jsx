@@ -17,7 +17,7 @@ const DriverModal = ({
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">
-                            {modalType === 'add' ? 'Add Водій' : 'Update Водій'}
+                            {modalType === 'add' ? 'Додати водія' : 'Оновити водія'}
                         </h5>
                         <button
                             type="button"
@@ -29,7 +29,7 @@ const DriverModal = ({
                         <form>
                             <div className="row">
                                 <div className="col-md-6 mb-3">
-                                    <label className="form-label">First Name</label>
+                                    <label className="form-label">Ім'я</label>
                                     <input
                                         type="text"
                                         className={`form-control ${errors.first_name ? 'is-invalid' : ''}`}
@@ -40,7 +40,7 @@ const DriverModal = ({
                                     {errors.first_name && <div className="invalid-feedback">{errors.first_name}</div>}
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label className="form-label">Last Name</label>
+                                    <label className="form-label">Прізвище</label>
                                     <input
                                         type="text"
                                         className={`form-control ${errors.last_name ? 'is-invalid' : ''}`}
@@ -76,7 +76,7 @@ const DriverModal = ({
                                 </div>
                             )}
                             <div className="mb-3">
-                                <label className="form-label">License Number</label>
+                                <label className="form-label">Номер водійського посвідчення</label>
                                 <input
                                     type="text"
                                     className={`form-control ${errors.license_number ? 'is-invalid' : ''}`}
@@ -116,7 +116,7 @@ const DriverModal = ({
                             className="btn btn-primary"
                             onClick={onConfirm}
                         >
-                            {modalType === 'add' ? 'Confirm' : 'Update'}
+                            {modalType === 'add' ? 'Confirm' : 'Оновити'}
                         </button>
                     </div>
                 </div>

@@ -69,13 +69,13 @@ const LogBreakModal = ({isOpen, onSubmit, onClose, initialData}) => {
             <div className="modal-dialog modal-dialog-centered modal-lg">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title">{initialData ? "Update" : "Log"} Break</h5>
+                        <h5 className="modal-title">{initialData ? "Оновити" : "Log"} Break</h5>
                         <button type="button" className="btn-close" onClick={onClose}></button>
                     </div>
                     <form onSubmit={handleSubmit}>
                         <div className="modal-body">
                             <div className="mb-3">
-                                <label className="form-label">Select Location (click on map)</label>
+                                <label className="form-label">Виберіть Location (click on map)</label>
                                 <div style={{height: '300px', width: '100%'}}>
                                     <MapContainer
                                         center={mapCenter}
@@ -144,7 +144,7 @@ const LogBreakModal = ({isOpen, onSubmit, onClose, initialData}) => {
                                 type="submit"
                                 className="btn btn-primary"
                             >
-                                {initialData ? "Update" : "Submit"}
+                                {initialData ? "Оновити" : "Submit"}
                             </button>
                         </div>
                     </form>

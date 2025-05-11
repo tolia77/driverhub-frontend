@@ -13,7 +13,7 @@ const ClientFormModal = ({
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">
-                            {isEditing ? "Update" : "Create"} Client
+                            {isEditing ? "Оновити" : "Create"} Client
                         </h5>
                         <button
                             type="button"
@@ -35,7 +35,7 @@ const ClientFormModal = ({
                             />
                         </div>
                         <div className="mb-3">
-                            <label className="form-label">First Name</label>
+                            <label className="form-label">Ім'я</label>
                             <input
                                 type="text"
                                 className="form-control"
@@ -46,7 +46,7 @@ const ClientFormModal = ({
                             />
                         </div>
                         <div className="mb-3">
-                            <label className="form-label">Last Name</label>
+                            <label className="form-label">Прізвище</label>
                             <input
                                 type="text"
                                 className="form-control"
@@ -57,7 +57,7 @@ const ClientFormModal = ({
                             />
                         </div>
                         <div className="mb-3">
-                            <label className="form-label">Phone Number</label>
+                            <label className="form-label">Номер телефону</label>
                             <input
                                 type="tel"
                                 className="form-control"
@@ -92,7 +92,7 @@ const ClientFormModal = ({
                             className="btn btn-primary"
                             onClick={onSubmit}
                         >
-                            {isEditing ? "Update" : "Create"}
+                            {isEditing ? "Оновити" : "Create"}
                         </button>
                     </div>
                 </div>

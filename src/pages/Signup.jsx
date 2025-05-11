@@ -41,7 +41,7 @@ function SignUp() {
                     <h2 className="text-center mb-4">Create an Account</h2>
                     <form onSubmit={handleSubmit}>
                         <div className="mb-3">
-                            <label htmlFor="first_name" className="form-label">First Name</label>
+                            <label htmlFor="first_name" className="form-label">Ім'я</label>
                             <input
                                 type="text"
                                 className="form-control"
@@ -53,7 +53,7 @@ function SignUp() {
                             />
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="last_name" className="form-label">Last Name</label>
+                            <label htmlFor="last_name" className="form-label">Прізвище</label>
                             <input
                                 type="text"
                                 className="form-control"
@@ -77,13 +77,13 @@ function SignUp() {
                             />
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="phone" className="form-label">Phone number</label>
+                            <label htmlFor="phone" className="form-label">Номер телефону</label>
                             <input
                                 className="form-control"
                                 id="phone"
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
-                                placeholder="Enter your phone number"
+                                placeholder="Enter your номер телефону"
                                 required
                             />
                         </div>

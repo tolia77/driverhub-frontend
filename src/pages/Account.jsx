@@ -67,7 +67,7 @@ const Account = () => {
                                     </div>
                                     {account.license_number && (
                                         <div className="d-flex justify-content-between py-2 border-bottom">
-                                            <span className="fw-bold">License number:</span>
+                                            <span className="fw-bold">Номер водійського посвідчення:</span>
                                             <span>{account.license_number}</span>
                                         </div>
                                     )}

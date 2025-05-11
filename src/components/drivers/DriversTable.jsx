@@ -6,12 +6,12 @@ const DriversTable = ({drivers, onUpdate, onDelete}) => {
                     <table className="table table-hover table-striped mb-0">
                         <thead className="table-dark sticky-top">
                         <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
+                            <th>Ім'я</th>
+                            <th>Прізвище</th>
                             <th>Email</th>
-                            <th>License Number</th>
+                            <th>Номер водійського посвідчення</th>
                             <th>Транспортний засіб</th>
-                            <th>Actions</th>
+                            <th>Дії</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -30,13 +30,13 @@ const DriversTable = ({drivers, onUpdate, onDelete}) => {
                                             className="btn btn-sm btn-warning"
                                             onClick={() => onUpdate(driver.id)}
                                         >
-                                            <i className="bi bi-pencil"></i> Update
+                                            <i className="bi bi-pencil"></i> Оновити
                                         </button>
                                         <button
                                             className="btn btn-sm btn-danger"
                                             onClick={() => onDelete(driver.id)}
                                         >
-                                            <i className="bi bi-trash"></i> Delete
+                                            <i className="bi bi-trash"></i> Видалити
                                         </button>
                                     </div>
                                 </td>

@@ -207,8 +207,8 @@ const DeliveriesIndexAdmin = () => {
 
     const validateForm = () => {
         const errors = {};
-        if (!currentDelivery.pickup_location?.latitude) errors.pickup_location = "Pickup location is required";
-        if (!currentDelivery.dropoff_location?.latitude) errors.dropoff_location = "Dropoff location is required";
+        if (!currentDelivery.pickup_location?.latitude) errors.pickup_location = "Адреса завантаження is required";
+        if (!currentDelivery.dropoff_location?.latitude) errors.dropoff_location = "Адреса вивантаження is required";
         if (!currentDelivery.package_details?.trim()) errors.package_details = "Package details are required";
 
         setFormErrors(errors);
@@ -229,14 +229,13 @@ const DeliveriesIndexAdmin = () => {
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <h1 className="mb-0">Керування Доставками</h1>
                 <button className="btn btn-success" onClick={handleAddDelivery}>
-                    <i className="bi bi-plus-circle me-2"></i>Add Delivery
+                    <i className="bi bi-plus-circle me-2"></i>Додати доставку
                 </button>
             </div>
 
             <SearchBar
                 searchTerm={searchTerm}
                 onSearchChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Search deliveries..."
             />
 
             <DeliveriesTableAdmin
@@ -257,7 +256,7 @@ const DeliveriesIndexAdmin = () => {
                 clients={clients}
             />
 
-            {/* Delete Confirmation Modal */}
+            {/* Видалити Confirmation Modal */}
             {isDeleteModalOpen && (
                 <div className="modal fade show d-block" tabIndex="-1" style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
                     <div className="modal-dialog modal-dialog-centered">
@@ -296,7 +295,7 @@ const DeliveriesIndexAdmin = () => {
                                             Deleting...
                                         </>
                                     ) : (
-                                        "Delete"
+                                        "Видалити"
                                     )}
                                 </button>
                             </div>

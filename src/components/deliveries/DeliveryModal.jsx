@@ -98,7 +98,7 @@ const DeliveryModal = ({
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">
-                            {modalType === 'add' ? 'Add Delivery' : 'Update Delivery'}
+                            {modalType === 'add' ? 'Додати доставку' : 'Оновити доставку'}
                         </h5>
                         <button
                             type="button"
@@ -117,7 +117,7 @@ const DeliveryModal = ({
                                         value={delivery.driver_id}
                                         onChange={onInputChange}
                                     >
-                                        <option value="">Select a driver</option>
+                                        <option value="">Оберіть водія</option>
                                         {drivers.map(driver => (
                                             <option key={driver.id} value={driver.id}>
                                                 {`${driver.first_name} ${driver.last_name}` || `Водій ${driver.id}`}
@@ -134,7 +134,7 @@ const DeliveryModal = ({
                                         value={delivery.client_id}
                                         onChange={onInputChange}
                                     >
-                                        <option value="">Select a client</option>
+                                        <option value="">Оберіть клієнта</option>
                                         {clients.map(client => (
                                             <option key={client.id} value={client.id}>
                                                 {`${client.first_name} ${client.last_name}` || `Client ${client.id}`}
@@ -147,7 +147,7 @@ const DeliveryModal = ({
 
                             <div className="row">
                                 <div className="col-md-6 mb-3">
-                                    <label className="form-label">Pickup Location</label>
+                                    <label className="form-label">Адреса завантаження</label>
                                     <div style={{height: '300px', width: '100%', marginBottom: '10px'}}>
                                         <MapContainer center={pickupMapCenter} zoom={13}
                                                       style={{height: '100%', width: '100%'}}>
@@ -175,7 +175,7 @@ const DeliveryModal = ({
                                 </div>
 
                                 <div className="col-md-6 mb-3">
-                                    <label className="form-label">Dropoff Location</label>
+                                    <label className="form-label">Адреса вивантаження</label>
                                     <div style={{height: '300px', width: '100%', marginBottom: '10px'}}>
                                         <MapContainer center={dropoffMapCenter} zoom={13}
                                                       style={{height: '100%', width: '100%'}}>
@@ -241,7 +241,7 @@ const DeliveryModal = ({
                             className="btn btn-primary"
                             onClick={onConfirm}
                         >
-                            {modalType === 'add' ? 'Add' : 'Update'}
+                            {modalType === 'add' ? 'Додати' : 'Оновити'}
                         </button>
                     </div>
                 </div>

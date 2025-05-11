@@ -96,7 +96,7 @@ const ReviewsIndexAdmin = () => {
 
     const validateForm = () => {
         if (!isEditing && !formData.delivery_id) {
-            alert("Delivery ID is required");
+            alert("ID Доставки is required");
             return false;
         }
         if (!formData.rating) {
@@ -118,7 +118,7 @@ const ReviewsIndexAdmin = () => {
                     className="btn btn-primary"
                     onClick={openCreateModal}
                 >
-                    Add New Відгук
+                    Додати новий відгук
                 </button>
             </div>
 

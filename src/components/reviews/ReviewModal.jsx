@@ -35,7 +35,7 @@ const ReviewModal = ({
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title">{isEdit ? 'Edit Відгук' : 'Leave Відгук'}</h5>
+                        <h5 className="modal-title">{isEdit ? 'Редагувати Відгук' : 'Залишити Відгук'}</h5>
                         <button
                             type="button"
                             className="btn-close"
@@ -91,7 +91,7 @@ const ReviewModal = ({
                                     {isEdit ? 'Updating...' : 'Submitting...'}
                                 </>
                             ) : (
-                                isEdit ? 'Update' : 'Submit'
+                                isEdit ? 'Оновити' : 'Submit'
                             )}
                         </button>
                     </div>
