@@ -46,7 +46,7 @@ const LogBreaksIndexDriver = () => {
     };
 
     const handleDeleteLogBreak = (logBreakId) => {
-        if (window.confirm("Are you sure you want to delete this log break?")) {
+        if (window.confirm("Ви справді хочете видалити цей запис?")) {
             logBreaksDeleteRequest(logBreakId, getAccessToken())
                 .then(() => fetchLogBreaks())
                 .catch(err => console.error("Error deleting log break:", err));

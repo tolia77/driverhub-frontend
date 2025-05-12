@@ -17,7 +17,7 @@ const ReviewsTable = ({ reviews, onEdit, onDelete }) => {
                         <thead className="table-dark sticky-top">
                         <tr>
                             <th>ID Доставки</th>
-                            <th>Rating</th>
+                            <th>Оцінка</th>
                             <th>Відгук</th>
                             <th>Дата створення</th>
                             <th>Дії</th>

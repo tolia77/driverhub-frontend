@@ -101,19 +101,19 @@ const DispatchersIndexAdmin = () => {
 
     const validateForm = () => {
         if (!formData.first_name.trim()) {
-            alert("Ім'я is required");
+            alert("Ім'я є обов'язковим");
             return false;
         }
         if (!formData.last_name.trim()) {
-            alert("Прізвище is required");
+            alert("Прізвище є обов'язковим");
             return false;
         }
         if (!isEditing && !formData.email.trim()) {
-            alert("Email is required");
+            alert("Email є обов'язковим");
             return false;
         }
         if (!isEditing && !formData.password.trim()) {
-            alert("Password is required");
+            alert("Пароль є обов'язковим");
             return false;
         }
         return true;

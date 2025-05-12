@@ -38,7 +38,7 @@ const ReviewFormModal = ({
                             </div>
                         )}
                         <div className="mb-3">
-                            <label className="form-label">Rating (1-5)</label>
+                            <label className="form-label">Оцінка (1-5)</label>
                             <select
                                 className="form-select"
                                 name="rating"

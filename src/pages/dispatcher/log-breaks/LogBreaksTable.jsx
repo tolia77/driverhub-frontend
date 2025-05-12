@@ -4,7 +4,7 @@ const LogBreaksTable = ({ logBreaks }) => {
     if (logBreaks.length === 0) {
         return (
             <div className="alert alert-info">
-                No log breaks found for this driver.
+                Не знайдено жодного запису про перерву.
             </div>
         );
     }

@@ -96,15 +96,15 @@ const ReviewsIndexAdmin = () => {
 
     const validateForm = () => {
         if (!isEditing && !formData.delivery_id) {
-            alert("ID Доставки is required");
+            alert("ID Доставки є обов'язковим");
             return false;
         }
         if (!formData.rating) {
-            alert("Rating is required");
+            alert("Оцінка є обов'язковим");
             return false;
         }
         if (formData.rating < 1 || formData.rating > 5) {
-            alert("Rating must be between 1 and 5");
+            alert("Оцінка повинна бути від 1 до 5");
             return false;
         }
         return true;

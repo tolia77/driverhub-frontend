@@ -18,7 +18,7 @@ const ReviewsTable = ({ reviews, onEdit, onDelete }) => {
                         <tr>
                             <th>ID</th>
                             <th>ID Доставки</th>
-                            <th>Rating</th>
+                            <th>Оцінка</th>
                             <th>Text</th>
                             <th>Дата створення</th>
                             <th>Дії</th>

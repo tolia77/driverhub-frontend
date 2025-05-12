@@ -10,7 +10,7 @@ const DeliveriesIndexClient = () => {
     const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
     const [currentDelivery, setCurrentDelivery] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [actionType, setActionType] = useState('create'); // 'create', 'edit', or 'delete'
+    const [actionType, setActionType] = useState('create');
 
     useEffect(() => {
         const fetchDeliveries = async () => {
@@ -106,7 +106,7 @@ const DeliveriesIndexClient = () => {
                     <div className="modal-dialog modal-dialog-centered">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title">Видалити Відгук</h5>
+                                <h5 className="modal-title">Видалити відгук</h5>
                                 <button
                                     type="button"
                                     className="btn-close"
@@ -115,7 +115,7 @@ const DeliveriesIndexClient = () => {
                                 ></button>
                             </div>
                             <div className="modal-body">
-                                <p>Are you sure you want to delete this review?</p>
+                                <p>Ви справді хочете видалити цей відгук?</p>
                             </div>
                             <div className="modal-footer">
                                 <button
@@ -136,7 +136,7 @@ const DeliveriesIndexClient = () => {
                                         <>
                                             <span className="spinner-border spinner-border-sm me-1" role="status"
                                                   aria-hidden="true"></span>
-                                            Deleting...
+                                            Видалення...
                                         </>
                                     ) : (
                                         "Видалити"

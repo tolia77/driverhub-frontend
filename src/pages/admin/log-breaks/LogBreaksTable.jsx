@@ -4,7 +4,7 @@ const LogBreaksTable = ({ logBreaks, onDelete, onEdit, isAdmin = false }) => {
     if (logBreaks.length === 0) {
         return (
             <div className="alert alert-info">
-                No log breaks found for this delivery.
+                Записів про перерви не знайдено
             </div>
         );
     }

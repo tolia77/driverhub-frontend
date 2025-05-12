@@ -4,7 +4,7 @@ const DispatchersTable = ({ dispatchers, onEdit, onDelete }) => {
     if (dispatchers.length === 0) {
         return (
             <div className="alert alert-info">
-                No dispatchers found.
+                Диспетчерів не знайдено
             </div>
         );
     }
