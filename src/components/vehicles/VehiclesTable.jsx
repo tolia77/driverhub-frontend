@@ -6,7 +6,6 @@ const VehiclesTable = ({ vehicles, onUpdate, onDelete }) => {
                     <table className="table table-hover table-striped mb-0">
                         <thead className="table-dark sticky-top">
                         <tr>
-                            <th>ID</th>
                             <th>Модель</th>
                             <th>Номерний знак</th>
                             <th>Вантажопідйомність</th>
@@ -18,7 +17,6 @@ const VehiclesTable = ({ vehicles, onUpdate, onDelete }) => {
                         <tbody>
                         {vehicles.map(vehicle => (
                             <tr key={vehicle.id}>
-                                <td>{vehicle.id}</td>
                                 <td>{vehicle.model}</td>
                                 <td>{vehicle.license_plate}</td>
                                 <td>{vehicle.capacity}</td>

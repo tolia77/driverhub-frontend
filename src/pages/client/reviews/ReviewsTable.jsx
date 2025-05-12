@@ -16,7 +16,7 @@ const ReviewsTable = ({ reviews, onEdit, onDelete }) => {
                     <table className="table table-hover table-striped mb-0">
                         <thead className="table-dark sticky-top">
                         <tr>
-                            <th>ID Доставки</th>
+                            <th>Доставка</th>
                             <th>Оцінка</th>
                             <th>Відгук</th>
                             <th>Дата створення</th>

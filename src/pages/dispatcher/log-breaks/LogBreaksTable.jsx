@@ -16,7 +16,6 @@ const LogBreaksTable = ({ logBreaks }) => {
                     <table className="table table-hover table-striped mb-0">
                         <thead className="table-dark sticky-top">
                         <tr>
-                            <th>ID</th>
                             <th>Адреса</th>
                             <th>Час початку</th>
                             <th>Час завершення</th>
@@ -26,7 +25,6 @@ const LogBreaksTable = ({ logBreaks }) => {
                         <tbody>
                         {logBreaks.map((logBreak) => (
                             <tr key={logBreak.id}>
-                                <td>{logBreak.id}</td>
                                 <td>{logBreak.location.address || `${logBreak.location.latitude}, ${logBreak.location.longitude}`}</td>
                                 <td>{format(new Date(logBreak.start_time), "yyyy-MM-dd HH:mm")}</td>
                                 <td>{format(new Date(logBreak.end_time), "yyyy-MM-dd HH:mm")}</td>

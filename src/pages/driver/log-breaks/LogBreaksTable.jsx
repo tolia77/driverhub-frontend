@@ -8,7 +8,6 @@ const LogBreaksTable = ({ logBreaks, onEdit, onDelete }) => {
                     <table className="table table-hover table-striped mb-0">
                         <thead className="table-dark sticky-top">
                         <tr>
-                            <th>ID</th>
                             <th>Адреса</th>
                             <th>Час початку</th>
                             <th>Час завершення</th>
@@ -20,13 +19,12 @@ const LogBreaksTable = ({ logBreaks, onEdit, onDelete }) => {
                         {logBreaks.length === 0 ? (
                             <tr>
                                 <td colSpan="6" className="text-center py-4">
-                                    No log breaks found
+                                    Перерви не знайдені
                                 </td>
                             </tr>
                         ) : (
                             logBreaks.map((logBreak) => (
                                 <tr key={logBreak.id}>
-                                    <td>{logBreak.id}</td>
                                     <td>{logBreak.location.address || `${logBreak.location.latitude}, ${logBreak.location.longitude}`}</td>
                                     <td>{format(new Date(logBreak.start_time), "yyyy-MM-dd HH:mm")}</td>
                                     <td>{format(new Date(logBreak.end_time), "yyyy-MM-dd HH:mm")}</td>
