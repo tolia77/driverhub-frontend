@@ -106,6 +106,7 @@ const VehiclesIndex = () => {
         const errors = {};
         if (!currentVehicle.model.trim()) errors.model = "Модель є обов'язковою";
         if (!currentVehicle.license_plate.trim()) errors.license_plate = "Номерний знак є обов'язковим";
+        if (currentVehicle.license_plate.trim().length !== 8) errors.license_plate = "Номерний знак повинен містити 8 символів";
         if (!currentVehicle.capacity || isNaN(currentVehicle.capacity) || currentVehicle.capacity <= 0) {
             errors.capacity = "Вантажопідйомність повинна бути додатнім числом";
         }
