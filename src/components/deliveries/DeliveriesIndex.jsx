@@ -4,14 +4,15 @@ import {
     deliveryShowRequest,
     deliveriesCreateRequest,
     deliveriesUpdateRequest,
-} from "src/services/backend/deliveriesRequests";
-import {driversIndexRequest} from "src/services/backend/driversRequests";
-import DeliveriesTable from "src/components/deliveries/DeliveriesTable";
-import DeliveryModal from "src/components/deliveries/DeliveryModal";
+    deliveriesDeleteRequest
+} from "src/services/backend/deliveriesRequests.js";
+import {driversIndexRequest} from "src/services/backend/driversRequests.js";
+import DeliveriesTable from "src/components/deliveries/DeliveriesTable.jsx";
+import DeliveryModal from "src/components/deliveries/DeliveryModal.jsx";
 import {getAccessToken} from "src/utils/auth.js";
 import {clientsIndexRequest} from "src/services/backend/clientsRequests.js";
 
-const DeliveriesIndex = () => {
+const DeliveriesIndex = ({userRole = 'dispatcher'}) => {
     const [deliveries, setDeliveries] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalType, setModalType] = useState('add');
@@ -48,7 +49,11 @@ const DeliveriesIndex = () => {
         delivery_notes: '',
         created_at: ''
     });
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
     const authorization = getAccessToken();
+
+    const isAdmin = userRole === 'admin';
 
     useEffect(() => {
         fetchDeliveries();
@@ -117,6 +122,24 @@ const DeliveriesIndex = () => {
             setIsModalOpen(true);
         } catch (error) {
             console.error("Error fetching deliveries details:", error);
+        }
+    };
+
+    const handleDeleteDelivery = (id) => {
+        setCurrentDelivery(deliveries.find(d => d.id === id));
+        setIsDeleteModalOpen(true);
+    };
+
+    const confirmDeleteDelivery = async () => {
+        try {
+            setIsDeleting(true);
+            await deliveriesDeleteRequest(currentDelivery.id, authorization);
+            setDeliveries(deliveries.filter(d => d.id !== currentDelivery.id));
+            setIsDeleteModalOpen(false);
+        } catch (error) {
+            console.error("Error deleting delivery:", error);
+        } finally {
+            setIsDeleting(false);
         }
     };
 
@@ -360,9 +383,11 @@ const DeliveriesIndex = () => {
             <DeliveriesTable
                 deliveries={filteredDeliveries}
                 onUpdate={handleUpdateDelivery}
+                onDelete={isAdmin ? handleDeleteDelivery : null}
                 showDriver={true}
                 showClient={true}
                 showActions={true}
+                userRole={userRole}
             />
 
             <DeliveryModal
@@ -376,6 +401,54 @@ const DeliveriesIndex = () => {
                 drivers={drivers}
                 clients={clients}
             />
+
+            {/* Delete Confirmation Modal */}
+            {isDeleteModalOpen && (
+                <div className="modal fade show d-block" tabIndex="-1" style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
+                    <div className="modal-dialog modal-dialog-centered">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">Підтвердження видалення</h5>
+                                <button
+                                    type="button"
+                                    className="btn-close"
+                                    onClick={() => setIsDeleteModalOpen(false)}
+                                    disabled={isDeleting}
+                                ></button>
+                            </div>
+                            <div className="modal-body">
+                                <p>Ви впевнені, що хочете видалити цю доставку?</p>
+                                <p className="text-danger">Цю дію не можна скасувати.</p>
+                            </div>
+                            <div className="modal-footer">
+                                <button
+                                    type="button"
+                                    className="btn btn-secondary"
+                                    onClick={() => setIsDeleteModalOpen(false)}
+                                    disabled={isDeleting}
+                                >
+                                    Скасувати
+                                </button>
+                                <button
+                                    type="button"
+                                    className="btn btn-danger"
+                                    onClick={confirmDeleteDelivery}
+                                    disabled={isDeleting}
+                                >
+                                    {isDeleting ? (
+                                        <>
+                                            <span className="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+                                            Видалення...
+                                        </>
+                                    ) : (
+                                        "Видалити"
+                                    )}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

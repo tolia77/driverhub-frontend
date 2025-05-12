@@ -2,7 +2,6 @@ import {BrowserRouter, Route, Routes} from "react-router";
 import Layout from "src/components/layout/Layout.jsx";
 import Index from "src/pages/Index.jsx";
 import OnlyDispatchers from "src/components/OnlyDispatchers.jsx";
-import DeliveriesIndex from "src/pages/dispatcher/deliveries/DeliveriesIndex.jsx";
 import LogBreaksIndex from "src/pages/dispatcher/log-breaks/LogBreaksIndex.jsx";
 import ChatDispatcher from "src/pages/dispatcher/chat/ChatDispatcher.jsx";
 import OnlyDrivers from "src/components/OnlyDrivers.jsx";
@@ -25,6 +24,7 @@ import DispatchersIndexAdmin from "src/pages/admin/dispatchers/DispatchersIndexA
 import ReviewsIndexAdmin from "src/pages/admin/reviews/ReviewsIndexAdmin.jsx";
 import ClientsIndexAdmin from "src/pages/admin/clients/ClientsIndexAdmin.jsx";
 import ClientReviewsIndex from "src/pages/client/reviews/ClientReviewsIndex.jsx";
+import DeliveriesIndexDispatcher from "src/pages/dispatcher/deliveries/DeliveriesIndexDispatcher.jsx";
 
 function App() {
     return (
@@ -33,7 +33,7 @@ function App() {
                 <Route path="/" element={<Layout/>}>
                     <Route index element={<Index/>}/>
                     <Route path="dispatcher/" element={<OnlyDispatchers/>}>
-                        <Route path="deliveries/" element={<DeliveriesIndex/>}/>
+                        <Route path="deliveries/" element={<DeliveriesIndexDispatcher/>}/>
                         <Route path="drivers/" element={<DriversIndexDispatcher/>}/>
                         <Route path="vehicles/" element={<VehiclesIndexDispatcher/>}/>
                         <Route path="log-breaks/" element={<LogBreaksIndex/>}/>
