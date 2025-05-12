@@ -44,7 +44,7 @@ const Account = () => {
                     <div className="col-md-8 col-lg-6">
                         <div className="card shadow-sm">
                             <div className="card-body p-4">
-                                <h1 className="card-title text-center mb-4">Акаунт</h1>
+                                <h1 className="card-title text-center mb-4">Мій Акаунт</h1>
 
                                 <div className="mb-4">
                                     <div className="d-flex justify-content-between py-2 border-bottom">
@@ -60,7 +60,7 @@ const Account = () => {
                                         <span>{account.email}</span>
                                     </div>
                                     <div className="d-flex justify-content-between py-2 border-bottom">
-                                        <span className="fw-bold">роль:</span>
+                                        <span className="fw-bold">Роль:</span>
                                         <span className="text-capitalize">{account.role}</span>
                                     </div>
                                     {account.license_number && (
