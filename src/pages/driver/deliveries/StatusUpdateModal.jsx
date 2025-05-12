@@ -17,7 +17,7 @@ const StatusUpdateModal = ({ isOpen, currentStatus, onStatusChange, onConfirm, o
                         >
                             <option value="Pending">Очікує</option>
                             <option value="In-Transit">В процесі</option>
-                            <option value="Completed">Доставлена</option>
+                            <option value="Delivered">Доставлена</option>
                             <option value="Failed">Невдала</option>
                         </select>
                     </div>

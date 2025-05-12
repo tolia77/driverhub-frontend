@@ -340,7 +340,7 @@ const DeliveriesIndex = ({userRole = 'dispatcher'}) => {
                                 <option value="">Всі статуси</option>
                                 <option value="Pending">Очікує</option>
                                 <option value="In-Transit">В процесі</option>
-                                <option value="Completed">Завершена</option>
+                                <option value="Delivered">Завершена</option>
                                 <option value="Failed">Невдала</option>
                             </select>
                         </div>

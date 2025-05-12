@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {deliveriesMyClientRequest} from "src/services/backend/deliveriesRequests.js";
 import {reviewsCreateRequest, reviewsUpdateRequest, reviewsDeleteRequest} from "src/services/backend/reviewsRequests.js";
-import DeliveriesTable from "src/pages/client/deliveries/DeliveriesTable.jsx";
+import DeliveriesTable from "src/components/deliveries/DeliveriesTable.jsx";
 import ReviewModal from "src/components/reviews/ReviewModal.jsx";
 import {getAccessToken} from "src/utils/auth.js";
 
@@ -11,6 +11,10 @@ const DeliveriesIndexClient = () => {
     const [currentDelivery, setCurrentDelivery] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [actionType, setActionType] = useState('create');
+    const [reviewData, setReviewData] = useState({
+        text: "",
+        rating: 5
+    });
 
     useEffect(() => {
         const fetchDeliveries = async () => {
@@ -44,11 +48,6 @@ const DeliveriesIndexClient = () => {
 
         setIsReviewModalOpen(true);
     };
-
-    const [reviewData, setReviewData] = useState({
-        text: "",
-        rating: 5
-    });
 
     const handleSubmitReview = async (data) => {
         if (!currentDelivery) return;
@@ -89,7 +88,15 @@ const DeliveriesIndexClient = () => {
     return (
         <div className="container-fluid py-4">
             <h1 className="mb-4">Мої Доставки</h1>
-            <DeliveriesTable deliveries={deliveries} onOpenReviewModal={openReviewModal}/>
+
+            <DeliveriesTable
+                deliveries={deliveries}
+                onOpenReviewModal={openReviewModal}
+                showDriver={true}
+                showClient={false}
+                showActions={true}
+                userRole="client"
+            />
 
             <ReviewModal
                 isOpen={isReviewModalOpen && actionType !== 'delete'}
@@ -100,7 +107,7 @@ const DeliveriesIndexClient = () => {
                 isEdit={actionType === 'edit'}
             />
 
-            {/* Видалити Confirmation Modal */}
+            {/* Delete Confirmation Modal */}
             {isReviewModalOpen && actionType === 'delete' && (
                 <div className="modal fade show d-block" tabIndex="-1" style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
                     <div className="modal-dialog modal-dialog-centered">

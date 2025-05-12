@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
 import { deliveriesMyDriverRequest, deliveriesUpdateStatusRequest } from "src/services/backend/deliveriesRequests";
 import { logBreaksCreateRequest } from "src/services/backend/logBreaksRequests";
-import DeliveriesTable from "src/pages/driver/deliveries/DeliveriesTable";
+import DeliveriesTable from "src/components/deliveries/DeliveriesTable";
 import StatusUpdateModal from "src/pages/driver/deliveries/StatusUpdateModal";
 import LogBreakModal from "src/components/log-breaks/LogBreakModal.jsx";
-import {getAccessToken} from "src/utils/auth.js";
+import { getAccessToken } from "src/utils/auth.js";
 
 const DeliveriesIndexDriver = () => {
     const [deliveries, setDeliveries] = useState([]);
@@ -44,7 +43,7 @@ const DeliveriesIndexDriver = () => {
             await deliveriesUpdateStatusRequest(
                 currentDelivery.id,
                 newStatus,
-                localStorage.getItem("accessToken")
+                getAccessToken()
             );
             setDeliveries(deliveries.map(delivery =>
                 delivery.id === currentDelivery.id
@@ -65,7 +64,7 @@ const DeliveriesIndexDriver = () => {
                     ...logBreakData,
                     delivery_id: currentDelivery.id
                 },
-                localStorage.getItem("accessToken")
+                getAccessToken()
             );
             setIsLogBreakModalOpen(false);
         } catch (err) {
@@ -84,6 +83,10 @@ const DeliveriesIndexDriver = () => {
                 deliveries={deliveries}
                 onUpdateStatus={openStatusModal}
                 onLogBreak={openLogBreakModal}
+                showDriver={false}
+                showClient={true}
+                showActions={true}
+                userRole="driver"
             />
 
             <StatusUpdateModal
