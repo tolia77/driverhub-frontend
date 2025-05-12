@@ -15,7 +15,7 @@ const VehicleSelectModal = ({
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title">Select Vehicle</h5>
+                        <h5 className="modal-title">Оберіть транспортний засіб</h5>
                         <button
                             type="button"
                             className="btn-close"
@@ -36,7 +36,7 @@ const VehicleSelectModal = ({
                                     </button>
                                 ))}
                             </div> :
-                            <p>There is no unassigned vehicles left. <Link to={`/${getUserRole()}/vehicles/`}>Add new vehicle</Link>
+                            <p>Більше немає вільних транспортних засобів. <Link to={`/${getUserRole()}/vehicles/`}>Додати новий</Link>
                             </p>
                         }
                     </div>
@@ -46,7 +46,7 @@ const VehicleSelectModal = ({
                             className="btn btn-secondary"
                             onClick={onClose}
                         >
-                            Cancel
+                            Скасувати
                         </button>
                     </div>
                 </div>

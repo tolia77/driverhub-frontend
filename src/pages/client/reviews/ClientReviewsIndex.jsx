@@ -56,7 +56,7 @@ const ClientReviewsIndex = () => {
     };
 
     const handleDeleteReview = (reviewId) => {
-        if (window.confirm("Are you sure you want to delete this review?")) {
+        if (window.confirm("Ви справді хочете видалити цей відгук?")) {
             setIsLoading(true);
             reviewsDeleteRequest(getAccessToken(), reviewId)
                 .then(() => fetchReviews())
@@ -70,13 +70,13 @@ const ClientReviewsIndex = () => {
     return (
         <div className="container py-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <h1 className="mb-0">My Reviews</h1>
+                <h1 className="mb-0">Мої відгуки</h1>
             </div>
 
             {isLoading && !isModalOpen ? (
                 <div className="text-center">
                     <div className="spinner-border text-primary" role="status">
-                        <span className="visually-hidden">Loading...</span>
+                        <span className="visually-hidden">Завантаження...</span>
                     </div>
                 </div>
             ) : (

@@ -2,7 +2,7 @@ const ChatSidebar = ({drivers, selectedDriver, onSelectDriver}) => {
     return (
         <div className="card h-100">
             <div className="card-header">
-                <h2 className="mb-0">Drivers</h2>
+                <h2 className="mb-0">Водії</h2>
             </div>
             <div className="card-body p-0">
                 <ul className="list-group list-group-flush">
@@ -21,5 +21,4 @@ const ChatSidebar = ({drivers, selectedDriver, onSelectDriver}) => {
         </div>
     );
 };
-
 export default ChatSidebar;

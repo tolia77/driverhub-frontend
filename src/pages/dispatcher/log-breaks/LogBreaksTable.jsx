@@ -4,7 +4,7 @@ const LogBreaksTable = ({ logBreaks }) => {
     if (logBreaks.length === 0) {
         return (
             <div className="alert alert-info">
-                No log breaks found for this driver.
+                Не знайдено жодного запису про перерву.
             </div>
         );
     }
@@ -17,10 +17,10 @@ const LogBreaksTable = ({ logBreaks }) => {
                         <thead className="table-dark sticky-top">
                         <tr>
                             <th>ID</th>
-                            <th>Location</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                            <th>Cost</th>
+                            <th>Адреса</th>
+                            <th>Час початку</th>
+                            <th>Час завершення</th>
+                            <th>Вартість</th>
                         </tr>
                         </thead>
                         <tbody>

@@ -16,11 +16,11 @@ const ReviewsTable = ({ reviews, onEdit, onDelete }) => {
                     <table className="table table-hover table-striped mb-0">
                         <thead className="table-dark sticky-top">
                         <tr>
-                            <th>Delivery ID</th>
-                            <th>Rating</th>
-                            <th>Review</th>
-                            <th>Created At</th>
-                            <th>Actions</th>
+                            <th>ID Доставки</th>
+                            <th>Оцінка</th>
+                            <th>Відгук</th>
+                            <th>Дата створення</th>
+                            <th>Дії</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -39,13 +39,13 @@ const ReviewsTable = ({ reviews, onEdit, onDelete }) => {
                                         className="btn btn-sm btn-warning me-2"
                                         onClick={() => onEdit(review)}
                                     >
-                                        Edit
+                                        Редагувати
                                     </button>
                                     <button
                                         className="btn btn-sm btn-danger"
                                         onClick={() => onDelete(review.id)}
                                     >
-                                        Delete
+                                        Видалити
                                     </button>
                                 </td>
                             </tr>

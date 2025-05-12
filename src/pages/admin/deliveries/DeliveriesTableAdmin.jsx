@@ -11,19 +11,19 @@ const DeliveriesTableAdmin = ({ deliveries, onUpdate, onDelete }) => {
                         <thead className="table-dark sticky-top">
                         <tr>
                             <th>ID</th>
-                            <th>Driver ID</th>
-                            <th>Pickup Location</th>
-                            <th>Dropoff Location</th>
-                            <th>Status</th>
-                            <th>Created At</th>
-                            <th>Actions</th>
+                            <th>Водій ID</th>
+                            <th>Адреса завантаження</th>
+                            <th>Адреса вивантаження</th>
+                            <th>Статус</th>
+                            <th>Дата створення</th>
+                            <th>Дії</th>
                         </tr>
                         </thead>
                         <tbody>
                         {deliveries.map(delivery => (
                             <tr key={delivery.id}>
                                 <td>{delivery.id}</td>
-                                <td>{delivery.driver_id || 'None'}</td>
+                                <td>{delivery.driver_id || 'Не вказано'}</td>
                                 <td>{delivery?.pickup_location?.address || `${delivery.pickup_location.latitude}, ${delivery.pickup_location.longitude}`}</td>
                                 <td>{delivery?.dropoff_location?.address || `${delivery.dropoff_location.latitude}, ${delivery.dropoff_location.longitude}`}</td>
                                 <td>{delivery.status}</td>
@@ -34,13 +34,13 @@ const DeliveriesTableAdmin = ({ deliveries, onUpdate, onDelete }) => {
                                             className="btn btn-sm btn-warning"
                                             onClick={() => onUpdate(delivery.id)}
                                         >
-                                            <i className="bi bi-pencil"></i> Edit
+                                            <i className="bi bi-pencil"></i> Редагувати
                                         </button>
                                         <button
                                             className="btn btn-sm btn-danger"
                                             onClick={() => onDelete(delivery.id)}
                                         >
-                                            <i className="bi bi-trash"></i> Delete
+                                            <i className="bi bi-trash"></i> Видалити
                                         </button>
                                     </div>
                                 </td>

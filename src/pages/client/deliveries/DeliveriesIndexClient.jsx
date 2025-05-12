@@ -10,7 +10,7 @@ const DeliveriesIndexClient = () => {
     const [isReviewModalOpen, setIsReviewModalOpen] = useState(false);
     const [currentDelivery, setCurrentDelivery] = useState(null);
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [actionType, setActionType] = useState('create'); // 'create', 'edit', or 'delete'
+    const [actionType, setActionType] = useState('create');
 
     useEffect(() => {
         const fetchDeliveries = async () => {
@@ -88,7 +88,7 @@ const DeliveriesIndexClient = () => {
 
     return (
         <div className="container-fluid py-4">
-            <h1 className="mb-4">My Deliveries</h1>
+            <h1 className="mb-4">Мої Доставки</h1>
             <DeliveriesTable deliveries={deliveries} onOpenReviewModal={openReviewModal}/>
 
             <ReviewModal
@@ -100,13 +100,13 @@ const DeliveriesIndexClient = () => {
                 isEdit={actionType === 'edit'}
             />
 
-            {/* Delete Confirmation Modal */}
+            {/* Видалити Confirmation Modal */}
             {isReviewModalOpen && actionType === 'delete' && (
                 <div className="modal fade show d-block" tabIndex="-1" style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
                     <div className="modal-dialog modal-dialog-centered">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title">Delete Review</h5>
+                                <h5 className="modal-title">Видалити відгук</h5>
                                 <button
                                     type="button"
                                     className="btn-close"
@@ -115,7 +115,7 @@ const DeliveriesIndexClient = () => {
                                 ></button>
                             </div>
                             <div className="modal-body">
-                                <p>Are you sure you want to delete this review?</p>
+                                <p>Ви справді хочете видалити цей відгук?</p>
                             </div>
                             <div className="modal-footer">
                                 <button
@@ -124,7 +124,7 @@ const DeliveriesIndexClient = () => {
                                     onClick={() => setIsReviewModalOpen(false)}
                                     disabled={isSubmitting}
                                 >
-                                    Cancel
+                                    Скасувати
                                 </button>
                                 <button
                                     type="button"
@@ -136,10 +136,10 @@ const DeliveriesIndexClient = () => {
                                         <>
                                             <span className="spinner-border spinner-border-sm me-1" role="status"
                                                   aria-hidden="true"></span>
-                                            Deleting...
+                                            Видалення...
                                         </>
                                     ) : (
-                                        "Delete"
+                                        "Видалити"
                                     )}
                                 </button>
                             </div>

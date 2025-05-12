@@ -1,6 +1,6 @@
-import { useState } from "react";
+import {useState} from "react";
 
-const MessageInput = ({ onSendMessage }) => {
+const MessageInput = ({onSendMessage}) => {
     const [message, setMessage] = useState("");
 
     const handleSend = () => {
@@ -26,13 +26,13 @@ const MessageInput = ({ onSendMessage }) => {
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
                     onKeyDown={handleKeyPress}
-                    placeholder="Type a message"
+                    placeholder="Введіть повідомлення"
                 />
                 <button
                     className="btn btn-primary"
                     onClick={handleSend}
                 >
-                    Send
+                    Надіслати
                 </button>
             </div>
         </div>

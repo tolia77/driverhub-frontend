@@ -159,15 +159,15 @@ const DriversIndex = () => {
 
     const validateForm = () => {
         const errors = {};
-        if (!currentDriver.first_name.trim()) errors.first_name = "First name is required";
-        if (!currentDriver.last_name.trim()) errors.last_name = "Last name is required";
+        if (!currentDriver.first_name.trim()) errors.first_name = "Ім'я є обов'язковим";
+        if (!currentDriver.last_name.trim()) errors.last_name = "Прізвище є обов'язковим";
         if (!currentDriver.email.trim()) {
-            errors.email = "Email is required";
+            errors.email = "Email є обов'язковим";
         } else if (!/\S+@\S+\.\S+/.test(currentDriver.email)) {
-            errors.email = "Invalid email format";
+            errors.email = "Неправильний формат email";
         }
-        if (modalType === 'add' && !currentDriver.password) errors.password = "Password is required";
-        if (!currentDriver.license_number.trim()) errors.license_number = "License number is required";
+        if (modalType === 'add' && !currentDriver.password) errors.password = "Пароль є обов'язковим";
+        if (!currentDriver.license_number.trim()) errors.license_number = "Номер водійського посвідчення є обов'язковим";
 
         setFormErrors(errors);
         return Object.keys(errors).length === 0;
@@ -176,12 +176,12 @@ const DriversIndex = () => {
     return (
         <div className="container-fluid py-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <h1 className="mb-0">Drivers</h1>
+                <h1 className="mb-0">Водії</h1>
                 <button
                     className="btn btn-success"
                     onClick={handleAddDriver}
                 >
-                    <i className="bi bi-plus-circle me-2"></i>Add Driver
+                    <i className="bi bi-plus-circle me-2"></i>Додати водія
                 </button>
             </div>
 

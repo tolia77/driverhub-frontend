@@ -70,12 +70,12 @@ const LogBreaksIndexAdmin = () => {
             })
             .catch(error => {
                 console.error("Error saving log break:", error);
-                alert("Failed to save log break. Please try again.");
+                alert("Помилка при збереженні.");
             });
     };
 
     const handleDeleteLogBreak = (logBreakId) => {
-        if (window.confirm("Are you sure you want to delete this log break?")) {
+        if (window.confirm("Ви справді хочете видалити цей запис?")) {
             logBreaksDeleteRequest(logBreakId, getAccessToken())
                 .then(() => fetchLogBreaks())
                 .catch(err => console.error("Error deleting log break:", err));
@@ -85,13 +85,13 @@ const LogBreaksIndexAdmin = () => {
     return (
         <div className="container py-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <h1 className="mb-0">Admin Log Breaks Management</h1>
+                <h1 className="mb-0">Керування записами про зупинки</h1>
                 {selectedDelivery && (
                     <button
                         className="btn btn-primary"
                         onClick={openCreateModal}
                     >
-                        Add New Log Break
+                        Додати запис про перерву
                     </button>
                 )}
             </div>

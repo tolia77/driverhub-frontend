@@ -8,15 +8,15 @@ const DeliveriesTable = ({ deliveries, onUpdate }) => {
                     <table className="table table-hover table-striped mb-0">
                         <thead className="table-dark sticky-top">
                         <tr>
-                            <th>Driver</th>
-                            <th>Client</th>
-                            <th>Pickup Location</th>
-                            <th>Dropoff Location</th>
-                            <th>Package details</th>
-                            <th>Delivery notes</th>
-                            <th>Status</th>
-                            <th>Created At</th>
-                            <th>Actions</th>
+                            <th>Водій</th>
+                            <th>Клієнт</th>
+                            <th>Адреса завантаження</th>
+                            <th>Адреса вивантаження</th>
+                            <th>Деталі доставки</th>
+                            <th>Примітки</th>
+                            <th>Статус</th>
+                            <th>Дата створення</th>
+                            <th>Дії</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -36,7 +36,7 @@ const DeliveriesTable = ({ deliveries, onUpdate }) => {
                                             className="btn btn-sm btn-warning"
                                             onClick={() => onUpdate(delivery.id)}
                                         >
-                                            <i className="bi bi-pencil"></i> Update
+                                            <i className="bi bi-pencil"></i> Оновити
                                         </button>
                                     </div>
                                 </td>

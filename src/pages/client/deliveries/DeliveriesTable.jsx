@@ -11,11 +11,11 @@ const DeliveriesTable = ({deliveries, onOpenReviewModal}) => {
                         <thead className="table-dark sticky-top">
                         <tr>
                             <th>ID</th>
-                            <th>Pickup Location</th>
-                            <th>Dropoff Location</th>
-                            <th>Package Details</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                            <th>Адреса завантаження</th>
+                            <th>Адреса вивантаження</th>
+                            <th>Деталі доставки</th>
+                            <th>Статус</th>
+                            <th>Дії</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -35,13 +35,13 @@ const DeliveriesTable = ({deliveries, onOpenReviewModal}) => {
                                                         className="btn btn-sm btn-warning"
                                                         onClick={() => onOpenReviewModal(delivery, 'edit')}
                                                     >
-                                                        Edit Review
+                                                        Редагувати відгук
                                                     </button>
                                                     <button
                                                         className="btn btn-sm btn-danger"
                                                         onClick={() => onOpenReviewModal(delivery, 'delete')}
                                                     >
-                                                        Delete
+                                                        Видалити
                                                     </button>
                                                 </>
                                             ) : (
@@ -49,7 +49,7 @@ const DeliveriesTable = ({deliveries, onOpenReviewModal}) => {
                                                     className="btn btn-sm btn-primary"
                                                     onClick={() => onOpenReviewModal(delivery, 'create')}
                                                 >
-                                                    Leave Review
+                                                    Залишити відгук
                                                 </button>
                                             )}
                                         </div>

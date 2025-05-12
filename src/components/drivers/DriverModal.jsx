@@ -17,7 +17,7 @@ const DriverModal = ({
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">
-                            {modalType === 'add' ? 'Add Driver' : 'Update Driver'}
+                            {modalType === 'add' ? 'Додати водія' : 'Оновити водія'}
                         </h5>
                         <button
                             type="button"
@@ -29,7 +29,7 @@ const DriverModal = ({
                         <form>
                             <div className="row">
                                 <div className="col-md-6 mb-3">
-                                    <label className="form-label">First Name</label>
+                                    <label className="form-label">Ім'я</label>
                                     <input
                                         type="text"
                                         className={`form-control ${errors.first_name ? 'is-invalid' : ''}`}
@@ -40,7 +40,7 @@ const DriverModal = ({
                                     {errors.first_name && <div className="invalid-feedback">{errors.first_name}</div>}
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label className="form-label">Last Name</label>
+                                    <label className="form-label">Прізвище</label>
                                     <input
                                         type="text"
                                         className={`form-control ${errors.last_name ? 'is-invalid' : ''}`}
@@ -64,7 +64,7 @@ const DriverModal = ({
                             </div>
                             {modalType === 'add' && (
                                 <div className="mb-3">
-                                    <label className="form-label">Password</label>
+                                    <label className="form-label">Пароль</label>
                                     <input
                                         type="password"
                                         className={`form-control ${errors.password ? 'is-invalid' : ''}`}
@@ -76,7 +76,7 @@ const DriverModal = ({
                                 </div>
                             )}
                             <div className="mb-3">
-                                <label className="form-label">License Number</label>
+                                <label className="form-label">Номер водійського посвідчення</label>
                                 <input
                                     type="text"
                                     className={`form-control ${errors.license_number ? 'is-invalid' : ''}`}
@@ -87,7 +87,7 @@ const DriverModal = ({
                                 {errors.license_number && <div className="invalid-feedback">{errors.license_number}</div>}
                             </div>
                             <div className="mb-3">
-                                <label className="form-label">Vehicle</label>
+                                <label className="form-label">Транспортний засіб</label>
                                 <div
                                     className="form-control d-flex justify-content-between align-items-center"
                                     onClick={onSelectVehicle}
@@ -96,7 +96,7 @@ const DriverModal = ({
                   <span>
                     {driver.vehicle_id && vehiclesMap[driver.vehicle_id]
                         ? `${vehiclesMap[driver.vehicle_id].model} (${vehiclesMap[driver.vehicle_id].license_plate})`
-                        : "Choose vehicle..."}
+                        : "Обрати транспортний засіб..."}
                   </span>
                                     <i className="bi bi-chevron-down"></i>
                                 </div>
@@ -109,14 +109,14 @@ const DriverModal = ({
                             className="btn btn-secondary"
                             onClick={onClose}
                         >
-                            Cancel
+                            Скасувати
                         </button>
                         <button
                             type="button"
                             className="btn btn-primary"
                             onClick={onConfirm}
                         >
-                            {modalType === 'add' ? 'Confirm' : 'Update'}
+                            {modalType === 'add' ? 'Confirm' : 'Оновити'}
                         </button>
                     </div>
                 </div>

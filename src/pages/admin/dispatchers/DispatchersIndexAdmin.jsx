@@ -101,19 +101,19 @@ const DispatchersIndexAdmin = () => {
 
     const validateForm = () => {
         if (!formData.first_name.trim()) {
-            alert("First name is required");
+            alert("Ім'я є обов'язковим");
             return false;
         }
         if (!formData.last_name.trim()) {
-            alert("Last name is required");
+            alert("Прізвище є обов'язковим");
             return false;
         }
         if (!isEditing && !formData.email.trim()) {
-            alert("Email is required");
+            alert("Email є обов'язковим");
             return false;
         }
         if (!isEditing && !formData.password.trim()) {
-            alert("Password is required");
+            alert("Пароль є обов'язковим");
             return false;
         }
         return true;
@@ -122,12 +122,12 @@ const DispatchersIndexAdmin = () => {
     return (
         <div className="container py-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <h1 className="mb-0">Dispatchers Management</h1>
+                <h1 className="mb-0">Керування Диспетчерами</h1>
                 <button
                     className="btn btn-primary"
                     onClick={openCreateModal}
                 >
-                    Add New Dispatcher
+                    Додати нового диспетчера
                 </button>
             </div>
 

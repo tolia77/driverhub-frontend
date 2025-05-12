@@ -4,7 +4,7 @@ const DispatchersTable = ({ dispatchers, onEdit, onDelete }) => {
     if (dispatchers.length === 0) {
         return (
             <div className="alert alert-info">
-                No dispatchers found.
+                Диспетчерів не знайдено
             </div>
         );
     }
@@ -18,10 +18,10 @@ const DispatchersTable = ({ dispatchers, onEdit, onDelete }) => {
                         <tr>
                             <th>ID</th>
                             <th>Email</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Created At</th>
-                            <th>Actions</th>
+                            <th>Ім'я</th>
+                            <th>Прізвище</th>
+                            <th>Дата створення</th>
+                            <th>Дії</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -37,13 +37,13 @@ const DispatchersTable = ({ dispatchers, onEdit, onDelete }) => {
                                         className="btn btn-sm btn-warning me-2"
                                         onClick={() => onEdit(dispatcher)}
                                     >
-                                        Edit
+                                        Редагувати
                                     </button>
                                     <button
                                         className="btn btn-sm btn-danger"
                                         onClick={() => onDelete(dispatcher.id)}
                                     >
-                                        Delete
+                                        Видалити
                                     </button>
                                 </td>
                             </tr>

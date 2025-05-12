@@ -5,7 +5,7 @@ import {getUserId} from "src/utils/auth.js";
 function Index() {
     return (
         <section className="text-center mt-5">
-            <h1 className="mb-4 fw-bold">Welcome to <span className="text-primary">DriveTrack</span></h1>
+            <h1 className="mb-4 fw-bold">Ласкаво просимо до <span className="text-primary">DriveTrack</span></h1>
 
             {!getUserId() ? <div className="d-flex justify-content-center gap-3">
                 <Link to="/login" className="btn btn-primary px-4 py-2">
@@ -17,7 +17,7 @@ function Index() {
                 </Link>
             </div> : <div className="d-flex justify-content-center gap-3">
                 <Link to="/account" className="btn btn-lg btn-primary px-4 py-2">
-                    My account
+                    Мій акаунт
                 </Link>
             </div>}
         </section>

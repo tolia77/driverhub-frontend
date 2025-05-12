@@ -209,9 +209,9 @@ const DeliveriesIndex = () => {
 
     const validateForm = () => {
         const errors = {};
-        if (!currentDelivery.pickup_location?.latitude) errors.pickup_location = "Pickup location is required";
-        if (!currentDelivery.dropoff_location?.latitude) errors.dropoff_location = "Dropoff location is required";
-        if (!currentDelivery.package_details?.trim()) errors.package_details = "Package details are required";
+        if (!currentDelivery.pickup_location?.latitude) errors.pickup_location = "Адреса завантаження є обов'язковою";
+        if (!currentDelivery.dropoff_location?.latitude) errors.dropoff_location = "Адреса вивантаження є обов'язковою";
+        if (!currentDelivery.package_details?.trim()) errors.package_details = "Деталі доставки є обов'язковими";
 
         setFormErrors(errors);
         return Object.keys(errors).length === 0;
@@ -245,106 +245,106 @@ const DeliveriesIndex = () => {
     return (
         <div className="container-fluid py-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <h1 className="mb-0">Deliveries</h1>
+                <h1 className="mb-0">Доставки</h1>
                 <button className="btn btn-success" onClick={handleAddDelivery}>
-                    <i className="bi bi-plus-circle me-2"></i>Add Delivery
+                    <i className="bi bi-plus-circle me-2"></i>Додати доставку
                 </button>
             </div>
 
             <div className="card mb-4">
                 <div className="card-header">
                     <div className="d-flex justify-content-between align-items-center">
-                        <h5 className="mb-0">Filters</h5>
+                        <h5 className="mb-0">Фільтри</h5>
                         <button className="btn btn-sm btn-outline-secondary" onClick={resetFilters}>
-                            Reset Filters
+                            Скинути фільтри
                         </button>
                     </div>
                 </div>
                 <div className="card-body">
                     <div className="row g-3">
                         <div className="col-md-3">
-                            <label className="form-label">Driver</label>
+                            <label className="form-label">Водій</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Filter by driver name"
+                                placeholder="Фільтрувати за ім'ям водія"
                                 name="driver_name"
                                 value={filters.driver_name}
                                 onChange={handleFilterChange}
                             />
                         </div>
                         <div className="col-md-3">
-                            <label className="form-label">Client</label>
+                            <label className="form-label">Клієнт</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Filter by client name"
+                                placeholder="Фільтрувати за ім'ям клієнта"
                                 name="client_name"
                                 value={filters.client_name}
                                 onChange={handleFilterChange}
                             />
                         </div>
                         <div className="col-md-3">
-                            <label className="form-label">Pickup Address</label>
+                            <label className="form-label">Адреса завантаження</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Filter by pickup address"
+                                placeholder="Фільтрувати за адресою завантаження"
                                 name="pickup_address"
                                 value={filters.pickup_address}
                                 onChange={handleFilterChange}
                             />
                         </div>
                         <div className="col-md-3">
-                            <label className="form-label">Dropoff Address</label>
+                            <label className="form-label">Адреса вивантаження</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Filter by dropoff address"
+                                placeholder="Фільтрувати за адресою вивантаження"
                                 name="dropoff_address"
                                 value={filters.dropoff_address}
                                 onChange={handleFilterChange}
                             />
                         </div>
                         <div className="col-md-3">
-                            <label className="form-label">Status</label>
+                            <label className="form-label">Статус</label>
                             <select
                                 className="form-select"
                                 name="status"
                                 value={filters.status}
                                 onChange={handleFilterChange}
                             >
-                                <option value="">All Statuses</option>
-                                <option value="Pending">Pending</option>
-                                <option value="In-Transit">In-Transit</option>
-                                <option value="Completed">Completed</option>
-                                <option value="Cancelled">Cancelled</option>
+                                <option value="">Всі статуси</option>
+                                <option value="Pending">Очікує</option>
+                                <option value="In-Transit">В процесі</option>
+                                <option value="Completed">Завершена</option>
+                                <option value="Failed">Невдала</option>
                             </select>
                         </div>
                         <div className="col-md-3">
-                            <label className="form-label">Package Details</label>
+                            <label className="form-label">Деталі доставки</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Filter by package details"
+                                placeholder="Фільтрувати за деталями доставки"
                                 name="package_details"
                                 value={filters.package_details}
                                 onChange={handleFilterChange}
                             />
                         </div>
                         <div className="col-md-3">
-                            <label className="form-label">Delivery Notes</label>
+                            <label className="form-label">Примітки</label>
                             <input
                                 type="text"
                                 className="form-control"
-                                placeholder="Filter by delivery notes"
+                                placeholder="Фільтрувати за примітками"
                                 name="delivery_notes"
                                 value={filters.delivery_notes}
                                 onChange={handleFilterChange}
                             />
                         </div>
                         <div className="col-md-3">
-                            <label className="form-label">Created At</label>
+                            <label className="form-label">Дата створення</label>
                             <input
                                 type="date"
                                 className="form-control"

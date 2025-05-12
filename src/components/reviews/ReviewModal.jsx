@@ -35,7 +35,7 @@ const ReviewModal = ({
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5 className="modal-title">{isEdit ? 'Edit Review' : 'Leave Review'}</h5>
+                        <h5 className="modal-title">{isEdit ? 'Редагувати відгук' : 'Залишити відгук'}</h5>
                         <button
                             type="button"
                             className="btn-close"
@@ -45,7 +45,7 @@ const ReviewModal = ({
                     </div>
                     <div className="modal-body">
                         <div className="mb-3">
-                            <label className="form-label">Rating</label>
+                            <label className="form-label">Оцінка</label>
                             <div className="rating-stars">
                                 {[1, 2, 3, 4, 5].map((star) => (
                                     <i
@@ -58,7 +58,7 @@ const ReviewModal = ({
                             </div>
                         </div>
                         <div className="mb-3">
-                            <label className="form-label">Review</label>
+                            <label className="form-label">Відгук</label>
                             <textarea
                                 className="form-control"
                                 rows="4"
@@ -76,7 +76,7 @@ const ReviewModal = ({
                             onClick={onClose}
                             disabled={isLoading}
                         >
-                            Cancel
+                            Скасувати
                         </button>
                         <button
                             type="button"
@@ -88,10 +88,10 @@ const ReviewModal = ({
                                 <>
                                     <span className="spinner-border spinner-border-sm me-1" role="status"
                                           aria-hidden="true"></span>
-                                    {isEdit ? 'Updating...' : 'Submitting...'}
+                                    {isEdit ? 'Оновлення...' : 'Підтвердження...'}
                                 </>
                             ) : (
-                                isEdit ? 'Update' : 'Submit'
+                                isEdit ? 'Оновити' : 'Підтвердити'
                             )}
                         </button>
                     </div>

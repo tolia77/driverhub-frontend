@@ -46,15 +46,15 @@ const Account = () => {
                     <div className="col-md-8 col-lg-6">
                         <div className="card shadow-sm">
                             <div className="card-body p-4">
-                                <h1 className="card-title text-center mb-4">Account Details</h1>
+                                <h1 className="card-title text-center mb-4">Акаунт</h1>
 
                                 <div className="mb-4">
                                     <div className="d-flex justify-content-between py-2 border-bottom">
-                                        <span className="fw-bold">First name:</span>
+                                        <span className="fw-bold">Ім'я:</span>
                                         <span>{account.first_name}</span>
                                     </div>
                                     <div className="d-flex justify-content-between py-2 border-bottom">
-                                        <span className="fw-bold">Last name:</span>
+                                        <span className="fw-bold">Прізвище:</span>
                                         <span>{account.last_name}</span>
                                     </div>
                                     <div className="d-flex justify-content-between py-2 border-bottom">
@@ -62,12 +62,12 @@ const Account = () => {
                                         <span>{account.email}</span>
                                     </div>
                                     <div className="d-flex justify-content-between py-2 border-bottom">
-                                        <span className="fw-bold">Role:</span>
+                                        <span className="fw-bold">роль:</span>
                                         <span className="text-capitalize">{account.role}</span>
                                     </div>
                                     {account.license_number && (
                                         <div className="d-flex justify-content-between py-2 border-bottom">
-                                            <span className="fw-bold">License number:</span>
+                                            <span className="fw-bold">Номер водійського посвідчення:</span>
                                             <span>{account.license_number}</span>
                                         </div>
                                     )}
@@ -78,7 +78,7 @@ const Account = () => {
                                         className="btn btn-danger px-4"
                                         onClick={handleLogout}
                                     >
-                                        Logout
+                                        Вийти
                                     </button>
                                 </div>
                             </div>

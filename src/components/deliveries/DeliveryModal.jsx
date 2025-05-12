@@ -70,7 +70,7 @@ const DeliveryModal = ({
                 value: {
                     latitude: position.lat,
                     longitude: position.lng,
-                    address: `Location at ${position.lat.toFixed(6)}, ${position.lng.toFixed(6)}`
+                    address: `Місцезнаходження ${position.lat.toFixed(6)}, ${position.lng.toFixed(6)}`
                 }
             }
         });
@@ -84,7 +84,7 @@ const DeliveryModal = ({
                 value: {
                     latitude: position.lat,
                     longitude: position.lng,
-                    address: `Location at ${position.lat.toFixed(6)}, ${position.lng.toFixed(6)}`
+                    address: `Місцезнаходження ${position.lat.toFixed(6)}, ${position.lng.toFixed(6)}`
                 }
             }
         });
@@ -98,7 +98,7 @@ const DeliveryModal = ({
                 <div className="modal-content">
                     <div className="modal-header">
                         <h5 className="modal-title">
-                            {modalType === 'add' ? 'Add Delivery' : 'Update Delivery'}
+                            {modalType === 'add' ? 'Додати доставку' : 'Оновити доставку'}
                         </h5>
                         <button
                             type="button"
@@ -110,34 +110,34 @@ const DeliveryModal = ({
                         <form>
                             <div className="row">
                                 <div className="col-md-6 mb-3">
-                                    <label className="form-label">Driver</label>
+                                    <label className="form-label">Водій</label>
                                     <select
                                         className={`form-control ${errors.driver_id ? 'is-invalid' : ''}`}
                                         name="driver_id"
                                         value={delivery.driver_id}
                                         onChange={onInputChange}
                                     >
-                                        <option value="">Select a driver</option>
+                                        <option value="">Оберіть водія</option>
                                         {drivers.map(driver => (
                                             <option key={driver.id} value={driver.id}>
-                                                {`${driver.first_name} ${driver.last_name}` || `Driver ${driver.id}`}
+                                                {`${driver.first_name} ${driver.last_name}` || `Водій ${driver.id}`}
                                             </option>
                                         ))}
                                     </select>
                                     {errors.driver_id && <div className="invalid-feedback">{errors.driver_id}</div>}
                                 </div>
                                 <div className="col-md-6 mb-3">
-                                    <label className="form-label">Client</label>
+                                    <label className="form-label">Клієнт</label>
                                     <select
                                         className={`form-control ${errors.client_id ? 'is-invalid' : ''}`}
                                         name="client_id"
                                         value={delivery.client_id}
                                         onChange={onInputChange}
                                     >
-                                        <option value="">Select a client</option>
+                                        <option value="">Оберіть клієнта</option>
                                         {clients.map(client => (
                                             <option key={client.id} value={client.id}>
-                                                {`${client.first_name} ${client.last_name}` || `Client ${client.id}`}
+                                                {`${client.first_name} ${client.last_name}` || `Клієнт ${client.id}`}
                                             </option>
                                         ))}
                                     </select>
@@ -147,7 +147,7 @@ const DeliveryModal = ({
 
                             <div className="row">
                                 <div className="col-md-6 mb-3">
-                                    <label className="form-label">Pickup Location</label>
+                                    <label className="form-label">Адреса завантаження</label>
                                     <div style={{height: '300px', width: '100%', marginBottom: '10px'}}>
                                         <MapContainer center={pickupMapCenter} zoom={13}
                                                       style={{height: '100%', width: '100%'}}>
@@ -165,8 +165,7 @@ const DeliveryModal = ({
                                     {pickupPosition && (
                                         <div className="text-center">
                                             <small className="text-muted">
-                                                Selected
-                                                coordinates: {pickupPosition.lat.toFixed(6)}, {pickupPosition.lng.toFixed(6)}
+                                                Обрані координати: {pickupPosition.lat.toFixed(6)}, {pickupPosition.lng.toFixed(6)}
                                             </small>
                                         </div>
                                     )}
@@ -175,7 +174,7 @@ const DeliveryModal = ({
                                 </div>
 
                                 <div className="col-md-6 mb-3">
-                                    <label className="form-label">Dropoff Location</label>
+                                    <label className="form-label">Адреса вивантаження</label>
                                     <div style={{height: '300px', width: '100%', marginBottom: '10px'}}>
                                         <MapContainer center={dropoffMapCenter} zoom={13}
                                                       style={{height: '100%', width: '100%'}}>
@@ -193,8 +192,7 @@ const DeliveryModal = ({
                                     {dropoffPosition && (
                                         <div className="text-center">
                                             <small className="text-muted">
-                                                Selected
-                                                coordinates: {dropoffPosition.lat.toFixed(6)}, {dropoffPosition.lng.toFixed(6)}
+                                                Обрані координати: {dropoffPosition.lat.toFixed(6)}, {dropoffPosition.lng.toFixed(6)}
                                             </small>
                                         </div>
                                     )}
@@ -203,9 +201,9 @@ const DeliveryModal = ({
                                 </div>
                             </div>
 
-                            {/* Package Details & Notes */}
+                            {/* Деталі доставки & Notes */}
                             <div className="mb-3">
-                                <label className="form-label">Package Details</label>
+                                <label className="form-label">Деталі доставки</label>
                                 <input
                                     type="text"
                                     className={`form-control ${errors.package_details ? 'is-invalid' : ''}`}
@@ -217,7 +215,7 @@ const DeliveryModal = ({
                                     <div className="invalid-feedback">{errors.package_details}</div>}
                             </div>
                             <div className="mb-3">
-                                <label className="form-label">Delivery Notes</label>
+                                <label className="form-label">Примітки</label>
                                 <textarea
                                     className="form-control"
                                     name="delivery_notes"
@@ -234,14 +232,14 @@ const DeliveryModal = ({
                             className="btn btn-secondary"
                             onClick={onClose}
                         >
-                            Cancel
+                            Скасувати
                         </button>
                         <button
                             type="button"
                             className="btn btn-primary"
                             onClick={onConfirm}
                         >
-                            {modalType === 'add' ? 'Add' : 'Update'}
+                            {modalType === 'add' ? 'Додати' : 'Оновити'}
                         </button>
                     </div>
                 </div>

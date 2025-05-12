@@ -96,15 +96,15 @@ const ReviewsIndexAdmin = () => {
 
     const validateForm = () => {
         if (!isEditing && !formData.delivery_id) {
-            alert("Delivery ID is required");
+            alert("ID Доставки є обов'язковим");
             return false;
         }
         if (!formData.rating) {
-            alert("Rating is required");
+            alert("Оцінка є обов'язковим");
             return false;
         }
         if (formData.rating < 1 || formData.rating > 5) {
-            alert("Rating must be between 1 and 5");
+            alert("Оцінка повинна бути від 1 до 5");
             return false;
         }
         return true;
@@ -113,12 +113,12 @@ const ReviewsIndexAdmin = () => {
     return (
         <div className="container py-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <h1 className="mb-0">Reviews Management</h1>
+                <h1 className="mb-0">Керування відгуками</h1>
                 <button
                     className="btn btn-primary"
                     onClick={openCreateModal}
                 >
-                    Add New Review
+                    Додати новий відгук
                 </button>
             </div>
 

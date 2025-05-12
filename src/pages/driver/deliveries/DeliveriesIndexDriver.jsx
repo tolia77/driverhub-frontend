@@ -77,7 +77,7 @@ const DeliveriesIndexDriver = () => {
     return (
         <div className="container-fluid py-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <h1 className="mb-0">My Deliveries</h1>
+                <h1 className="mb-0">Мої Доставки</h1>
             </div>
 
             <DeliveriesTable

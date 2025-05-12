@@ -65,7 +65,7 @@ const ChatDispatcher = () => {
                     {selectedDriver ? (
                         <div className="card h-100">
                             <div className="card-header">
-                                <h3 className="mb-0">Chat with {selectedDriver.name}</h3>
+                                <h3 className="mb-0">Чат з {selectedDriver.name}</h3>
                             </div>
                             <div className="card-body d-flex flex-column p-0">
                                 <ChatMessages
@@ -79,7 +79,7 @@ const ChatDispatcher = () => {
                     ) : (
                         <div className="card h-100">
                             <div className="card-body d-flex align-items-center justify-content-center">
-                                <p className="mb-0 text-muted">Select a driver to start chatting</p>
+                                <p className="mb-0 text-muted">Оберіть водія для початку розмови</p>
                             </div>
                         </div>
                     )}

@@ -104,16 +104,16 @@ const VehiclesIndex = () => {
 
     const validateForm = () => {
         const errors = {};
-        if (!currentVehicle.model.trim()) errors.model = "Model is required";
-        if (!currentVehicle.license_plate.trim()) errors.license_plate = "License plate is required";
+        if (!currentVehicle.model.trim()) errors.model = "Модель є обов'язковою";
+        if (!currentVehicle.license_plate.trim()) errors.license_plate = "Номерний знак є обов'язковим";
         if (!currentVehicle.capacity || isNaN(currentVehicle.capacity) || currentVehicle.capacity <= 0) {
-            errors.capacity = "Capacity must be a positive number";
+            errors.capacity = "Вантажопідйомність повинна бути додатнім числом";
         }
         if (!currentVehicle.mileage || isNaN(currentVehicle.mileage) || currentVehicle.mileage < 0) {
-            errors.mileage = "Mileage must be a non-negative number";
+            errors.mileage = "Пробіг повинен бути невід'ємним числом";
         }
         if (!currentVehicle.maintenance_due_date.trim()) {
-            errors.maintenance_due_date = "Maintenance due date is required";
+            errors.maintenance_due_date = "Дата наступного техогляду є обов'язковою";
         }
 
         setFormErrors(errors);
@@ -134,12 +134,12 @@ const VehiclesIndex = () => {
     return (
         <div className="container-fluid py-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <h1 className="mb-0">Vehicles</h1>
+                <h1 className="mb-0">Транспортні засоби</h1>
                 <button
                     className="btn btn-success"
                     onClick={handleAddVehicle}
                 >
-                    <i className="bi bi-plus-circle me-2"></i>Add Vehicle
+                    <i className="bi bi-plus-circle me-2"></i>Додати транспортний засіб
                 </button>
             </div>
 

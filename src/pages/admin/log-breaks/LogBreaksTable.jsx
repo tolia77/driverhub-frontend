@@ -4,7 +4,7 @@ const LogBreaksTable = ({ logBreaks, onDelete, onEdit, isAdmin = false }) => {
     if (logBreaks.length === 0) {
         return (
             <div className="alert alert-info">
-                No log breaks found for this delivery.
+                Записів про перерви не знайдено
             </div>
         );
     }
@@ -17,11 +17,11 @@ const LogBreaksTable = ({ logBreaks, onDelete, onEdit, isAdmin = false }) => {
                         <thead className="table-dark sticky-top">
                         <tr>
                             <th>ID</th>
-                            <th>Location</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                            <th>Cost</th>
-                            {isAdmin && <th>Actions</th>}
+                            <th>Адреса</th>
+                            <th>Час початку</th>
+                            <th>Час завершення</th>
+                            <th>Вартість</th>
+                            {isAdmin && <th>Дії</th>}
                         </tr>
                         </thead>
                         <tbody>
@@ -38,13 +38,13 @@ const LogBreaksTable = ({ logBreaks, onDelete, onEdit, isAdmin = false }) => {
                                             className="btn btn-sm btn-warning me-2"
                                             onClick={() => onEdit(logBreak)}
                                         >
-                                            Edit
+                                            Редагувати
                                         </button>
                                         <button
                                             className="btn btn-sm btn-danger"
                                             onClick={() => onDelete(logBreak.id)}
                                         >
-                                            Delete
+                                            Видалити
                                         </button>
                                     </td>
                                 )}

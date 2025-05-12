@@ -7,12 +7,12 @@ const VehiclesTable = ({ vehicles, onUpdate, onDelete }) => {
                         <thead className="table-dark sticky-top">
                         <tr>
                             <th>ID</th>
-                            <th>Model</th>
-                            <th>License Plate</th>
-                            <th>Capacity</th>
-                            <th>Mileage</th>
-                            <th>Maintenance Due Date</th>
-                            <th>Actions</th>
+                            <th>Модель</th>
+                            <th>Номерний знак</th>
+                            <th>Вантажопідйомність</th>
+                            <th>Пробіг</th>
+                            <th>Наступний техогляд</th>
+                            <th>Дії</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -23,20 +23,20 @@ const VehiclesTable = ({ vehicles, onUpdate, onDelete }) => {
                                 <td>{vehicle.license_plate}</td>
                                 <td>{vehicle.capacity}</td>
                                 <td>{vehicle.mileage}</td>
-                                <td>{vehicle.maintenance_due_date || "None"}</td>
+                                <td>{vehicle.maintenance_due_date || "Не вказано"}</td>
                                 <td>
                                     <div className="d-flex gap-2">
                                         <button
                                             className="btn btn-sm btn-warning"
                                             onClick={() => onUpdate(vehicle.id)}
                                         >
-                                            <i className="bi bi-pencil"></i> Update
+                                            <i className="bi bi-pencil"></i> Оновити
                                         </button>
                                         <button
                                             className="btn btn-sm btn-danger"
                                             onClick={() => onDelete(vehicle.id)}
                                         >
-                                            <i className="bi bi-trash"></i> Delete
+                                            <i className="bi bi-trash"></i> Видалити
                                         </button>
                                     </div>
                                 </td>
