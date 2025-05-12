@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { useState } from "react";
 
 const DeliveriesTable = ({
                              deliveries,
@@ -12,9 +13,75 @@ const DeliveriesTable = ({
                              showClient = true,
                              showActions = true,
                          }) => {
+    const [sortConfig, setSortConfig] = useState({
+        key: null,
+        direction: 'ascending',
+    });
+
     if (deliveries.length === 0) {
         return <div className="alert alert-info">Доставок не знайдено</div>;
     }
+
+    const requestSort = (key) => {
+        let direction = 'ascending';
+        if (sortConfig.key === key && sortConfig.direction === 'ascending') {
+            direction = 'descending';
+        }
+        setSortConfig({ key, direction });
+    };
+
+    const getSortableValue = (delivery, key) => {
+        switch (key) {
+            case 'driver':
+                return delivery.driver
+                    ? `${delivery.driver.first_name} ${delivery.driver.last_name}`.toLowerCase()
+                    : '';
+            case 'client':
+                return delivery.client
+                    ? `${delivery.client.first_name} ${delivery.client.last_name}`.toLowerCase()
+                    : '';
+            case 'pickup_address':
+                return (delivery?.pickup_location?.address ||
+                    `${delivery.pickup_location.latitude}, ${delivery.pickup_location.longitude}`).toLowerCase();
+            case 'dropoff_address':
+                return (delivery?.dropoff_location?.address ||
+                    `${delivery.dropoff_location.latitude}, ${delivery.dropoff_location.longitude}`).toLowerCase();
+            case 'created_at':
+                return new Date(delivery.created_at).getTime();
+            default:
+                return delivery[key]?.toString().toLowerCase() || '';
+        }
+    };
+
+    const sortedDeliveries = [...deliveries].sort((a, b) => {
+        if (!sortConfig.key) return 0;
+
+        const aValue = getSortableValue(a, sortConfig.key);
+        const bValue = getSortableValue(b, sortConfig.key);
+
+        if (aValue < bValue) {
+            return sortConfig.direction === 'ascending' ? -1 : 1;
+        }
+        if (aValue > bValue) {
+            return sortConfig.direction === 'ascending' ? 1 : -1;
+        }
+        return 0;
+    });
+
+    const SortableHeader = ({ children, sortKey }) => (
+        <th
+            onClick={() => requestSort(sortKey)}
+            style={{ cursor: 'pointer', position: 'relative' }}
+            className="sortable-header"
+        >
+            {children}
+            {sortConfig.key === sortKey && (
+                <span className="sort-icon">
+          {sortConfig.direction === 'ascending' ? '↑' : '↓'}
+        </span>
+            )}
+        </th>
+    );
 
     return (
         <div className="card">
@@ -23,19 +90,23 @@ const DeliveriesTable = ({
                     <table className="table table-hover table-striped mb-0">
                         <thead className="table-dark sticky-top">
                         <tr>
-                            {showDriver && <th>Водій</th>}
-                            {showClient && <th>Клієнт</th>}
-                            <th>Адреса завантаження</th>
-                            <th>Адреса вивантаження</th>
-                            <th>Деталі доставки</th>
-                            <th>Примітки</th>
-                            <th>Статус</th>
-                            <th>Дата створення</th>
+                            {showDriver && (
+                                <SortableHeader sortKey="driver">Водій</SortableHeader>
+                            )}
+                            {showClient && (
+                                <SortableHeader sortKey="client">Клієнт</SortableHeader>
+                            )}
+                            <SortableHeader sortKey="pickup_address">Адреса завантаження</SortableHeader>
+                            <SortableHeader sortKey="dropoff_address">Адреса вивантаження</SortableHeader>
+                            <SortableHeader sortKey="package_details">Деталі доставки</SortableHeader>
+                            <SortableHeader sortKey="delivery_notes">Примітки</SortableHeader>
+                            <SortableHeader sortKey="status">Статус</SortableHeader>
+                            <SortableHeader sortKey="created_at">Дата створення</SortableHeader>
                             {showActions && <th>Дії</th>}
                         </tr>
                         </thead>
                         <tbody>
-                        {deliveries.map((delivery) => (
+                        {sortedDeliveries.map((delivery) => (
                             <tr key={delivery.id}>
                                 {showDriver && (
                                     <td>
