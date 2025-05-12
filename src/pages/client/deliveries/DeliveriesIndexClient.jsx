@@ -92,7 +92,7 @@ const DeliveriesIndexClient = () => {
             <DeliveriesTable
                 deliveries={deliveries}
                 onOpenReviewModal={openReviewModal}
-                showDriver={true}
+                showDriver={false}
                 showClient={false}
                 showActions={true}
                 userRole="client"

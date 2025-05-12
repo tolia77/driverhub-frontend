@@ -92,7 +92,7 @@ export default function Header() {
                                     <Link to="/client/deliveries" className="nav-link px-2">Доставки</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/client/reviews" className="nav-link px-2">My reviews</Link>
+                                    <Link to="/client/reviews" className="nav-link px-2">Мої відгуки</Link>
                                 </li>
                             </>
                         )}

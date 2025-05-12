@@ -431,7 +431,6 @@ const DeliveriesIndex = ({userRole = 'dispatcher'}) => {
                 clients={clients}
             />
 
-            {/* Delete Confirmation Modal */}
             {isDeleteModalOpen && (
                 <div className="modal fade show d-block" tabIndex="-1" style={{backgroundColor: 'rgba(0,0,0,0.5)'}}>
                     <div className="modal-dialog modal-dialog-centered">

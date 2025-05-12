@@ -1,5 +1,5 @@
-import { format } from "date-fns";
-import { useState } from "react";
+import {format} from "date-fns";
+import {useState} from "react";
 
 const DeliveriesTable = ({
                              deliveries,
@@ -27,7 +27,7 @@ const DeliveriesTable = ({
         if (sortConfig.key === key && sortConfig.direction === 'ascending') {
             direction = 'descending';
         }
-        setSortConfig({ key, direction });
+        setSortConfig({key, direction});
     };
 
     const getSortableValue = (delivery, key) => {
@@ -68,10 +68,10 @@ const DeliveriesTable = ({
         return 0;
     });
 
-    const SortableHeader = ({ children, sortKey }) => (
+    const SortableHeader = ({children, sortKey}) => (
         <th
             onClick={() => requestSort(sortKey)}
-            style={{ cursor: 'pointer', position: 'relative' }}
+            style={{cursor: 'pointer', position: 'relative'}}
             className="sortable-header"
         >
             {children}
@@ -86,7 +86,7 @@ const DeliveriesTable = ({
     return (
         <div className="card">
             <div className="card-body p-0">
-                <div className="table-responsive" style={{ maxHeight: '500px' }}>
+                <div className="table-responsive" style={{maxHeight: '500px'}}>
                     <table className="table table-hover table-striped mb-0">
                         <thead className="table-dark sticky-top">
                         <tr>
@@ -165,20 +165,17 @@ const DeliveriesTable = ({
                                                             <>
                                                                 <button
                                                                     className="btn btn-sm btn-warning"
-                                                                    onClick={() =>
-                                                                        onOpenReviewModal(delivery, "edit")
-                                                                    }
+                                                                    onClick={() => onOpenReviewModal(delivery, "edit")}
                                                                 >
-                                                                    Редагувати відгук
+                                                                    <i className="bi bi-pencil"></i> Редагувати відгук
                                                                 </button>
                                                                 <button
                                                                     className="btn btn-sm btn-danger"
-                                                                    onClick={() =>
-                                                                        onOpenReviewModal(delivery, "delete")
-                                                                    }
+                                                                    onClick={() => onOpenReviewModal(delivery, "delete")}
                                                                 >
-                                                                    Видалити
+                                                                    <i className="bi bi-trash"></i> Видалити
                                                                 </button>
+
                                                             </>
                                                         ) : (
                                                             <button
