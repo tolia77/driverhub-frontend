@@ -1,7 +1,7 @@
 import {instance} from "src/services/backend/config.js";
 
 export async function driversIndexRequest(params, authorization) {
-    return await instance.get("/drivers", {
+    return await instance.get("/drivers/", {
         params: params,
         headers: {
             Authorization: authorization

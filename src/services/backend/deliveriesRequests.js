@@ -35,7 +35,7 @@ export async function deliveriesUpdateRequest(deliveryId, data, authorization) {
 }
 
 export async function deliveriesMyDriverRequest(authorization) {
-    return await instance.get("/deliveries/driver/me", {
+    return await instance.get("/deliveries/driver/me/", {
         headers: {
             Authorization: authorization
         },
@@ -43,7 +43,7 @@ export async function deliveriesMyDriverRequest(authorization) {
 }
 
 export async function deliveriesMyClientRequest(authorization) {
-    return await instance.get("/deliveries/client/me", {
+    return await instance.get("/deliveries/client/me/", {
         headers: {
             Authorization: authorization
         },
@@ -51,7 +51,7 @@ export async function deliveriesMyClientRequest(authorization) {
 }
 
 export async function deliveriesUpdateStatusRequest(deliveryId, status, authorization) {
-    return await instance.patch(`/deliveries/${deliveryId}/status`,
+    return await instance.patch(`/deliveries/${deliveryId}/status/`,
         {
             new_status: status,
         },

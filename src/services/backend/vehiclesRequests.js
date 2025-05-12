@@ -9,7 +9,7 @@ export async function vehiclesIndexRequest(params, authorization) {
     })
 }
 export async function vehiclesUnassignedRequest(authorization) {
-    return await instance.get("/vehicles/unassigned", {
+    return await instance.get("/vehicles/unassigned/", {
         headers: {
             Authorization: authorization
         }
