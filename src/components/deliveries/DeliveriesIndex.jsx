@@ -47,7 +47,8 @@ const DeliveriesIndex = ({userRole = 'dispatcher'}) => {
         status: '',
         package_details: '',
         delivery_notes: '',
-        created_at: ''
+        start_date: '',  // Changed from created_at
+        end_date: ''
     });
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
@@ -179,7 +180,8 @@ const DeliveriesIndex = ({userRole = 'dispatcher'}) => {
             status: '',
             package_details: '',
             delivery_notes: '',
-            created_at: ''
+            start_date: '',
+            end_date: ''
         });
     };
 
@@ -246,6 +248,22 @@ const DeliveriesIndex = ({userRole = 'dispatcher'}) => {
         const clientFullName = delivery.client ?
             `${delivery.client.first_name} ${delivery.client.last_name}`.toLowerCase() : '';
 
+        const deliveryDate = delivery.created_at ? new Date(delivery.created_at) : null;
+
+        let dateInRange = true;
+        if (filters.start_date || filters.end_date) {
+            const startDate = filters.start_date ? new Date(filters.start_date) : null;
+            const endDate = filters.end_date ? new Date(filters.end_date) : null;
+
+            if (startDate && endDate) {
+                dateInRange = deliveryDate >= startDate && deliveryDate <= endDate;
+            } else if (startDate) {
+                dateInRange = deliveryDate >= startDate;
+            } else if (endDate) {
+                dateInRange = deliveryDate <= endDate;
+            }
+        }
+
         return (
             (filters.driver_name === '' ||
                 driverFullName.includes(filters.driver_name.toLowerCase())) &&
@@ -260,8 +278,7 @@ const DeliveriesIndex = ({userRole = 'dispatcher'}) => {
                 delivery.package_details?.toLowerCase().includes(filters.package_details.toLowerCase())) &&
             (filters.delivery_notes === '' ||
                 delivery.delivery_notes?.toLowerCase().includes(filters.delivery_notes.toLowerCase())) &&
-            (filters.created_at === '' ||
-                delivery.created_at?.includes(filters.created_at))
+            dateInRange
         );
     });
 
@@ -367,14 +384,26 @@ const DeliveriesIndex = ({userRole = 'dispatcher'}) => {
                             />
                         </div>
                         <div className="col-md-3">
-                            <label className="form-label">Дата створення</label>
-                            <input
-                                type="date"
-                                className="form-control"
-                                name="created_at"
-                                value={filters.created_at}
-                                onChange={handleFilterChange}
-                            />
+                            <label className="form-label">Діапазон дат</label>
+                            <div className="d-flex gap-1">
+                                <input
+                                    type="date"
+                                    className="form-control"
+                                    name="start_date"
+                                    value={filters.start_date}
+                                    onChange={handleFilterChange}
+                                    placeholder="Від"
+                                />
+                                <input
+                                    type="date"
+                                    className="form-control"
+                                    name="end_date"
+                                    value={filters.end_date}
+                                    onChange={handleFilterChange}
+                                    min={filters.start_date}
+                                    placeholder="До"
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -437,7 +466,8 @@ const DeliveriesIndex = ({userRole = 'dispatcher'}) => {
                                 >
                                     {isDeleting ? (
                                         <>
-                                            <span className="spinner-border spinner-border-sm me-1" role="status" aria-hidden="true"></span>
+                                            <span className="spinner-border spinner-border-sm me-1" role="status"
+                                                  aria-hidden="true"></span>
                                             Видалення...
                                         </>
                                     ) : (
