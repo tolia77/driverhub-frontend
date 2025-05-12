@@ -9,11 +9,11 @@ function Index() {
 
             {!getUserId() ? <div className="d-flex justify-content-center gap-3">
                 <Link to="/login" className="btn btn-primary px-4 py-2">
-                    Login
+                    Увійти
                 </Link>
 
                 <Link to="/signup" className="btn btn-outline-primary px-4 py-2">
-                    Sign Up
+                    Зареєструватися
                 </Link>
             </div> : <div className="d-flex justify-content-center gap-3">
                 <Link to="/account" className="btn btn-lg btn-primary px-4 py-2">

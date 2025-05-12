@@ -106,10 +106,10 @@ export default function Header() {
                         ) : (
                             <>
                                 <li className="nav-item">
-                                    <Link to="/login" className="nav-link px-2">Login</Link>
+                                    <Link to="/login" className="nav-link px-2">Увійти</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/signup" className="nav-link px-2">Sign Up</Link>
+                                    <Link to="/signup" className="nav-link px-2">Зареєструватись</Link>
                                 </li>
                             </>
                         )}
