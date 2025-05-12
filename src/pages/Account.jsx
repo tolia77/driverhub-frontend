@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
 import { getMeRequest } from "src/services/backend/authRequests";
 import RequireAuth from "src/components/RequireAuth.jsx";
 
 const Account = () => {
-    const navigate = useNavigate();
     const [account, setAccount] = useState({
         first_name: "",
         last_name: "",
@@ -36,7 +34,7 @@ const Account = () => {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("accountType");
         localStorage.removeItem("userId");
-        navigate("/login");
+        window.location.href = "/login";
     };
 
     return (

@@ -1,12 +1,11 @@
 import {useState} from 'react';
-import {Link, useNavigate} from 'react-router';
+import {Link} from 'react-router';
 import {getMeRequest, signInRequest} from "src/services/backend/authRequests.js";
 import {getUserRole} from "src/utils/auth.js";
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -16,13 +15,13 @@ function Login() {
                 localStorage.setItem('accountType', result.data.type);
                 localStorage.setItem('userId', result.data.id)
                 if (getUserRole() === "driver") {
-                    navigate("/driver/deliveries");
+                    window.location.href = "/driver/deliveries";
                 } else if (getUserRole() === "dispatcher") {
-                    navigate("/dispatcher/deliveries");
+                    window.location.href = "/dispatcher/deliveries";
                 } else if (getUserRole() === "client") {
-                    navigate("/client/deliveries");
+                    window.location.href = "/client/deliveries";
                 }else if (getUserRole() === "admin") {
-                    navigate("/admin/deliveries");
+                    window.location.href = "/admin/deliveries";
                 }
             })
         }).catch(error => {
