@@ -6,7 +6,7 @@ import {
     deliveriesUpdateRequest,
 } from "src/services/backend/deliveriesRequests";
 import {driversIndexRequest} from "src/services/backend/driversRequests";
-import DeliveriesTable from "src/pages/dispatcher/deliveries/DeliveriesTable";
+import DeliveriesTable from "src/components/deliveries/DeliveriesTable";
 import DeliveryModal from "src/components/deliveries/DeliveryModal";
 import {getAccessToken} from "src/utils/auth.js";
 import {clientsIndexRequest} from "src/services/backend/clientsRequests.js";
@@ -360,6 +360,9 @@ const DeliveriesIndex = () => {
             <DeliveriesTable
                 deliveries={filteredDeliveries}
                 onUpdate={handleUpdateDelivery}
+                showDriver={true}
+                showClient={true}
+                showActions={true}
             />
 
             <DeliveryModal
