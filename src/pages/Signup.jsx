@@ -12,6 +12,12 @@ function SignUp() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        const phoneRegex = /^\+[1-9]\d{9,14}$/;
+        if (!phoneRegex.test(phone)) {
+            alert("Будь ласка, введіть коректний номер телефону.");
+            return;
+        }
+
         if (password !== confirmPassword) {
             alert("Паролі не сходяться!");
             return;
