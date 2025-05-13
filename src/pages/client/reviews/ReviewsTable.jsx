@@ -4,7 +4,7 @@ const ReviewsTable = ({ reviews, onEdit, onDelete }) => {
     if (reviews.length === 0) {
         return (
             <div className="alert alert-info">
-                You haven't left any reviews yet.
+                Ви ще не залишили жодного відгуку.
             </div>
         );
     }
