@@ -33,7 +33,7 @@ export async function reviewsDeleteRequest(authorization, id) {
 }
 
 export async function reviewShowRequest(authorization, id) {
-    return await instance.get(`/reviews/${id}/`, {
+    return await instance.get(`/reviews/${id}`, {
         headers: {
             Authorization: authorization
         }
@@ -41,7 +41,7 @@ export async function reviewShowRequest(authorization, id) {
 }
 
 export async function reviewsMyRequest(authorization) {
-    return await instance.get("/reviews/client/me/", {
+    return await instance.get("/reviews/client/me", {
         headers: {
             Authorization: authorization
         }

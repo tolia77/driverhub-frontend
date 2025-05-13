@@ -9,7 +9,7 @@ export async function clientsIndexRequest(authorization) {
 }
 
 export async function clientShowRequest(id, authorization) {
-    return await instance.get(`/clients/${id}/`, {
+    return await instance.get(`/clients/${id}`, {
         headers: {
             Authorization: authorization,
         }
@@ -17,7 +17,7 @@ export async function clientShowRequest(id, authorization) {
 }
 
 export async function clientDeleteRequest(id, authorization) {
-    return await instance.delete(`/clients/${id}/`, {
+    return await instance.delete(`/clients/${id}`, {
         headers: {
             Authorization: authorization,
         }
@@ -25,7 +25,7 @@ export async function clientDeleteRequest(id, authorization) {
 }
 
 export async function clientUpdateRequest(id, data, authorization) {
-    return await instance.patch(`/clients/${id}/`, data, {
+    return await instance.patch(`/clients/${id}`, data, {
         headers: {
             Authorization: authorization,
         }

@@ -17,7 +17,7 @@ export async function dispatchersIndexRequest(authorization) {
 }
 
 export async function dispatchersShowRequest(id, authorization) {
-    return await instance.get(`/dispatchers/${id}/`, {
+    return await instance.get(`/dispatchers/${id}`, {
         headers: {
             Authorization: authorization
         }
@@ -25,7 +25,7 @@ export async function dispatchersShowRequest(id, authorization) {
 }
 
 export async function dispatchersUpdateRequest(id, data, authorization) {
-    return await instance.patch(`/dispatchers/${id}/`, data, {
+    return await instance.patch(`/dispatchers/${id}`, data, {
         headers: {
             Authorization: authorization
         }
@@ -33,7 +33,7 @@ export async function dispatchersUpdateRequest(id, data, authorization) {
 }
 
 export async function dispatchersDeleteRequest(id, authorization) {
-    return await instance.delete(`/dispatchers/${id}/`, {
+    return await instance.delete(`/dispatchers/${id}`, {
         headers: {
             Authorization: authorization
         }
