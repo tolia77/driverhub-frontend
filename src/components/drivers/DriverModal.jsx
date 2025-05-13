@@ -116,7 +116,7 @@ const DriverModal = ({
                             className="btn btn-primary"
                             onClick={onConfirm}
                         >
-                            {modalType === 'add' ? 'Confirm' : 'Оновити'}
+                            {modalType === 'add' ? 'Додати' : 'Оновити'}
                         </button>
                     </div>
                 </div>

@@ -60,7 +60,7 @@ const DispatcherModal = ({
                         </div>
                         <div className="mb-3">
                             <label className="form-label">
-                                {isEditing ? "New Пароль (leave blank to keep current)" : "Пароль"}
+                                {isEditing ? "Новий пароль (залишіть пустим якщо без змін)" : "Пароль"}
                             </label>
                             <input
                                 type="password"

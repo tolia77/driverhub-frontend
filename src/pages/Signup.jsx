@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Link, useNavigate} from 'react-router';
+import {Link} from 'react-router';
 import {registerClientRequest, signInRequest} from "src/services/backend/authRequests.js";
 
 function SignUp() {
@@ -9,7 +9,6 @@ function SignUp() {
     const [phone, setPhone] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -29,7 +28,7 @@ function SignUp() {
             signInRequest(email, password).then((result) => {
                 localStorage.setItem('accessToken', `Bearer ${result.data.access_token}`);
                 localStorage.setItem('accountType', 'client');
-                navigate("/client/deliveries");
+                window.location.href = "/client/deliveries";
             });
         });
     };
@@ -111,7 +110,8 @@ function SignUp() {
                                 required
                             />
                         </div>
-                        <button type="submit" className="btn btn-primary w-100 py-2 mb-3">Створити обліковий запис</button>
+                        <button type="submit" className="btn btn-primary w-100 py-2 mb-3">Створити обліковий запис
+                        </button>
                         <p className="text-center text-muted mb-0">
                             Вже маєте акаунт? <Link to="/login" className="text-decoration-none">Увійти</Link>
                         </p>
