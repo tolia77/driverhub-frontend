@@ -7,7 +7,9 @@ const useChatSocket = (selectedDriverId = null) => {
     const accessToken = getAccessToken();
 
     useEffect(() => {
-        const ws = new WebSocket(`ws://${import.meta.env.VITE_BACKEND_WS_URL}/ws/chat?token=${accessToken}`);
+        const protocol = window.location.protocol === "https:" ? "wss" : "ws";
+        const ws = new WebSocket(`${protocol}://${import.meta.env.VITE_BACKEND_WS_URL}/ws/chat?token=${accessToken}`);
+
         socketRef.current = ws;
 
         ws.onmessage = (event) => {
