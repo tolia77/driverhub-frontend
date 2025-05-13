@@ -1,5 +1,6 @@
 import {format} from "date-fns";
 import {useState} from "react";
+import LocationMapModal from "src/components/deliveries/LocationMapModal.jsx";
 
 const DeliveriesTable = ({
                              deliveries,
@@ -17,6 +18,9 @@ const DeliveriesTable = ({
         key: null,
         direction: 'ascending',
     });
+    const [mapModalOpen, setMapModalOpen] = useState(false);
+    const [mapModalPosition, setMapModalPosition] = useState(null);
+    const [mapModalTitle, setMapModalTitle] = useState("");
 
     if (deliveries.length === 0) {
         return <div className="alert alert-info">Доставок не знайдено</div>;
@@ -123,13 +127,41 @@ const DeliveriesTable = ({
                                     </td>
                                 )}
                                 <td>
-                                    {delivery?.pickup_location?.address ||
-                                        `${delivery.pickup_location.latitude}, ${delivery.pickup_location.longitude}`}
+                                    {delivery?.pickup_location?.address || `${delivery.pickup_location.latitude}, ${delivery.pickup_location.longitude}`}
+                                    <button
+                                        className="btn btn-sm btn-outline-primary ms-2"
+                                        title="Показати на карті"
+                                        onClick={() => {
+                                            setMapModalPosition({
+                                                lat: parseFloat(delivery.pickup_location.latitude),
+                                                lng: parseFloat(delivery.pickup_location.longitude),
+                                            });
+                                            setMapModalTitle("Місце завантаження");
+                                            setMapModalOpen(true);
+                                        }}
+                                    >
+                                        <i className="bi bi-geo-alt-fill"></i>
+                                    </button>
                                 </td>
+
                                 <td>
-                                    {delivery?.dropoff_location?.address ||
-                                        `${delivery.dropoff_location.latitude}, ${delivery.dropoff_location.longitude}`}
+                                    {delivery?.dropoff_location?.address || `${delivery.dropoff_location.latitude}, ${delivery.dropoff_location.longitude}`}
+                                    <button
+                                        className="btn btn-sm btn-outline-success ms-2"
+                                        title="Показати на карті"
+                                        onClick={() => {
+                                            setMapModalPosition({
+                                                lat: parseFloat(delivery.dropoff_location.latitude),
+                                                lng: parseFloat(delivery.dropoff_location.longitude),
+                                            });
+                                            setMapModalTitle("Місце вивантаження");
+                                            setMapModalOpen(true);
+                                        }}
+                                    >
+                                        <i className="bi bi-geo-alt-fill"></i>
+                                    </button>
                                 </td>
+
                                 <td>{delivery.package_details}</td>
                                 <td>{delivery.delivery_notes}</td>
                                 <td>{delivery.status}</td>
@@ -216,6 +248,13 @@ const DeliveriesTable = ({
                     </table>
                 </div>
             </div>
+            <LocationMapModal
+                isOpen={mapModalOpen}
+                onClose={() => setMapModalOpen(false)}
+                position={mapModalPosition}
+                title={mapModalTitle}
+            />
+
         </div>
     );
 };
