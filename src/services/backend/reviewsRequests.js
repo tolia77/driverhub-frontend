@@ -17,7 +17,7 @@ export async function reviewsCreateRequest(authorization, data) {
 }
 
 export async function reviewsUpdateRequest(authorization, id, data) {
-    return await instance.patch(`/reviews/${id}/`, data, {
+    return await instance.patch(`/reviews/${id}`, data, {
         headers: {
             Authorization: authorization
         }
@@ -25,7 +25,7 @@ export async function reviewsUpdateRequest(authorization, id, data) {
 }
 
 export async function reviewsDeleteRequest(authorization, id) {
-    return await instance.delete(`/reviews/${id}/`, {
+    return await instance.delete(`/reviews/${id}`, {
         headers: {
             Authorization: authorization
         }
